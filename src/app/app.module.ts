@@ -4,6 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
+import {UxvRoutingModule} from "./app-routing.module";
+import {Front} from "./frontend/front.module";
+
 
 @NgModule({
   declarations: [
@@ -12,9 +15,12 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    Front,
+    HttpModule,
+    UxvRoutingModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
