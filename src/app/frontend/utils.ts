@@ -368,3 +368,22 @@ export function elevateZoom() {
 
     },0));
 }
+ // input-counter
+export function inputCounter(){
+    if ($j(".input-counter").length > 0) {
+        $j('.minus-btn').click(function () {
+            var $jinput = $j(this).parent().find('input');
+            var count = parseInt($jinput.val()) - 1;
+            count = count < 1 ? 1 : count;
+            $jinput.val(count);
+            $jinput.change();
+            return false;
+        });
+        $j('.plus-btn').click(function () {
+            var $jinput = $j(this).parent().find('input');
+            $jinput.val(parseInt($jinput.val()) + 1);
+            $jinput.change();
+            return false;
+        });
+    }
+}
