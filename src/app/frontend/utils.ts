@@ -387,3 +387,101 @@ export function inputCounter(){
         });
     }
 }
+
+
+// Slide Column  $j('.slide-column-close').trigger('click');
+export function slideColumn(){
+    if ($j('#leftColumn').length > 0) {
+        $j(window).resize(function(){
+            if(window.innerWidth < 992 ) {
+                filtersHeight();
+            } else {
+                $j('#leftColumn').removeAttr('style');
+            }
+        });
+
+
+        $j('.slide-column-close').addClass('position-fix');
+        $j('.slide-column-open').on('click', function(e){
+            e.preventDefault();
+            $j('#leftColumn').addClass('column-open');
+            $j('body').css("top", -$j('body').scrollTop());
+            $j('body').addClass("no-scroll").append( '<div class="modal-filter"></div>');
+            if ($j(".modal-filter").length > 0) {
+                $j(".modal-filter").click(function(){
+                    $j('.slide-column-close').trigger('click');
+                })
+            }
+        });
+        $j('.slide-column-close').on('click', function(e){
+            e.preventDefault();
+            $j("#leftColumn").removeClass('column-open');
+            var top = parseInt($j('body').css("top").replace("px", ""))*-1;
+            $j('body').removeAttr("style");
+            $j('body').removeClass("no-scroll");
+            $j('body').scrollTop(top);
+            $j(".modal-filter").unbind();
+            $j(".modal-filter").remove();
+        });
+    }
+
+}
+
+function filtersHeight(){
+    var $obj = $j('#leftColumn');
+    var w_height = window.innerHeight;
+    var o_height = $obj.outerHeight();
+    var delta = w_height - o_height;
+    if(delta < 0) {
+        $obj.css({"max-height": o_height + delta, "overflow": "auto", "overflow-x": "hidden" });
+    }
+}
+
+
+// Category list collapse
+export function expanderList() {
+    $j('.expander-list .expander').each(function() {
+        if ($j(this).parent('li').hasClass('active')){
+            $j(this).next('ul').slideDown(0);
+            $j(this).parent().addClass('open');
+        }
+    })
+    $j(".expander-list .expander").on('click', function(e) {
+        e.preventDefault;
+        var speed = 300;
+        var thisItem = $j(this).parent(),
+            nextLevel = $j(this).next('ul');
+        if (thisItem.hasClass('open')){
+            thisItem.removeClass('open');
+            nextLevel.slideUp(speed);
+        }
+        else {
+            thisItem.addClass('open');
+            nextLevel.slideDown(speed);
+        }
+    })
+};
+
+
+// Collapse Block (left column in listing)
+export function collapseBlock() {
+    $j('.collapse-block__content').each(function() {
+        if ($j(this).parent('.collapse-block').hasClass('open')){
+            $j(this).slideDown(0);
+        }
+    })
+    $j('.collapse-block__title').on('click', function(e) {
+        e.preventDefault;
+        var speed = 300;
+        var thisItem = $j(this).parent(),
+            nextLevel = $j(this).next('.collapse-block__content');
+        if (thisItem.hasClass('open')){
+            thisItem.removeClass('open');
+            nextLevel.slideUp(speed);
+        }
+        else {
+            thisItem.addClass('open');
+            nextLevel.slideDown(speed);
+        }
+    })
+};

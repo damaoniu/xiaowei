@@ -11947,7 +11947,7 @@ table .input-counter .plus-btn:before {
 *****************************************/
 /* Carousel content */
 .slick-loading .slick-list {
-  background: #fff url('../images/ajax-loader.gif') center center no-repeat;
+  background: #fff url('/assets/images/ajax-loader.gif') center center no-repeat;
 }
 .slickArrow {
   display: block;
