@@ -5,8 +5,6 @@ import {
 } from "../../utils"
 declare  var jQuery:any;
 declare  var window:any;
-
-
 let $j=jQuery.noConflict();
 @Component({
     selector:"home",
@@ -17,42 +15,17 @@ let $j=jQuery.noConflict();
 export class Home implements OnInit,OnDestroy,AfterContentInit{
   ngOnInit(){
       //remove loader
-      jQuery('body').addClass('loaded');
-      // top menu(hover)
-      jQuery(function($j) {
-          "use strict";
-
-          $j('.nav.navbar-nav li').hover(function(){
-              $j(this).addClass('hover');
-          },function(){
-              $j(this).removeClass('hover');
-          })
-
-      });
-      //search dropdwon
-      $j('.search__open').on('click', function(e) {
-          e.preventDefault();
-          $j(this).parent('.search').addClass('open');
-          $j(this).next('#search-dropdown, .search-dropdown').addClass('open');
-          $j('header .badge').addClass('badge--hidden');
-      });
-      $j('.search__close').on('click', function(e) {
-          e.preventDefault();
-          $j(this).closest('.search').removeClass('open');
-          $j(this).closest('#search-dropdown, .search-dropdown').removeClass('open');
-          $j('header .badge').removeClass('badge--hidden');
-      });
 
       //aside
-      bannerAsid($j('.bannerAsid'),1,1,1,1,1);//banner
-      testimonialsAsid($j('.testimonialsAsid'),1,1,1,1,1);//TESTIMONIALS
+      bannerAsid($j('.bannerAsid'));//banner
+      testimonialsAsid($j('.testimonialsAsid'));//TESTIMONIALS
       productCarousel($j('#postsCarousel'),1,1,1,1,1);
     //product carousel
       productCarousel($j('#megaMenuCarousel2'),1,1,1,1,1);
       productCarousel($j('#carouselNew'),2,1,2,2,2);
       productCarousel($j('#carouselSale'),3,2,2,2,2);
       productCarousel($j('#carouselFeatured'),5,3,3,2,1);
-      verticalCarousel($j('.vertical-carousel-1'),2,2,2,2,2,'verticalCarousel'));
+      verticalCarousel($j('.vertical-carousel-1'),2);
       brandsCarousel($j('.brands-carousel'));
       bannerCarouselShort($j('.category-carousel'))
 
