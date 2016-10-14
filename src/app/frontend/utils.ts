@@ -1,6 +1,7 @@
 // Product Carousel
 declare var window:any;
 declare var jQuery:any;
+declare var noUiSlider:any;
 let $j = jQuery.noConflict();
 
 function debouncer(func, timeout) {
@@ -485,3 +486,66 @@ export function collapseBlock() {
         }
     })
 };
+
+// Price Slider initialize
+export function priceSlider() {
+
+    if ($j('.price-slider').length) {
+
+        var priceSlider = document.getElementById('priceSlider');
+
+        noUiSlider.create(priceSlider, {
+            start: [100, 900],
+            connect: true,
+            step: 1,
+            range: {
+                'min': 0,
+                'max': 1000
+            }
+        });
+
+        var inputPriceMax = $j('#priceMax');
+        var inputPriceMin = $j('#priceMin');
+
+        priceSlider.noUiSlider.on('update', function( values, handle ) {
+
+            var value = values[handle];
+
+            if ( handle ) {
+                inputPriceMax.val(value);
+            } else {
+                inputPriceMin.val(value);
+            }
+        });
+
+        inputPriceMax.on('change', function(){
+            priceSlider.noUiSlider.set([null, this.value]);
+        });
+        inputPriceMin.on('change', function(){
+            priceSlider.noUiSlider.set([this.value, null]);
+        });
+    };
+}
+
+
+
+// Listing view mode
+export  function listingModeToggle() {
+    if ($j('a.link-row-view').length) {
+        $j('a.link-row-view').on('click', function(e) {
+            e.preventDefault();
+            $j(this).addClass('active');
+            $j('a.link-grid-view').removeClass('active');
+            $j('.product-listing').addClass('row-view');
+        })
+    }
+    if ($j('a.link-row-view').length) {
+
+        $j('a.link-grid-view').on('click', function(e) {
+            e.preventDefault();
+            $j(this).addClass('active');
+            $j('a.link-row-view').removeClass('active');
+            $j('.product-listing').removeClass('row-view');
+        })
+    }
+}

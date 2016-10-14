@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {slideColumn, expanderList, collapseBlock} from "../../utils";
+import {slideColumn, expanderList, collapseBlock, listingModeToggle, priceSlider} from "../../utils";
 
 declare var jQuery:any;
 let $j=jQuery.noConflict();
@@ -12,6 +12,8 @@ export class ProductsComponent implements OnInit{
         slideColumn();
         expanderList();
         collapseBlock();
+        listingModeToggle();
+        priceSlider();
     }
 
 }
