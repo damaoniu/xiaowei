@@ -2,6 +2,18 @@
 declare var window:any;
 declare var jQuery:any;
 let $j = jQuery.noConflict();
+
+function debouncer(func, timeout) {
+    var timeoutID, timeout = timeout || 500;
+    return function() {
+        var scope = this,
+            args = arguments;
+        clearTimeout(timeoutID);
+        timeoutID = setTimeout(function() {
+            func.apply(scope, Array.prototype.slice.call(args));
+        }, timeout);
+    }
+}
 // Fix z-index problem on carousel hover
 function fixCarouselHover(carousel) {
     carousel.find('.slick-slide').bind( "mouseenter mouseleave",
@@ -214,4 +226,145 @@ export function bannerCarouselShort(carousel) {
                 }
             }]
     });
+}
+
+// Product thumbnails carousel
+export function thumbnailsCarousel(carousel) {
+    carousel.slick({
+        infinite: false,
+        dots: false,
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        responsive: [{
+            breakpoint: 1200,
+            settings: {
+                slidesToShow: 3,
+                slidesToScroll: 1
+            }
+        },{
+            breakpoint: 992,
+            settings: {
+                slidesToShow: 2,
+                slidesToScroll: 1
+            }
+        }]
+    });
+}
+
+// Elevate Zoom
+export function elevateZoom() {
+
+    var windowW = window.innerWidth || document.documentElement.clientWidth;
+    $j('.product-zoom').imagesLoaded(function() {
+        if ($j('.product-zoom').length) {
+
+            var zoomPosition
+            if ( $j('html').css('direction').toLowerCase() == 'rtl' ) {
+                zoomPosition = 11;
+            }
+            else {
+                zoomPosition = 1
+            }
+
+
+            if (windowW > 767) {
+                $j('.product-zoom').elevateZoom({
+                    //zoomWindowHeight: $j('.product-zoom').height(), // if zoom container must be as image height
+                    zoomWindowWidth: $j('.product-zoom').width()- 60,
+                    zoomWindowHeight: $j('.product-zoom').width() - 60,
+                    gallery: "smallGallery",
+                    galleryActiveClass: 'active',
+                    zoomWindowPosition	: zoomPosition
+                })
+
+            } else {
+                $j(".product-zoom").elevateZoom({
+                    gallery: "smallGallery",
+                    zoomType: "inner",
+                    galleryActiveClass: 'active',
+                    zoomWindowPosition	: zoomPosition
+                });
+            }
+        }
+    })
+
+
+    $j('.product-main-image > .product-main-image__zoom ').bind('click', function(){
+
+
+        var galleryObj = [];
+        var current = 0;
+        var itemN = 0;
+        var image={};
+
+        if ($j('#smallGallery').length){
+            console.log('1');
+            $j('#smallGallery li a').not('.video-link').each(function() {
+                if ($j(this).hasClass('active')) {
+                    current = itemN;
+                }
+                itemN++;
+                var src = $j(this).data('zoom-image'),
+                    type = 'image';
+                image = {};
+                image ["src"] = src;
+                image ["type"] = type;
+
+                galleryObj.push(image);
+            });
+        }
+
+        else {
+            console.log('2');
+            itemN++;
+            var src = $j(this).parent().find('.product-zoom').data('zoom-image'),
+                type = 'image';
+            image = {};
+            image ["src"] = src;
+            image ["type"] = type;
+
+            galleryObj.push(image);
+        }
+
+        $j.magnificPopup.open({
+            items: galleryObj,
+            gallery: {
+                enabled: true,
+            }
+        }, current);
+
+    });
+
+    var  prevW = windowW;
+
+
+    $j(window).resize(debouncer(function(e) {
+        var currentW = window.innerWidth || $j(window).width();
+
+        if (currentW != prevW) {
+            // start resize events
+
+            $j('.zoomContainer').remove();
+            $j('.elevatezoom').removeData('elevateZoom');
+
+            if ($j('.product-zoom').length) {
+                if (currentW > 767) {
+                    $j('.product-zoom').elevateZoom({
+                        zoomWindowHeight: $j('.product-zoom').height(),
+                        gallery: "smallGallery"
+                    })
+                } else {
+                    $j(".product-zoom").elevateZoom({
+                        gallery: "smallGallery",
+                        zoomType: "inner"
+                    });
+                }
+            }
+
+        }
+
+        prevW = window.innerWidth || $j(window).width();
+
+
+    },0));
 }
