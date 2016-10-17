@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation, AfterContentInit} from "@angular/core";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -7,7 +7,11 @@ let $j=jQuery.noConflict();
     templateUrl:"./front.html",
     encapsulation:ViewEncapsulation.None
 })
-export class FrontComponent implements OnInit{
+export class FrontComponent implements OnInit,AfterContentInit{
+    ngAfterContentInit():void {
+        //initate the dropdowns
+        // $j('.dropdown-toggle').dropdown();
+    }
     ngOnInit(){
         //remove loader
         jQuery('body').addClass('loaded');
@@ -49,6 +53,8 @@ export class FrontComponent implements OnInit{
             $j(this).closest('#search-dropdown, .search-dropdown').removeClass('open');
             $j('header .badge').removeClass('badge--hidden');
         });
+
+
 
     }
 

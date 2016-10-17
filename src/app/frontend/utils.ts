@@ -492,7 +492,7 @@ export function priceSlider() {
 
     if ($j('.price-slider').length) {
 
-        var priceSlider = document.getElementById('priceSlider');
+        var priceSlider = $j('#priceSlider').get(0);
 
         noUiSlider.create(priceSlider, {
             start: [100, 900],
