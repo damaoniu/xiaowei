@@ -6,6 +6,7 @@ import {CommonModule} from "@angular/common";
 @NgModule({
     imports:[RouterModule,FormsModule,CommonModule],
     exports:[RouterModule,FormsModule,CommonModule],
+    providers:[]
 })
 export class SharedModule{
 

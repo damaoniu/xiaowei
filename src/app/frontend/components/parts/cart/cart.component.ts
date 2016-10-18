@@ -1,21 +1,28 @@
-import {Component, OnInit, ViewEncapsulation, ElementRef, Renderer} from "@angular/core";
-import {element} from "protractor/built/index";
+import {Component, OnInit, ViewEncapsulation, ElementRef} from "@angular/core";
+import {CartService} from "../../../../shared/services/cartService/cart.service";
 declare var jQuery:any;
 declare var window:any;
+// declare var localStorage:any;
 let $j=jQuery.noConflict();
 @Component({
     selector:"cart",
     templateUrl:"./cart.html",
-    encapsulation:ViewEncapsulation.None
+    encapsulation:ViewEncapsulation.None,
+
+
 })
 export class Cart implements OnInit{
-    cartIsOpen=false;
-    constructor(private _renderer:Renderer, private _elf:ElementRef){}
-    openCart(){
-        // this.cartIsOpen=!this.cartIsOpen;
+    cartIsOpen:boolean=false;
+    constructor( private _elf:ElementRef,public  cartService:CartService){
+    }
+    //use this reactive we to set up reactive properties
+    get cart(){
+        return this.cartService.getCart();
     }
     ngOnInit(){
-        //init cart slid
+        this.cartService.setCart({number:100})
+
+        // localStorage.setItem("test","test")
         if ($j("header .cart").length > 0) {
             $j('header .cart .dropdown-toggle').on('click', function(e){
                 $j("header .cart .dropdown").toggleClass('open');

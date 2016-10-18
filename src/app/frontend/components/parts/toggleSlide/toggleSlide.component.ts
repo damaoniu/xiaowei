@@ -5,9 +5,10 @@ let $j=jQuery.noConflict();
 @Component({
     templateUrl:"./toggleSlide.html",
     selector:"slideToggle",
-    encapsulation:ViewEncapsulation.None
+    encapsulation:ViewEncapsulation.None,
 })
 export class SlideToggle implements OnInit{
+    @Input('name') name:string;
     @ViewChild('title') title:ElementRef;
     @ViewChild('content') content:ElementRef;
     @Output('opened') opened:EventEmitter<any>=new EventEmitter<any>(false);
@@ -25,12 +26,12 @@ export class SlideToggle implements OnInit{
         if (thisItem.hasClass('open')){
             thisItem.removeClass('open');
             $j(this.content.nativeElement).slideUp(this.speed);
-            this.opened.emit();
+            this.opened.emit({name:this.name,open:false});
         }
         else {
             thisItem.addClass('open');
             $j(this.content.nativeElement).slideDown(this.speed);
-            this.opened.emit()
+            this.opened.emit({name:this.name,open:true})
         }
     }
     constructor(public renderer:Renderer, public el:ElementRef){}
