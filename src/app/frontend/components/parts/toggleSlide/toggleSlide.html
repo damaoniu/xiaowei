@@ -1,0 +1,6 @@
+<div class="collapse-block  collapse-block--indent-lg" toggleSlide>
+    <h4 #title (click)="toggle($event)"  class="collapse-block__title collapse-block__icon-left"><ng-content select="[title]"></ng-content></h4>
+    <div #content class="collapse-block__content">
+        <ng-content select="[content]"></ng-content>
+    </div>
+</div>

@@ -8,8 +8,9 @@ import {ProductsComponent} from "./components/products/products.component";
 import {PartsModule} from "./components/parts/parts.module";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FaqComponent} from "./components/faq/faq.component";
+import {FrontDirectivesModule} from "./directives/frontDirective.module";
 @NgModule({
-    imports: [SharedModule,frontRoutes,PartsModule],
+    imports: [SharedModule,frontRoutes,PartsModule,FrontDirectivesModule],
     declarations:[
         FrontComponent,Home,ProductComponent,ProductsComponent,
         CheckoutComponent,FaqComponent
