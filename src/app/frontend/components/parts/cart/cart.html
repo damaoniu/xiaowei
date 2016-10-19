@@ -10,37 +10,16 @@
         <div class="container">
             <div class="cart__top">Recently added item(s)</div>
             <a href="#" class="icon icon-close cart__close"><span>CLOSE</span></a>
+            <div *ngIf="itemsCount<=0">
+                <div class="cart__item__info__title">
+                    <h2><a href="#">你的购物袋现在为空!</a></h2>
+                </div>
+            </div>
             <ul>
-                <li class="cart__item">
+                <li class="cart__item" *ngFor="let item of cart" >
                     <div class="cart__item__image pull-left"><a href="#"><img src="/assets/images/product/product-1.jpg" alt=""/></a></div>
                     <div class="cart__item__control">
-                        <div class="cart__item__delete"><a href="#" class="icon icon-delete"><span>Delete</span></a></div>
-                        <div class="cart__item__edit"><a href="#" class="icon icon-edit"><span>Edit</span></a></div>
-                    </div>
-                    <div class="cart__item__info">
-                        <div class="cart__item__info__title">
-                            <h2><a href="#">Quis nostrud exercit ation ullamco</a></h2>
-                        </div>
-                        <div class="cart__item__info__price"><span class="info-label">Price:</span><span>$84.00</span></div>
-                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input type="text" class="input--ys" value='1' /></div>
-                        <div class="cart__item__info__details">
-                            <div class='multitooltip'>
-                                <a href="#">Details</a>
-                                <div class="tip on-bottom">
-                                    <span><strong>Color:</strong> Purple</span>
-                                    <span><strong>Quantity:</strong> 200</span>
-                                    <span><strong>Image:</strong> No</span>
-                                    <span><strong>Paper:</strong> Type Linen</span>
-                                    <span><strong>Size:</strong> 4"x3.5"</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-                <li class="cart__item">
-                    <div class="cart__item__image pull-left"><a href="#"><img src="/assets/images/product/product-2.jpg" alt=""/></a></div>
-                    <div class="cart__item__control">
-                        <div class="cart__item__delete"><a href="#" class="icon icon-delete"><span>Delete</span></a></div>
+                        <div class="cart__item__delete" (click)="deleteItem(item)"><a href="#" class="icon icon-delete"><span>Delete</span></a></div>
                         <div class="cart__item__edit"><a href="#" class="icon icon-edit"><span>Edit</span></a></div>
                     </div>
                     <div class="cart__item__info">
@@ -66,7 +45,7 @@
             </ul>
             <div class="cart__bottom">
                 <div class="cart__total">Cart subtotal: <span> $65.00</span></div>
-                <button class="btn btn--ys btn-checkout">Checkout <span class="icon icon--flippedX icon-reply"></span></button>
+                <button class="btn btn--ys btn-checkout" >Checkout <span class="icon icon--flippedX icon-reply"></span></button>
                 <a href="#" class="btn btn--ys"><span class="icon icon-shopping_basket"></span> View Cart</a>
             </div>
         </div>

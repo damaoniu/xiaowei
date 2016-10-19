@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewEncapsulation, ElementRef} from "@angular/core";
 import {CartService} from "../../../../shared/services/cartService/cart.service";
+import {Item} from "../../../../shared/services/cartService/item";
 declare var jQuery:any;
 declare var window:any;
 // declare var localStorage:any;
@@ -21,6 +22,9 @@ export class Cart implements OnInit{
     }
     get itemsCount(){
         return this.cartService.getItemsCount();
+    }
+    deleteItem(item:Item){
+        this.cartService.deleteItem(item);
     }
     ngOnInit(){
         this.cartService.addItem({id:"100",description:"est",price:12,name:"as",img_src:"adsd"})

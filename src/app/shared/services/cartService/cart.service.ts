@@ -1,10 +1,19 @@
-import {Injectable} from "@angular/core";
+import {Injectable, NgZone} from "@angular/core";
 import {Item} from "./item";
-//this is the better way to use no typescript
+//this is the better way to use no typescript libraries
 declare var _:any;
+declare var localStorage:any;
+let cart="cart";
 @Injectable()
 export class CartService{
-    public cart:Item[]=[{id:"4",name:"test",price:23,description:"very good stuff",img_src:"adsdf"}];
+    public cart:Item[]=[];
+    constructor(public _ngzone:NgZone){
+        if(localStorage.getItem(cart)){
+            this.cart=JSON.parse(localStorage.getItem(cart));
+        }else {
+            this.cart=[{id:"4",name:"test",price:23,description:"very good stuff",img_src:"adsdf"}]
+        }
+    }
     setCart(value){
         this.cart=value;
     }
@@ -20,9 +29,12 @@ export class CartService{
         }else{
             this.cart.push(item);
         }
+        localStorage.setItem(cart,JSON.stringify(this.cart));
+
     }
     deleteItem(item:Item){
         this.cart = this.cart.filter(cartItem=>cartItem.id!==item.id);
+        localStorage.setItem(cart,JSON.stringify(this.cart));
     }
     clearCart(){
         this.cart = [];
