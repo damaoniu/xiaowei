@@ -13,6 +13,8 @@ export class FrontComponent implements OnInit,AfterContentInit{
         // $j('.dropdown-toggle').dropdown();
     }
     ngOnInit(){
+        //set content margin Top
+        $j("#pageContentPart").css("margin-top",$j("#headerPart").outerHeight());
         //remove loader
         jQuery('body').addClass('loaded');
         // top menu(hover)

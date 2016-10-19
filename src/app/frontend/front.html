@@ -488,10 +488,10 @@
 </div>
 <!-- /mobile menu -->
 <!-- HEADER section -->
-<div class="header-wrapper">
-    <header id="header" class="header-layout-02">
+<div id="headerPart" class="header-wrapper navbar-fixed-top">
+    <header id="header"  class="header-layout-02 ">
         <div class="container">
-            <div class="row">
+            <div class="row ">
                 <!-- col-left -->
                 <div class="col-sm-3 col-md-3 col-lg-3 col-xl-3">
                     <div class="settings">
@@ -1258,12 +1258,13 @@
 </div>
 <!-- End HEADER section --
 <!-- CONTENT section -->
-
-<router-outlet></router-outlet>
+<div id="pageContentPart">
+	<router-outlet></router-outlet>
+</div>
 
 <!-- End CONTENT section -->
 <!-- FOOTER section -->
-<footer class="layout-0">
+<footer id="footer" class="layout-0">
     <!-- footer-data -->
     <div class="container inset-bottom-60">
         <div class="row" >
