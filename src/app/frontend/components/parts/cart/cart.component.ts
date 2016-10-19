@@ -19,8 +19,11 @@ export class Cart implements OnInit{
     get cart(){
         return this.cartService.getCart();
     }
+    get itemsCount(){
+        return this.cartService.getItemsCount();
+    }
     ngOnInit(){
-        this.cartService.setCart({number:100})
+        this.cartService.addItem({id:"100",description:"est",price:12,name:"as",img_src:"adsd"})
 
         // localStorage.setItem("test","test")
         if ($j("header .cart").length > 0) {
