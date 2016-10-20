@@ -1,12 +1,15 @@
-import {Directive, OnInit, ElementRef} from "@angular/core";
+import {Directive, OnInit, ElementRef, AfterContentInit} from "@angular/core";
 declare var jQuery:any;
 let $j=jQuery.noConflict();
 declare var window:any;
 @Directive({
     selector:"[revSlider]"
 })
-export class RevolutionSlider {
-    constructor(public el:ElementRef){
+export class RevolutionSlider implements AfterContentInit{
+    constructor(public el:ElementRef){}
+
+    //this is where the childnodes of the native elements are loaded also
+    ngAfterContentInit():void {
         var windowW = window.innerWidth || $j(window).width();
         var fullwidth;
         var fullscreen;

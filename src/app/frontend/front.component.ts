@@ -8,13 +8,7 @@ let $j=jQuery.noConflict();
     encapsulation:ViewEncapsulation.None
 })
 export class FrontComponent implements OnInit,AfterContentInit{
-    ngAfterContentInit():void {
-        //initate the dropdowns
-        // $j('.dropdown-toggle').dropdown();
-    }
     ngOnInit(){
-        //set content margin Top
-        $j("#pageContentPart").css("margin-top",$j("#headerPart").outerHeight());
         //remove loader
         jQuery('body').addClass('loaded');
         // top menu(hover)
@@ -58,6 +52,12 @@ export class FrontComponent implements OnInit,AfterContentInit{
 
 
 
+    }
+    ngAfterContentInit():void {
+        //initate the dropdowns
+        // $j('.dropdown-toggle').dropdown();
+        //set content margin Top
+        $j("#pageContentPart").css("margin-top",$j("#headerPart").outerHeight());
     }
 
 }
