@@ -15,7 +15,8 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.css"
+        "styles.css",
+        "../src/assets/css/magic.min.css"
       ],
       "scripts": [
         "../node_modules/underscore/underscore.js"

@@ -1,5 +1,6 @@
 import {Injectable, NgZone} from "@angular/core";
 import {Item} from "./item";
+import {EventEmitter} from "@angular/forms/src/facade/async";
 //this is the better way to use no typescript libraries
 declare var _:any;
 declare var localStorage:any;
@@ -7,7 +8,11 @@ let cart="cart";
 @Injectable()
 export class CartService{
     public cart:Item[]=[];
+    public itemAdded$:EventEmitter<Item>;
+    public itemDeleted$:EventEmitter<Item>;
     constructor(public _ngzone:NgZone){
+        this.itemAdded$=new EventEmitter();
+        this.itemDeleted$=new EventEmitter();
         if(localStorage.getItem(cart)){
             this.cart=JSON.parse(localStorage.getItem(cart));
         }else {
@@ -30,6 +35,7 @@ export class CartService{
             this.cart.push(item);
         }
         localStorage.setItem(cart,JSON.stringify(this.cart));
+        this.itemAdded$.emit(item);
 
     }
     deleteItem(item:Item){

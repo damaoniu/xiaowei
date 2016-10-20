@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, ElementRef} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation, ElementRef, ViewChild, OnDestroy} from "@angular/core";
 import {CartService} from "../../../../shared/services/cartService/cart.service";
 import {Item} from "../../../../shared/services/cartService/item";
 declare var jQuery:any;
@@ -12,9 +12,17 @@ let $j=jQuery.noConflict();
 
 
 })
-export class Cart implements OnInit{
+export class Cart implements OnInit,OnDestroy{
     cartIsOpen:boolean=false;
-    constructor( private _elf:ElementRef,public  cartService:CartService){
+    @ViewChild("bage") badge:ElementRef;
+    constructor( private _elf:ElementRef,public  cartService:CartService    ){
+        let that = this;
+        cartService.itemAdded$.subscribe((item)=>{
+            $j(this.badge.nativeElement).removeClass('magictime puffIn');
+            setTimeout(function () {
+                $j(that.badge.nativeElement).addClass('magictime puffIn');
+            },20)
+        })
     }
     //use this reactive we to set up reactive properties
     get cart(){
@@ -78,6 +86,9 @@ export class Cart implements OnInit{
         }
 
 
+    }
+    ngOnDestroy():void {
+        this.cartService.itemAdded$.unsubscribe();
     }
 
 }
