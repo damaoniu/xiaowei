@@ -8,14 +8,6 @@ let $j=jQuery.noConflict();
 })
 export class ProductComponent implements OnInit{
     ngOnInit() {
-        $j('.video-link').magnificPopup({
-            disableOn: 767,
-            type: 'iframe',
-            removalDelay: 160,
-            preloader: false,
-            fixedContentPos: false
-        });
-
         // Init All Carousel
 
         thumbnailsCarousel($j('.product-images-carousel ul'));
