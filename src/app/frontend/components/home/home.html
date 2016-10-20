@@ -401,10 +401,11 @@
                                             <li class="level2"><a href="listing.html">Sunglasses</a></li>
                                         </ul>
                                     </li>
-                                    <li class="col-sm-3 hidden-xs">
+                                    <li class="col-sm-3 hidden-xs" >
                                         <a href="listing.html" class="megamenu__subtitle"><span>FEATURED</span></a>
                                         <!-- carousel -->
-                                        <div class="carousel-products" id="megaMenuCarousel2">
+                                        <div slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1" >
+                                         <div class="carousel-products carousel-slides" id="megaMenuCarousel2">
                                             <div>
                                                 <!-- product -->
                                                 <div class="product">
@@ -470,6 +471,7 @@
                                                 <!-- /product -->
                                             </div>
                                         </div>
+                                        </div>
                                         <!-- /carousel -->
                                     </li>
                                     <li class="col-sm-12 hidden-xs">
@@ -526,9 +528,9 @@
                                             <li class="level2"><a href="listing.html">Sunglasses</a></li>
                                         </ul>
                                     </li>
-                                    <li class="col-lg-3 col-md-4 hidden-md">
+                                    <li class="col-lg-3 col-md-4 hidden-md" slick [numberXl]="2" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
                                         <a href="listing.html" class="megamenu__subtitle"><span>Specials</span></a>
-                                        <div class="vertical-carousel vertical-carousel-1 special-carousel">
+                                        <div class="vertical-carousel vertical-carousel-1 special-carousel carousel-slides">
                                             <div class="vertical-carousel__item">
                                                 <div class="vertical-carousel__item__image pull-left"><a href="product.html"><img src="/assets/images/product/product-120x150-1.jpg" alt=""></a></div>
                                                 <div class="product__label product__label--sale"> <span>Sale</span></div>
@@ -569,22 +571,24 @@
                 </nav>
                 <!--======= /navbar-vertical =======-->
                 <!--======= banner-asid =======-->
-                <div class="bannerAsid nav-dot hidden-sm  hidden-xs">
-                    <!-- slide-->
-                    <div class="text-center">
-                        <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-01.jpg" alt=""></a>
+                <div class="bannerAsid nav-dot hidden-sm  hidden-xs" slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
+                    <div class="carousel-slides">
+                        <!-- slide-->
+                        <div class="text-center">
+                            <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-01.jpg" alt=""></a>
+                        </div>
+                        <!-- /slide-->
+                        <!-- slide-->
+                        <div class="text-center">
+                            <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-02.jpg" alt=""></a>
+                        </div>
+                        <!-- /slide-->
+                        <!-- slide-->
+                        <div class="text-center">
+                            <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-03.jpg" alt=""></a>
+                        </div>
+                        <!-- /slide-->
                     </div>
-                    <!-- /slide-->
-                    <!-- slide-->
-                    <div class="text-center">
-                        <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-02.jpg" alt=""></a>
-                    </div>
-                    <!-- /slide-->
-                    <!-- slide-->
-                    <div class="text-center">
-                        <a href="listing.html"><img class="img-responsive-inline" src="/assets/images/custom/banner-aside-03.jpg" alt=""></a>
-                    </div>
-                    <!-- /slide-->
                 </div>
                 <!--======= /banner-asid =======-->
                 <div class="divider divider--lg"></div>
@@ -596,9 +600,9 @@
                 <!--======= /facebook =======-->
                 <div class="divider divider--lg hidden-sm  hidden-xs"></div>
                 <!--======= testimonials =======-->
-                <div class="fill-bg-custom aside-inner color-white">
+                <div class="fill-bg-custom aside-inner color-white" slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1" >
                     <h4 class="text-center text-uppercase color-white mega">testimonials</h4>
-                    <div class="testimonialsAsid nav-dot nav-dot-invert">
+                    <div class="testimonialsAsid nav-dot nav-dot-invert carousel-slides">
                         <!-- slide-->
                         <a href="blog-post-right-column.html" class="link-hover-block">
                             <div class="text-center">
@@ -649,195 +653,106 @@
                 <!-- title -->
                 <h4 class="text-uppercase mega">RECENT POSTS</h4>
                 <!-- /title -->
-                <div class="carousel-products row layout-none-xl" id="postsCarousel">
-                    <!-- slide-->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-01.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="recent-post-box__text">
-                                    <h4><a href="blog-post-right-column.html">Mauris lacinia lectus</a></h4>
-                                    <div class="author">by <b>Admin</b></div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                    </p>
-                                    <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                <div  slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
+                    <div class="carousel-products row layout-none-xl carousel-slides" id="postsCarousel">
+                        <!-- slide-->
+                        <div class="col-sm-3 col-xl-6">
+                            <!--  -->
+                            <div class="recent-post-box">
+                                <div class="col-lg-12 col-xl-12">
+                                    <a href="blog-post-right-column.html">
+                                            <span class="figure">
+                                            <img src="/assets/images/custom/recent-posts-01.jpg" alt="">
+                                            <span class="figcaption label-top-left">
+                                            <span>
+                                            <b>26</b>
+                                            <em>jun</em>
+                                            </span>
+                                            </span>
+                                            </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-12 col-xl-12">
+                                    <div class="recent-post-box__text">
+                                        <h4><a href="blog-post-right-column.html">Mauris lacinia lectus</a></h4>
+                                        <div class="author">by <b>Admin</b></div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
+                                        </p>
+                                        <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- / -->
                         </div>
-                        <!-- / -->
-                    </div>
-                    <!-- /slide -->
-                    <!-- slide -->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-02.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="recent-post-box__text">
-                                    <h4><a href="blog-post-right-column.html">Lorem ipsum dolor</a> </h4>
-                                    <div class="author">by <b>Admin</b></div>
-                                    <p>
-                                        Dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                    </p>
-                                    <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                        <!-- /slide -->
+                        <!-- slide -->
+                        <div class="col-sm-3 col-xl-6">
+                            <!--  -->
+                            <div class="recent-post-box">
+                                <div class="col-lg-12 col-xl-12">
+                                    <a href="blog-post-right-column.html">
+                                            <span class="figure">
+                                            <img src="/assets/images/custom/recent-posts-02.jpg" alt="">
+                                            <span class="figcaption label-top-left">
+                                            <span>
+                                            <b>26</b>
+                                            <em>jun</em>
+                                            </span>
+                                            </span>
+                                            </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-12 col-xl-12">
+                                    <div class="recent-post-box__text">
+                                        <h4><a href="blog-post-right-column.html">Lorem ipsum dolor</a> </h4>
+                                        <div class="author">by <b>Admin</b></div>
+                                        <p>
+                                            Dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
+                                        </p>
+                                        <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- / -->
                         </div>
-                        <!-- / -->
-                    </div>
-                    <!-- /slide -->
-                    <!-- slide -->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-03.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="recent-post-box__text">
-                                    <h4><a href="blog-post-right-column.html">dolore magna aliqua</a></h4>
-                                    <div class="author">by <b>Admin</b></div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                    </p>
-                                    <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                        <!-- /slide -->
+                        <!-- slide -->
+                        <div class="col-sm-3 col-xl-6">
+                            <!--  -->
+                            <div class="recent-post-box">
+                                <div class="col-lg-12 col-xl-12">
+                                    <a href="blog-post-right-column.html">
+                                            <span class="figure">
+                                            <img src="/assets/images/custom/recent-posts-03.jpg" alt="">
+                                            <span class="figcaption label-top-left">
+                                            <span>
+                                            <b>26</b>
+                                            <em>jun</em>
+                                            </span>
+                                            </span>
+                                            </span>
+                                    </a>
+                                </div>
+                                <div class="col-lg-12 col-xl-12">
+                                    <div class="recent-post-box__text">
+                                        <h4><a href="blog-post-right-column.html">dolore magna aliqua</a></h4>
+                                        <div class="author">by <b>Admin</b></div>
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
+                                        </p>
+                                        <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                                    </div>
                                 </div>
                             </div>
+                            <!-- / -->
                         </div>
-                        <!-- / -->
+                        <!-- /slide -->
                     </div>
-                    <!-- /slide -->
-                    <!-- slide-->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-01.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="recent-post-box__text">
-                                    <h4><a href="blog-post-right-column.html">Mauris lacinia lectus</a></h4>
-                                    <div class="author">by <b>Admin</b></div>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                    </p>
-                                    <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / -->
+                    <div class="carousel-products__button button-bottom carousel-products__button_aside">
+                        <span class="btn-prev"></span>
+                        <span class="btn-next"></span>
                     </div>
-                    <!-- /slide -->
-                    <!-- slide -->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-02.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <div class="recent-post-box__text">
-                                    <h4><a href="blog-post-right-column.html">Lorem ipsum dolor</a> </h4>
-                                    <div class="author">by <b>Admin</b></div>
-                                    <p>
-                                        Dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                    </p>
-                                    <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- / -->
-                    </div>
-                    <!-- /slide -->
-                    <!-- slide -->
-                    <div class="col-sm-3 col-xl-6">
-                        <!--  -->
-                        <div class="recent-post-box">
-                            <div class="col-lg-12 col-xl-12">
-                                <a href="blog-post-right-column.html">
-										<span class="figure">
-										<img src="/assets/images/custom/recent-posts-03.jpg" alt="">
-										<span class="figcaption label-top-left">
-										<span>
-										<b>26</b>
-										<em>jun</em>
-										</span>
-										</span>
-										</span>
-                                </a>
-                            </div>
-                            <div class="col-lg-12 col-xl-12">
-                                <h4><a href="blog-post-right-column.html">dolore magna aliqua</a></h4>
-                                <div class="author">by <b>Admin</b></div>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
-                                </p>
-                                <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
-                            </div>
-                        </div>
-                        <!-- / -->
-                    </div>
-                    <!-- /slide -->
-                </div>
-                <div class="carousel-products__button button-bottom carousel-products__button_aside">
-                    <span class="btn-prev"></span>
-                    <span class="btn-next"></span>
                 </div>
                 <!--======= /carousel-new =======-->
                 <div class="divider divider--lg visible-xs"></div>
@@ -936,8 +851,8 @@
                 <!-- category section -->
                 <div class="divider divider--md0 visible-sm visible-xs"></div>
                 <div class="content-md">
-                    <div class="row">
-                        <div class="category-carousel">
+                    <div class="row" slick [numberXl]="3" [numberLg]="2" [numberMd]="1" [numberSm]="1" [numberXs]="1">
+                        <div class="category-carousel carousel-slides">
                             <div class="col-sm-4 col-md-4 col-lg-4">
                                 <a href="listing.html" class="banner zoom-in">
 										<span class="figure">
@@ -986,7 +901,7 @@
                 <div class="divider divider--md visible-sm visible-xs"></div>
                 <!-- /category section -->
                 <!--  -->
-                <div class="content-sm">
+                <div class="content-sm" slick [numberXl]="5" [numberLg]="3" [numberMd]="3" [numberSm]="2" [numberXs]="1">
                     <!-- title -->
                     <div class="title-with-button">
                         <div class="carousel-products__button pull-right"> <span class="btn-prev"></span> <span class="btn-next"></span> </div>
@@ -994,7 +909,7 @@
                     </div>
                     <!-- /title -->
                     <!-- carousel -->
-                    <div class="carousel-products row" id="carouselFeatured">
+                    <div class="carousel-products carousel-slides row" id="carouselFeatured" #slides >
                         <div class="col-lg-3">
                             <!-- product -->
                             <div class="product">
@@ -1430,9 +1345,9 @@
                 <!-- / -->
                 <hr class="hr-md">
                 <!--  -->
-                <div class="content-sm">
+                <div class="content-sm" >
                     <div class="row">
-                        <div class="col-sm-12 col-md-8 col-xl-7">
+                        <div slick [numberXl]="3" [numberLg]="2" [numberMd]="2" [numberSm]="2" [numberXs]="2" class="col-sm-12 col-md-8 col-xl-7">
                             <!-- title -->
                             <div class="title-with-button">
                                 <div class="carousel-products__button pull-right"> <span class="btn-prev"></span> <span class="btn-next"></span> </div>
@@ -1440,7 +1355,7 @@
                             </div>
                             <!-- /title -->
                             <!-- carousel -->
-                            <div class="carousel-products row" id="carouselSale">
+                            <div class="carousel-products carousel-slides row" #slides id="carouselSale">
                                 <div class="col-lg-3">
                                     <!-- product -->
                                     <div class="product">
@@ -1728,7 +1643,7 @@
                             </div>
                             <!-- /carousel -->
                         </div>
-                        <div class="col-sm-12 col-md-4 col-xl-5">
+                        <div slick [numberXl]="2" [numberLg]="1" [numberMd]="2" [numberSm]="2" [numberXs]="2" class="col-sm-12 col-md-4 col-xl-5">
                             <div class="divider--lg visible-sm visible-xs"></div>
                             <!-- title -->
                             <div class="title-with-button">
@@ -1737,7 +1652,7 @@
                             </div>
                             <!-- /title -->
                             <!-- carousel -->
-                            <div class="carousel-products row" id="carouselNew">
+                            <div class="carousel-products row carousel-slides" #slides id="carouselNew">
                                 <div class="col-lg-3">
                                     <!-- product -->
                                     <div class="product">
@@ -1922,9 +1837,9 @@
                 <!-- / -->
                 <hr>
                 <!-- brands-carousel -->
-                <div class="content section-indent-bottom">
+                <div class="content section-indent-bottom" slick [numberXl]="10" [numberLg]="6" [numberMd]="3" [numberSm]="3" [numberXs]="2">
                     <div class="row">
-                        <div class="brands-carousel">
+                        <div class="brands-carousel carousel-slides" #slides>
                             <div><a href="#"><img src="/assets/images/custom/brand-01.png" alt=""></a></div>
                             <div><a href="#"><img src="/assets/images/custom/brand-02.png" alt=""></a></div>
                             <div><a href="#"><img src="/assets/images/custom/brand-03.png" alt=""></a></div>

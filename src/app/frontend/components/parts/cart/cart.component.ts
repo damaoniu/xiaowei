@@ -14,7 +14,7 @@ let $j=jQuery.noConflict();
 })
 export class Cart implements OnInit,OnDestroy{
     cartIsOpen:boolean=false;
-    @ViewChild("bage") badge:ElementRef;
+    @ViewChild("badge") badge:ElementRef;
     constructor( private _elf:ElementRef,public  cartService:CartService    ){
         let that = this;
         cartService.itemAdded$.subscribe((item)=>{

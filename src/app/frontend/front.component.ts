@@ -1,4 +1,7 @@
-import {Component, OnInit, ViewEncapsulation, AfterContentInit} from "@angular/core";
+import {
+    Component, OnInit, ViewEncapsulation, AfterContentInit, AfterViewChecked, AfterViewInit,
+    ElementRef, ViewChild, NgZone
+} from "@angular/core";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -7,7 +10,9 @@ let $j=jQuery.noConflict();
     templateUrl:"./front.html",
     encapsulation:ViewEncapsulation.None
 })
-export class FrontComponent implements OnInit,AfterContentInit{
+export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
+    @ViewChild("header") header:ElementRef;
+    constructor(public ngZone:NgZone){}
     ngOnInit(){
         //remove loader
         jQuery('body').addClass('loaded');
@@ -124,7 +129,12 @@ export class FrontComponent implements OnInit,AfterContentInit{
         //initate the dropdowns
         // $j('.dropdown-toggle').dropdown();
         //set content margin Top
-        $j("#pageContentPart").css("margin-top",$j("#headerPart").outerHeight());
+    }
+    ngAfterViewInit():void {
+        this.ngZone.runOutsideAngular(()=>{
+            console.log($j(this.header.nativeElement).height())
+            $j("#pageContentPart").css("margin-top",$j(this.header.nativeElement).outerHeight());
+        })
     }
 
 }

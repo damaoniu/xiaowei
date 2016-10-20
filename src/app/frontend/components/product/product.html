@@ -48,9 +48,9 @@
                                 <div class="product-info__sku pull-left">SKU: <strong>mtk012c</strong></div>
                                 <div class="product-info__availability pull-right">Availability:   <strong class="color">In Stock</strong></div>
                             </div>
-                            <div class="visible-xs">
+                            <div class="visible-xs" slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
                                 <div class="clearfix"></div>
-                                <ul id="mobileGallery">
+                                <ul id="mobileGallery carousel-slides">
                                     <li><a href="#" data-image="/assets/images/product/product-big-1.jpg" data-zoom-image="/assets/images/product/product-big-1-zoom.jpg"><img src="/assets/images/product/product-small-1.jpg" alt="" /></a></li>
                                     <li><a href="#" data-image="/assets/images/product/product-big-2.jpg" data-zoom-image="/assets/images/product/product-big-2-zoom.jpg"><img src="/assets/images/product/product-small-2.jpg" alt="" /></a></li>
                                     <li><a href="#" data-image="/assets/images/product/product-big-3.jpg" data-zoom-image="/assets/images/product/product-big-3-zoom.jpg"><img src="/assets/images/product/product-small-3.jpg" alt="" /></a></li>
@@ -446,7 +446,8 @@
                     <div class="divider-line"></div>
                     <h4 class="text-uppercase">Related Products</h4>
                     <p>Check items to add to the cart or <a href="#" class="color">select all</a></p>
-                    <div class="vertical-carousel vertical-carousel-2 with-checkbox offset-top-40">
+                    <div slick [numberXl]="2" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
+                        <div class="vertical-carousel vertical-carousel-2 with-checkbox offset-top-40 carousel-slides">
                         <div class="vertical-carousel__item">
                             <div class="vertical-carousel__item__select pull-left">
                                 <div class="checkbox-group"><input type="checkbox" name="checkbox1" value="product1" id="checkBox1"><label for="checkBox1"><span class="check"></span> <span class="box"></span> &nbsp;</label></div>
@@ -492,13 +493,14 @@
                             <div class="rating"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
                         </div>
                     </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
     <!-- related products -->
     <section class="content">
-        <div class="container">
+        <div class="container" slick [numberXl]="6" [numberLg]="4" [numberMd]="4" [numberSm]="2" [numberXs]="1">
             <!-- title -->
             <div class="title-with-button">
                 <div class="carousel-products__center pull-right"> <span class="btn-prev"></span> <span class="btn-next"></span> </div>
@@ -506,7 +508,7 @@
             </div>
             <!-- /title -->
             <!-- carousel -->
-            <div class="carousel-products row" id="carouselRelated">
+            <div class="carousel-products row carousel-slides" id="carouselRelated">
                 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
                     <!-- product -->
                     <div class="product">

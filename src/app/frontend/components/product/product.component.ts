@@ -1,5 +1,5 @@
 import {Component, OnInit} from "@angular/core";
-import {productCarousel, verticalCarousel, thumbnailsCarousel, elevateZoom, inputCounter} from "../../utils";
+import {thumbnailsCarousel, elevateZoom, inputCounter} from "../../utils";
 declare var jQuery:any;
 let $j=jQuery.noConflict();
 @Component({
@@ -19,10 +19,6 @@ export class ProductComponent implements OnInit{
         // Init All Carousel
 
         thumbnailsCarousel($j('.product-images-carousel ul'));
-        productCarousel($j('#carouselRelated'),6,4,4,2,1);
-        verticalCarousel($j('.vertical-carousel-2'),3);
-        productCarousel($j('#mobileGallery'),1,1,1,1,1);
-
         inputCounter();
         elevateZoom();
 
