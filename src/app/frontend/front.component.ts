@@ -132,8 +132,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     }
     ngAfterViewInit():void {
         this.ngZone.runOutsideAngular(()=>{
-            console.log($j(this.header.nativeElement).height())
-            $j("#pageContentPart").css("margin-top",$j(this.header.nativeElement).outerHeight());
+
         })
     }
 

@@ -7618,7 +7618,7 @@ hr.hr-lg {
   }
 }
 .content--parallax {
-  background: url(../images/custom/parallax-img-01.jpg) 50% 50% no-repeat;
+  background: url(/assets/images/custom/parallax-img-01.jpg) 50% 50% no-repeat;
   height: 717px;
   background-size: cover;
   -webkit-background-size: cover;
@@ -11950,7 +11950,7 @@ table .input-counter .plus-btn:before {
 *****************************************/
 /* Carousel content */
 .slick-loading .slick-list {
-  background: #fff url('../images/ajax-loader.gif') center center no-repeat;
+  background: #fff url('/assets/images/ajax-loader.gif') center center no-repeat;
 }
 .slickArrow {
   display: block;
@@ -12727,7 +12727,7 @@ table .input-counter .plus-btn:before {
 * blog carousel  
 *****************************************/
 .content-bg-1 {
-  background: url(../images/custom/content-bg-1.jpg) center center no-repeat;
+  background: url(/assets/images/custom/content-bg-1.jpg) center center no-repeat;
   padding: 100px 0 35px;
 }
 @media (max-width: 991px) {
@@ -12736,7 +12736,7 @@ table .input-counter .plus-btn:before {
   }
 }
 .slider-fluid-bg1 {
-  background: url(../images/slider-fluid-bg1.jpg) center center fixed no-repeat #fafafa;
+  background: url(/assets/images/slider-fluid-bg1.jpg) center center fixed no-repeat #fafafa;
   z-index: 1;
   position: relative;
   padding-bottom: 3.9em;

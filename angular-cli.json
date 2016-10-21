@@ -16,7 +16,9 @@
       "mobile": false,
       "styles": [
         "styles.css",
-        "../src/assets/css/magic.min.css"
+        "../src/assets/css/magic.min.css",
+        "../src/assets/css/style.css",
+        "../src/assets/css/style-layout12.css"
       ],
       "scripts": [
         "../node_modules/underscore/underscore.js"

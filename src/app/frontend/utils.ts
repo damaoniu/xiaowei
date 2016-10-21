@@ -15,22 +15,6 @@ function debouncer(func, timeout) {
         }, timeout);
     }
 }
-// Fix z-index problem on carousel hover
-
-// Vertical carousel
-
-// Brands carousel
-
-// bannerAsid carousel
-
-
-// bannerAsid carousel
-
-// Category carousel
-
-
-
-// Category carousel
 
 // Product thumbnails carousel
 export function thumbnailsCarousel(carousel) {
