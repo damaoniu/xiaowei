@@ -4,6 +4,7 @@ import {
 } from "@angular/core";
 import {Router, NavigationEnd} from "@angular/router";
 import {NextObserver} from "rxjs/Observer";
+import {UserService} from "../shared/services/user/user.service";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -14,13 +15,16 @@ let $j=jQuery.noConflict();
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     @ViewChild("header") header:ElementRef;
-    constructor(public ngZone:NgZone, private router:Router){
+    constructor(public ngZone:NgZone, private router:Router,private userService:UserService){
         router.events.subscribe((event)=>{
             if(event instanceof NavigationEnd){
                 $j("html, body").animate({ scrollTop: 0 }, "slow")
             }
 
         });
+    }
+    get user(){
+        return this.userService.getUser();
     }
     ngOnInit(){
         //remove loader
@@ -35,11 +39,13 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
 
         });
         //newsletter modal
-        if ($j('#newsletterModal').length) {
-            var pause = $j('#newsletterModal').attr('data-pause');
-            setTimeout(function() {
-                $j('#newsletterModal').modal('show');
-            }, pause);
+        if(!this.user){
+            if ($j('#newsletterModal').length) {
+                var pause = $j('#newsletterModal').attr('data-pause');
+                setTimeout(function() {
+                    $j('#newsletterModal').modal('show');
+                }, pause);
+            }
         }
         //parallax
         if ($j('.content--parallax, .carusel--parallax').length) {

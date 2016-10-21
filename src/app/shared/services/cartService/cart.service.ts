@@ -13,8 +13,8 @@ export class CartService{
     public itemDeleted$:EventEmitter<Item>;
     public discount:Discount;
     constructor(public _ngzone:NgZone){
-        this.itemAdded$=new EventEmitter();
-        this.itemDeleted$=new EventEmitter();
+        this.itemAdded$=new EventEmitter<any>();
+        this.itemDeleted$=new EventEmitter<any>();
         if(localStorage.getItem(cart)){
             this.cart=JSON.parse(localStorage.getItem(cart));
         }else {
@@ -47,14 +47,12 @@ export class CartService{
     clearCart(){
         this.cart = [];
     }
-
+    getSubTotal(item:Item){
+        return item.discount?item.quantity*item.price*(100-item.discount.rate)/100:item.quantity*item.price;
+    }
     getTotalPrice(){
         let totalPrice = this.cart.reduce((sum, cartItem)=>{
-            if(cartItem.discount){
-                return sum+=cartItem.price*cartItem.discount.rate*cartItem.quantity, sum;
-            }else {
-                return sum+=cartItem.price*cartItem.quantity, sum;
-            }
+                return sum+=this.getSubTotal(cartItem), sum;
         },0);
         return totalPrice;
     }

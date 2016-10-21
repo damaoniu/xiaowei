@@ -8,14 +8,14 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 @Injectable()
 export class UserService {
-    private user:User;
+    public user:User;
     constructor(private _http:Http) {
     }
-    get user(){
+    getUser(){
         return this.user;
     }
-    set user(user:User){
-        this.user=user;
+    setUser(newUser:User){
+        this.user=newUser;
     }
     register(user:User) {
         let headers = new Headers();

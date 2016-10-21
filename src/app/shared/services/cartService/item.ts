@@ -6,5 +6,5 @@ export interface Item{
     name: string;
     img_src?: string;
     quantity:number;
-    discount:Discount
+    discount:Discount;
 }

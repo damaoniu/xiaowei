@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import {UxvRoutingModule} from "./app-routing.module";
 import {Front} from "./frontend/front.module";
 import {CartService} from "./shared/services/cartService/cart.service";
+import {UserService} from "./shared/services/user/user.service";
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import {CartService} from "./shared/services/cartService/cart.service";
     UxvRoutingModule
   ],
   providers: [
-      CartService
+      CartService,
+      UserService
   ],
   bootstrap: [AppComponent]
 })

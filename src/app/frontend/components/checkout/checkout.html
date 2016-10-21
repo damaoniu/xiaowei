@@ -307,31 +307,23 @@
                                         <tr *ngFor="let product of cart">
                                             <td>
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
-                                                    <a href="product.html">{{product.name}}</a>
+                                                    <a routerLink="/products/{{product.id}}">{{product.name}}</a>
                                                 </h5>
                                                 <ul class="order-review-table__list-parameters">
                                                     <li>
                                                         <span>Color:</span> Purple
                                                     </li>
                                                     <li>
-                                                        <span>Quantity:</span> 200
+                                                        <span>Quantity:</span> {{product.quantity}}
                                                     </li>
-                                                    <li>
-                                                        <span>Image:</span> No
-                                                    </li>
-                                                    <li>
-                                                        <span>Paper:</span> Type Linen
-                                                    </li>
-                                                    <li>
-                                                        <span>Size:</span> 4"x3.5"
-                                                    </li>
+
                                                     <li class="visible-xs">
                                                         <span>Price:</span>
                                                         <span class="price-mobile">{{product.price}}</span>
                                                     </li>
                                                     <li class="visible-xs">
                                                         <span>Qty:</span>
-                                                        <span>1</span>
+                                                        <span>{{product.quantity}}</span>
                                                     </li>
                                                 </ul>
                                             </td>
@@ -341,11 +333,11 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <span class="color">1</span>
+                                                <span class="color">{{product.quantity}}</span>
                                             </td>
                                             <td>
                                                 <div class="order-review-table__product-price subtotal">
-                                                    $28.00
+                                                    {{cartService.getSubTotal(product)}}
                                                 </div>
                                             </td>
                                         </tr>
@@ -370,7 +362,7 @@
                                                     <tfoot>
                                                     <tr>
                                                         <th>GRAND TOTAL:</th>
-                                                        <td>$56.00</td>
+                                                        <td>{{cartService.getTotalPrice()}}</td>
                                                     </tr>
                                                     </tfoot>
                                                 </table>
