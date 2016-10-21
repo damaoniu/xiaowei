@@ -15,8 +15,7 @@ export class Home implements OnInit,OnDestroy,AfterContentInit{
   }
 
   ngAfterContentInit(){
-      // console.log($j('#headerPart').height())
-      // $j("#pageContentPart").css("margin-top",$j('#headerPart').outerHeight());
+
   }
   ngOnDestroy(){
     $j('body').removeClass('loaded');
