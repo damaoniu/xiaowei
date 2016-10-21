@@ -9,17 +9,17 @@
         <div class="dropdown-menu dropdown-menu--xs-full slide-from-top" role="menu">
         <div class="container">
             <div class="cart__top">Recently added item(s)</div>
-            <a href="#" class="icon icon-close cart__close"><span>CLOSE</span></a>
+            <a routerLink="#" class="icon icon-close cart__close"><span>CLOSE</span></a>
             <div *ngIf="itemsCount<=0">
                 <div class="cart__item__info__title">
-                    <h2><a href="#">你的购物袋现在为空!</a></h2>
+                    <h2><a routerLink="#">你的购物袋现在为空!</a></h2>
                 </div>
             </div>
             <ul>
                 <li class="cart__item" *ngFor="let item of cart" >
-                    <div class="cart__item__image pull-left"><a href="#"><img src="/assets/images/product/product-1.jpg" alt=""/></a></div>
+                    <div class="cart__item__image pull-left"><a routerLink="#"><img src="/assets/images/product/product-1.jpg" alt=""/></a></div>
                     <div class="cart__item__control">
-                        <div class="cart__item__delete" (click)="deleteItem(item)"><a href="#" class="icon icon-delete"><span>删除</span></a></div>
+                        <div class="cart__item__delete" (click)="deleteItem(item)"><a routerLink="#" class="icon icon-delete"><span>删除</span></a></div>
                         <div class="cart__item__edit"><a  class="icon icon-edit"><span>编辑</span></a></div>
                     </div>
                     <div class="cart__item__info">
@@ -27,10 +27,10 @@
                             <h2><a routerLink="/products/{{item.id}}">{{item.name}}</a></h2>
                         </div>
                         <div class="cart__item__info__price"><span class="info-label">Price:</span><span>{{item.price}}</span></div>
-                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input type="text" class="input--ys" [(ngModel)]="item.quantity" /></div>
+                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input type="number" class="input--ys" [(ngModel)]="item.quantity" /></div>
                         <div class="cart__item__info__details">
                             <div class='multitooltip'>
-                                <a href="#">Details</a>
+                                <a routerLink="#">Details</a>
                                 <div class="tip on-bottom">
                                     <span><strong>Color:</strong> Purple</span>
                                     <span><strong>Quantity:</strong> 200</span>

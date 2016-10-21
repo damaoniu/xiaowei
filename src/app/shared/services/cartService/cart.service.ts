@@ -48,13 +48,14 @@ export class CartService{
         this.cart = [];
     }
     getSubTotal(item:Item){
-        return item.discount?item.quantity*item.price*(100-item.discount.rate)/100:item.quantity*item.price;
+        let subTotal= item.discount?item.quantity*item.price*(100-item.discount.rate)/100:item.quantity*item.price;
+        return subTotal
     }
     getTotalPrice(){
         let totalPrice = this.cart.reduce((sum, cartItem)=>{
                 return sum+=this.getSubTotal(cartItem), sum;
         },0);
-        return totalPrice;
+        return totalPrice.toFixed(2);
     }
 
 }
