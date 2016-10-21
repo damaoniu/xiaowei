@@ -8,50 +8,58 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 @Injectable()
 export class UserService {
-  constructor(private _http: Http) {}
+    private user:User;
+    constructor(private _http:Http) {
+    }
+    get user(){
+        return this.user;
+    }
+    set user(user:User){
+        this.user=user;
+    }
+    register(user:User) {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
 
-  register(user: User) {
-    let headers = new Headers();
-    headers.append("Content-Type", "application/json");
+        return this._http.post(
+            Config.webServiceUrl + "Users",
+            JSON.stringify({
+                Username: user.email,
+                Email: user.email,
+                Password: user.password
+            }),
+            {headers: headers}
+        )
+            .map(res=> {
+                //persist certain data
+                return res.json();
+            })
 
-    return this._http.post(
-      Config.apiUrl + "Users",
-      JSON.stringify({
-        Username: user.email,
-        Email: user.email,
-        Password: user.password
-      }),
-      { headers: headers }
-    )
-        .map(res=>{
-            //persist certain data
-            return res.json();
-        })
+            .catch(this.handleErrors);
+    }
 
-    .catch(this.handleErrors);
-  }
-  login(user: User) {
-  let headers = new Headers();
-  headers.append("Content-Type", "application/json");
+    login(user:User) {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
 
-  return this._http.post(
-    Config.apiUrl + "oauth/token",
-    JSON.stringify({
-      username: user.email,
-      password: user.password,
-      grant_type: "password"
-    }),
-    { headers: headers }
-  )
-  .map(response => response.json())
-  .do(data => {
-    Config.token = data.Result.access_token;
-  })
-  .catch(this.handleErrors);
-}
+        return this._http.post(
+            Config.webServiceUrl + "oauth/token",
+            JSON.stringify({
+                username: user.email,
+                password: user.password,
+                grant_type: "password"
+            }),
+            {headers: headers}
+        )
+            .map(response => response.json())
+            .do(data => {
+                Config.token = data.Result.access_token;
+            })
+            .catch(this.handleErrors);
+    }
 
-  handleErrors(error: Response) {
-    console.log(JSON.stringify(error.json()));
-    return Observable.throw(error);
-  }
+    handleErrors(error:Response) {
+        console.log(JSON.stringify(error.json()));
+        return Observable.throw(error);
+    }
 }

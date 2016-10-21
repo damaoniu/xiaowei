@@ -2,6 +2,8 @@ import {
     Component, OnInit, ViewEncapsulation, AfterContentInit, AfterViewChecked, AfterViewInit,
     ElementRef, ViewChild, NgZone
 } from "@angular/core";
+import {Router, NavigationEnd} from "@angular/router";
+import {NextObserver} from "rxjs/Observer";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -12,14 +14,19 @@ let $j=jQuery.noConflict();
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     @ViewChild("header") header:ElementRef;
-    constructor(public ngZone:NgZone){}
+    constructor(public ngZone:NgZone, private router:Router){
+        router.events.subscribe((event)=>{
+            if(event instanceof NavigationEnd){
+                $j("html, body").animate({ scrollTop: 0 }, "slow")
+            }
+
+        });
+    }
     ngOnInit(){
         //remove loader
         jQuery('body').addClass('loaded');
         // top menu(hover)
         jQuery(function($j) {
-            "use strict";
-
             $j('.nav.navbar-nav li').hover(function(){
                 $j(this).addClass('hover');
             },function(){

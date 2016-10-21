@@ -18,7 +18,7 @@ export class Home implements OnInit,OnDestroy,AfterContentInit{
 
   }
   ngOnDestroy(){
-    $j('body').removeClass('loaded');
+    // $j('body').removeClass('loaded');
   }
 
 }

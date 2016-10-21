@@ -304,10 +304,10 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-                                        <tr>
+                                        <tr *ngFor="let product of cart">
                                             <td>
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
-                                                    <a href="product.html">Mauris lacinia lectus</a>
+                                                    <a href="product.html">{{product.name}}</a>
                                                 </h5>
                                                 <ul class="order-review-table__list-parameters">
                                                     <li>
@@ -327,7 +327,7 @@
                                                     </li>
                                                     <li class="visible-xs">
                                                         <span>Price:</span>
-                                                        <span class="price-mobile">$28.00</span>
+                                                        <span class="price-mobile">{{product.price}}</span>
                                                     </li>
                                                     <li class="visible-xs">
                                                         <span>Qty:</span>
@@ -337,52 +337,7 @@
                                             </td>
                                             <td>
                                                 <div class="order-review-table__product-price unit-price">
-                                                    $28.00
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <span class="color">1</span>
-                                            </td>
-                                            <td>
-                                                <div class="order-review-table__product-price subtotal">
-                                                    $28.00
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <h5 class="order-review-table__product-name text-left text-uppercase">
-                                                    <a href="product.html">Mauris lacinia lectus</a>
-                                                </h5>
-                                                <ul class="order-review-table__list-parameters">
-                                                    <li>
-                                                        <span>Color:</span> Purple
-                                                    </li>
-                                                    <li>
-                                                        <span>Quantity:</span> 200
-                                                    </li>
-                                                    <li>
-                                                        <span>Image:</span> No
-                                                    </li>
-                                                    <li>
-                                                        <span>Paper:</span> Type Linen
-                                                    </li>
-                                                    <li>
-                                                        <span>Size:</span> 4"x3.5"
-                                                    </li>
-                                                    <li class="visible-xs">
-                                                        <span>Price:</span>
-                                                        <span class="price-mobile">$28.00</span>
-                                                    </li>
-                                                    <li class="visible-xs">
-                                                        <span>Qty:</span>
-                                                        <span>1</span>
-                                                    </li>
-                                                </ul>
-                                            </td>
-                                            <td>
-                                                <div class="order-review-table__product-price unit-price">
-                                                    $28.00
+                                                    {{product.price}}
                                                 </div>
                                             </td>
                                             <td>

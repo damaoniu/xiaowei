@@ -1,6 +1,7 @@
 import {Injectable, NgZone} from "@angular/core";
 import {Item} from "./item";
 import {EventEmitter} from "@angular/forms/src/facade/async";
+import {Discount} from "./discount";
 //this is the better way to use no typescript libraries
 declare var _:any;
 declare var localStorage:any;
@@ -10,13 +11,14 @@ export class CartService{
     public cart:Item[]=[];
     public itemAdded$:EventEmitter<Item>;
     public itemDeleted$:EventEmitter<Item>;
+    public discount:Discount;
     constructor(public _ngzone:NgZone){
         this.itemAdded$=new EventEmitter();
         this.itemDeleted$=new EventEmitter();
         if(localStorage.getItem(cart)){
             this.cart=JSON.parse(localStorage.getItem(cart));
         }else {
-            this.cart=[{id:"4",name:"test",price:23,description:"very good stuff",img_src:"adsdf"}]
+            this.cart=[{id:"4",name:"test",quantity:12,price:23,description:"very good stuff",img_src:"adsdf",discount:{rate:10,startTime:"23",endTime:'3',productId:"100"}}]
         }
     }
     setCart(value){
@@ -45,17 +47,16 @@ export class CartService{
     clearCart(){
         this.cart = [];
     }
-    // applyDiscount(code:string){
-    //     this.discount = discounts.filter(discount=>discount.code==code)[0];
-    // }
-    // getTotalPrice(){
-    //     let totalPrice = this.cart.reduce((sum, cartItem)=>{
-    //         return sum+=cartItem.price, sum;
-    //     },0);
-    //     if(this.discount){
-    //         totalPrice -= totalPrice=this.discount.amount;
-    //     }
-    //     return totalPrice;
-    // }
+
+    getTotalPrice(){
+        let totalPrice = this.cart.reduce((sum, cartItem)=>{
+            if(cartItem.discount){
+                return sum+=cartItem.price*cartItem.discount.rate*cartItem.quantity, sum;
+            }else {
+                return sum+=cartItem.price*cartItem.quantity, sum;
+            }
+        },0);
+        return totalPrice;
+    }
 
 }
