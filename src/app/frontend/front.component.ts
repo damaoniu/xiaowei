@@ -129,12 +129,10 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
         //initate the dropdowns
         // $j('.dropdown-toggle').dropdown();
         //set content margin Top
+        // $j("#pageContentPart").css("margin-top",$j('#headerPart').outerHeight());
     }
     ngAfterViewInit():void {
-        this.ngZone.runOutsideAngular(()=>{
-            console.log($j('#headerPart').height())
-            $j("#pageContentPart").css("margin-top",$j('#headerPart').outerHeight());
-        })
+
     }
 
 }
