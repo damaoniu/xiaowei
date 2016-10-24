@@ -4,3 +4,7 @@
 .bg-white{
  background-color: white;
 }
+
+.clearfix{
+ clear: both;
+}

@@ -3,8 +3,8 @@ import {
     ElementRef, ViewChild, NgZone
 } from "@angular/core";
 import {Router, NavigationEnd} from "@angular/router";
-import {NextObserver} from "rxjs/Observer";
 import {UserService} from "../shared/services/user/user.service";
+import {UtilsService} from "../shared/services/utils.services";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -15,7 +15,7 @@ let $j=jQuery.noConflict();
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     @ViewChild("header") header:ElementRef;
-    constructor(public ngZone:NgZone, private router:Router,private userService:UserService){
+    constructor(public ngZone:NgZone, private router:Router,private userService:UserService, private utils:UtilsService){
         router.events.subscribe((event)=>{
             if(event instanceof NavigationEnd){
                 $j("html, body").animate({ scrollTop: 0 }, "slow")
@@ -25,6 +25,9 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     }
     get user(){
         return this.userService.getUser();
+    }
+    get quickViewProduct(){
+        return this.utils.getQuickViewProduct();
     }
     ngOnInit(){
         //remove loader

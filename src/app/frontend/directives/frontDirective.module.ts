@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {SharedModule} from "../../shared/index";
+import {SharedModule} from "../../shared/sharedmodule";
 import {RevolutionSlider} from "./revolutionSlider.directive";
 import {SlickDirective} from "./slick.directive";
 import {MagnificPopUp} from "./magnificPopup.directive";

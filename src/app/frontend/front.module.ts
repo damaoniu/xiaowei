@@ -1,5 +1,5 @@
 import {NgModule} from "@angular/core";
-import {SharedModule} from "../shared/index";
+import {SharedModule} from "../shared/sharedmodule";
 import {Home} from "./components/home/home.component";
 import {FrontComponent} from "./front.component";
 import {frontRoutes} from "./front.routing";

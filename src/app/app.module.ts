@@ -19,7 +19,7 @@ import {UserService} from "./shared/services/user/user.service";
     FormsModule,
     Front,
     HttpModule,
-    UxvRoutingModule
+    UxvRoutingModule,
   ],
   providers: [
       CartService,
