@@ -11,6 +11,9 @@ export class SlickDirective implements AfterContentInit{
     @Input('numberMd') numberMd:number;
     @Input('numberSm') numberSm:number;
     @Input('numberXs') numberXs:number;
+    @Input('arrows') arrows:boolean;
+    @Input('dots') dots:boolean;
+
     constructor(public el:ElementRef){}
     ngAfterContentInit():void {
         // Fix z-index problem on carousel hover
@@ -23,7 +26,6 @@ export class SlickDirective implements AfterContentInit{
         }
         //initiate the carousel
         var windowW = window.innerWidth || $j(window).width();
-
         var slidesToShowXl = (this.numberXl > 0) ? this.numberXl : 6;
         var slidesToShowLg = (this.numberLg > 0) ? this.numberLg : 4;
         var slidesToShowMd = (this.numberMd > 0) ? this.numberMd : this.numberLg;
@@ -32,75 +34,45 @@ export class SlickDirective implements AfterContentInit{
 
         var carousel = $j(this.el.nativeElement);
         var speed = 500;
-
+        let options={
+            slidesToShow: slidesToShowXl,
+            slidesToScroll: 1,
+            speed: speed,
+            responsive: [{
+                breakpoint: 1770,
+                settings: {
+                    slidesToShow: slidesToShowLg,
+                    slidesToScroll: slidesToShowLg
+                }
+            },{
+                breakpoint: 992,
+                settings: {
+                    slidesToShow: slidesToShowMd,
+                    slidesToScroll: slidesToShowMd
+                }
+            }, {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: slidesToShowSm,
+                    slidesToScroll: slidesToShowSm
+                }
+            }, {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: slidesToShowXs,
+                    slidesToScroll: slidesToShowXs
+                }
+            }]
+        };
+        options['arrows']=this.arrows||true;
+        options['dots']=this.dots||false;
         if (carousel.find('.carousel-products__button').length > 0) {
-
-            $j(carousel.find(".carousel-slides")).slick({
-                prevArrow: carousel.find('.carousel-products__button .btn-prev'),
-                nextArrow: carousel.find('.carousel-products__button .btn-next'),
-                dots: true,
-                slidesToShow: slidesToShowXl,
-                slidesToScroll: slidesToShowXl,
-                responsive: [{
-                    breakpoint: 1770,
-                    settings: {
-                        slidesToShow: slidesToShowLg,
-                        slidesToScroll: slidesToShowLg
-                    }
-                },{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: slidesToShowMd,
-                        slidesToScroll: slidesToShowMd
-                    }
-                }, {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: slidesToShowSm,
-                        slidesToScroll: slidesToShowSm
-                    }
-                }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: slidesToShowXs,
-                        slidesToScroll: slidesToShowXs
-                    }
-                }]
-            });
+            options['prevArrow']=carousel.find('.carousel-products__button .btn-prev');
+            options['nextArrow']=carousel.find('.carousel-products__button .btn-next');
         }
         else {
-            $j(carousel.find(".carousel-slides")).slick({
-                slidesToShow: slidesToShowXl,
-                slidesToScroll: 1,
-                speed: speed,
-                dots:true,
-                responsive: [{
-                    breakpoint: 1770,
-                    settings: {
-                        slidesToShow: slidesToShowLg,
-                        slidesToScroll: slidesToShowLg
-                    }
-                },{
-                    breakpoint: 992,
-                    settings: {
-                        slidesToShow: slidesToShowMd,
-                        slidesToScroll: slidesToShowMd
-                    }
-                }, {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: slidesToShowSm,
-                        slidesToScroll: slidesToShowSm
-                    }
-                }, {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: slidesToShowXs,
-                        slidesToScroll: slidesToShowXs
-                    }
-                }]
-            });
         }
+        $j(carousel.find(".carousel-slides")).slick(options);
 
 
         fixCarouselHover($j(carousel.find(".carousel-slides")));
