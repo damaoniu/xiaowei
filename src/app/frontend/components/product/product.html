@@ -169,23 +169,10 @@
                                 </tr>
                                 </tbody>
                             </table>
-                            <div class="wrapper">
-                                <div class="pull-left"><span class="qty-label">QTY:</span></div>
-                                <div class="pull-left">
-                                    <!--  -->
-                                    <div class="number input-counter">
-                                        <span class="minus-btn"></span>
-                                        <input type="text" value="1" size="5"/>
-                                        <span class="plus-btn"></span>
-                                    </div>
-                                    <!-- / -->
-                                </div>
-                                <div class="pull-left"><button type="submit" class="btn btn--ys btn--xxl"><span class="icon icon-shopping_basket"></span> Add to cart</button></div>
-                            </div>
-                            <ul class="product-link">
-                                <li class="text-right"><a href="#"><span class="icon icon-favorite_border  tooltip-link"></span><span class="text">Add to wishlist</span></a></li>
-                                <li class="text-left"><a href="#"><span class="icon icon-sort  tooltip-link"></span><span class="text">Add to compare</span></a></li>
-                            </ul>
+
+                            <addToCart [showQty]="true"  [item]="{id:'23',price:23,description:'na',name:'sa',img_src:'wwer'}"></addToCart>
+
+
                         </div>
                     </div>
                     <div class="content">

@@ -9,7 +9,6 @@ let $j=jQuery.noConflict();
 export class ProductComponent implements OnInit{
     ngOnInit() {
         // Init All Carousel
-
         thumbnailsCarousel($j('.product-images-carousel ul'));
         inputCounter();
         elevateZoom();

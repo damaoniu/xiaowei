@@ -1,12 +1,17 @@
-<div class="product__inside__info">
-    <div class="product__inside__info__btns"> <a (click)="addToCart()" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket">
-        </span > Add to cart</a>
-        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
+<div class="wrapper">
+    <div *ngIf="showQty" [ngClass]="{'pull-left':showQty}"><span class="qty-label">QTY:</span></div>
+    <div *ngIf="showQty" [ngClass]="{'pull-left':showQty}">
+        <!--  -->
+        <div class="number input-counter" #counter>
+            <span class="minus-btn" #minusButton></span>
+            <input type="text" value="1" size="5" [(ngModel)]="qty"/>
+            <span class="plus-btn" #plusButton></span>
+        </div>
+        <!-- / -->
     </div>
-    <ul class="product__inside__info__link hidden-xs">
-        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-    </ul>
+
+    <div [ngClass]="{'pull-left':showQty}"> <button (click)="addToCart()" [ngClass]="showQty?'btn--xxl':'btn--xl'" class="btn btn--ys"><span class="icon icon-shopping_basket">
+        </span > Add to cart</button>
+    </div>
 </div>
+
