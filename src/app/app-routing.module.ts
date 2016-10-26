@@ -7,7 +7,7 @@ import { RouterModule ,} from '@angular/router';
       RouterModule.forChild([
         {
           path:"account",
-          loadChildren:'app/account/account.module'
+          loadChildren:'app/+account/account.module'
         }
       ])
   ],
