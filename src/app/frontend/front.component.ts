@@ -11,6 +11,7 @@ let $j=jQuery.noConflict();
 @Component({
     selector:"front",
     templateUrl:"./front.html",
+    styleUrls:["style.css","style-layout12.css"],
     encapsulation:ViewEncapsulation.None
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
@@ -31,7 +32,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     }
     ngOnInit(){
         //remove loader
-        jQuery('body').addClass('loaded');
+        jQuery('#loader-wrapper').addClass('loaded');
         // top menu(hover)
         jQuery(function($j) {
             $j('.nav.navbar-nav li').hover(function(){

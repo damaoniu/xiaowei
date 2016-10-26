@@ -25,8 +25,8 @@
                                 <div class="product-main-image__item"><img class="product-zoom" src='/assets/images/product/product-big-1.jpg' data-zoom-image="/assets/images/product/product-big-1-zoom.jpg" alt="" /></div>
                                 <div class="product-main-image__zoom"></div>
                             </div>
-                            <div class="product-images-carousel">
-                                <ul id="smallGallery">
+                            <div class="product-images-carousel" slick [numberXl]="4" [numberLg]="4" [numberMd]="1" [numberSm]="1" [numberXs]="1">
+                                <ul id="smallGallery" class="carousel-slides">
                                     <li><a href="#" data-image="/assets/images/product/product-big-1.jpg" data-zoom-image="/assets/images/product/product-big-1-zoom.jpg"><img src="/assets/images/product/product-small-1.jpg" alt="" /></a></li>
                                     <li><a href="#" data-image="/assets/images/product/product-big-2.jpg" data-zoom-image="/assets/images/product/product-big-2-zoom.jpg"><img src="/assets/images/product/product-small-2.jpg" alt="" /></a></li>
                                     <li><a href="#" data-image="/assets/images/product/product-big-3.jpg" data-zoom-image="/assets/images/product/product-big-3-zoom.jpg"><img src="/assets/images/product/product-small-3.jpg" alt="" /></a></li>
@@ -179,10 +179,6 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs nav-tabs--ys" role="tablist">
                             <li class="active"><a href="#Tab1"  role="tab" data-toggle="tab" class="text-uppercase">DESCRIPTION</a></li>
-                            <li><a href="#Tab2" role="tab" data-toggle="tab" class="text-uppercase">Reviews</a></li>
-                            <li><a href="#Tab3" role="tab" data-toggle="tab" class="text-uppercase">Tags</a></li>
-                            <li><a href="#Tab4" role="tab" data-toggle="tab" class="text-uppercase">CUSTOM TAB</a></li>
-                            <li><a href="#Tab5" role="tab" data-toggle="tab" class="text-uppercase">Sizing Guide</a></li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tab-content--ys">
@@ -218,182 +214,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="Tab2">
-                                <h5><strong class="color">CUSTOMER REVIEWS 1 ITEM(S)</strong></h5>
-                                <p> GREAT!</p>
-                                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
-                                <div class="divider divider--xs"></div>
-                                <table class="table table-params">
-                                    <tbody>
-                                    <tr>
-                                        <td class="text-right"><span class="color">QUALITY</span></td>
-                                        <td>
-                                            <div class="rating"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">PRICE</span></td>
-                                        <td>
-                                            <div class="rating"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">VALUE</span></td>
-                                        <td>
-                                            <div class="rating"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                        </td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                                <p class="color-light">Review by User / (posted on 16/9/2016)</p>
-                                <div class="divider divider--xs"></div>
-                                <h5><strong class="color">WRITE YOUR OWN REVIEW</strong></h5>
-                                <p><span class="color">YOU'RE REVIEWING:</span>  Lorem ipsum dolor sit amet conse ctetur</p>
-                                <p><span class="color">HOW DO YOU RATE THIS PRODUCT?</span></p>
-                                <div class="divider divider--xs"></div>
-                                <div class="table-responsive">
-                                    <table class="table table-params">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-right"></td>
-                                            <td class="text-center">
-                                                <div class="rating"><span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="rating"><span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="rating"><span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="rating"><span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span></div>
-                                            </td>
-                                            <td class="text-center">
-                                                <div class="rating"><span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span></div>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">QUALITY</span></td>
-                                            <td class="text-center"><span class="icon-enable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">PRICE</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-enable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">VALUE</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-enable">&#x25cf;</span></td>
-                                            <td class="text-center"><span class="icon-disable">&#x25cf;</span></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="divider divider--xs"></div>
-                                <form action="#" class="contact-form">
-                                    <label>Nickname<span class="required">*</span></label>
-                                    <input type="text" class="input--ys input--ys--full">
-                                    <label>Summary of Your Review<span class="required">*</span></label>
-                                    <input type="text" class="input--ys input--ys--full">
-                                    <label>Review<span class="required">*</span></label>
-                                    <textarea class="textarea--ys input--ys--full"></textarea>
-                                    <div class="divider divider--xs"></div>
-                                    <button type="submit" class="btn btn--ys text-uppercase">Submit Review</button>
-                                </form>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="Tab3">
-                                <h5><strong class="color">OTHER PEOPLE MARKED THIS PRODUCT WITH THESE TAGS:</strong></h5>
-                                <p>Pattern (1)</p>
-                                <div class="divider divider--xs"></div>
-                                <h5><strong class="color">ADD YOUR TAGS:</strong></h5>
-                                <form action="#" class="contact-form">
-                                    <input type="text" class="input--ys input--ys--full">
-                                    <p>Use spaces to separate tags. Use single quotes (') for phrases.</p>
-                                    <div class="divider divider--xs"></div>
-                                    <button type="submit" class="btn btn--ys">Add Tags</button>
-                                </form>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="Tab4">
-                                <h5><strong class="color text-uppercase">Lorem ipsum dolor sit amet conse ctetur adipisicing elit</strong></h5>
-                                <div class="divider divider--xs"></div>
-                                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.  orem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-                                <ul class="marker-list-circle">
-                                    <li><span class="text-uppercase">Lorem ipsum dolor sit amet</span></li>
-                                    <li><span class="text-uppercase">Conse ctetur adipisicing</span></li>
-                                    <li><span class="text-uppercase">Elit sed do eiusmod tempor</span></li>
-                                    <li><span class="text-uppercase">Incididunt ut laborev</span></li>
-                                    <li><span class="text-uppercase">Et dolore magna aliqua</span></li>
-                                    <li><span class="text-uppercase">Ut enim ad min</span></li>
-                                </ul>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="Tab5">
-                                <h5><strong class="color text-uppercase">Clothing - Single Size Conversion (Continued)</strong></h5>
-                                <div class="divider divider--xs"></div>
-                                <div class="table-responsive">
-                                    <table class="table table-params">
-                                        <tbody>
-                                        <tr>
-                                            <td class="text-right"><span class="color">UK</span></td>
-                                            <td>
-                                                <ul class="sizes-row">
-                                                    <li>18</li>
-                                                    <li>20</li>
-                                                    <li>22</li>
-                                                    <li>24</li>
-                                                    <li>26</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">European</span></td>
-                                            <td>
-                                                <ul class="sizes-row">
-                                                    <li>46</li>
-                                                    <li>48</li>
-                                                    <li>50</li>
-                                                    <li>52</li>
-                                                    <li>54</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">US</span></td>
-                                            <td>
-                                                <ul class="sizes-row">
-                                                    <li>14</li>
-                                                    <li>16</li>
-                                                    <li>18</li>
-                                                    <li>20</li>
-                                                    <li>22</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="text-right"><span class="color">Australia</span></td>
-                                            <td>
-                                                <ul class="sizes-row">
-                                                    <li>8</li>
-                                                    <li>10</li>
-                                                    <li>12</li>
-                                                    <li>14</li>
-                                                    <li>16</li>
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
+
                         </div>
                     </div>
                 </div>

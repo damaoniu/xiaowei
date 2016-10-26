@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule ,} from '@angular/router';
 
 
 @NgModule({
-  imports: [],
+  imports: [
+      RouterModule.forChild([
+        {
+          path:"account",
+          loadChildren:'app/account/account.module'
+        }
+      ])
+  ],
   exports: [RouterModule],
   providers: []
 })

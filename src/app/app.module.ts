@@ -4,10 +4,10 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
-import {UxvRoutingModule} from "./app-routing.module";
 import {Front} from "./frontend/front.module";
 import {CartService} from "./shared/services/cartService/cart.service";
 import {UserService} from "./shared/services/user/user.service";
+import {UxvRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
@@ -19,7 +19,7 @@ import {UserService} from "./shared/services/user/user.service";
     FormsModule,
     Front,
     HttpModule,
-    UxvRoutingModule,
+    UxvRoutingModule
   ],
   providers: [
       CartService,
