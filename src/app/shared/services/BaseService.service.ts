@@ -9,7 +9,7 @@ export class BaseService {
     constructor(public _http:Http ){
         this._headers=new Headers();
         this._headers.append("Content-Type", "application/json");
-        // this._headers.append('token',Config.token);
+        this._headers.append('token',Config.token);
     }
     _handleErrors (error: Response | any) {
         // In a real world app, we might use a remote logging infrastructure

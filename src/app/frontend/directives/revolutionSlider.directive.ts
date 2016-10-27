@@ -1,15 +1,27 @@
-import {Directive, OnInit, ElementRef, AfterContentInit} from "@angular/core";
+import {Directive, OnInit, ElementRef, AfterContentInit, NgZone, Input} from "@angular/core";
+import {Observable} from "rxjs/Rx";
 declare var jQuery:any;
 let $j=jQuery.noConflict();
 declare var window:any;
 @Directive({
     selector:"[revSlider]"
 })
-export class RevolutionSlider implements AfterContentInit{
-    constructor(public el:ElementRef){}
+export class RevolutionSlider implements AfterContentInit,OnInit{
+    @Input('slides') slides:Observable<any>;
+    constructor(public el:ElementRef,ngZone:NgZone){}
 
+    ngOnInit(){
+        let that=this;
+        this.slides.subscribe((data)=>{
+            setTimeout(()=>{
+                that.buildSlider();
+            })
+        })
+    }
     //this is where the childnodes of the native elements are loaded also
     ngAfterContentInit():void {
+    }
+    buildSlider(){
         var windowW = window.innerWidth || $j(window).width();
         var fullwidth;
         var fullscreen;
@@ -24,10 +36,10 @@ export class RevolutionSlider implements AfterContentInit{
                 fullscreen = "off";
             }
         }
-        $j(this.el.nativeElement).show().revolution(
-            {
+        console.log(this.el.nativeElement);
+        $j(this.el.nativeElement).show().revolution({
                 dottedOverlay:"none",
-                delay:16000,
+                delay:1600,
                 startwidth:2048,
                 startheight:900,
                 hideThumbs:200,
