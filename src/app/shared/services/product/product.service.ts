@@ -10,7 +10,7 @@ export class ProductService {
     baseUrl:string;
     getProductUrl:string="pms-product-service/products/";
     constructor(private _http:Http,private _headers:Headers) {
-        this.baseUrl=Config.webServiceUrl+"/pms-product-service/"
+        this.baseUrl=Config.productServiceUrl+"/pms-product-service/"
         this._headers.append("Content-Type", "application/json");
         this._headers.append('token',Config.token);
 

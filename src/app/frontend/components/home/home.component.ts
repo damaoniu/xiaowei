@@ -1,24 +1,32 @@
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterContentInit} from "@angular/core";
+import {CategoryService} from "../../../shared/services/category/category.service";
 
-declare  var jQuery:any;
-declare  var window:any;
-let $j=jQuery.noConflict();
+declare var jQuery:any;
+declare var window:any;
+let $j = jQuery.noConflict();
 @Component({
-    selector:"home",
-    templateUrl:"./home.html",
-    styleUrls:[],
-    encapsulation:ViewEncapsulation.None
+    selector: "home",
+    templateUrl: "./home.html",
+    styleUrls: [],
+    encapsulation: ViewEncapsulation.None
 })
-export class Home implements OnInit,OnDestroy,AfterContentInit{
-  ngOnInit(){
+export class Home implements OnInit,OnDestroy,AfterContentInit {
+    firstLevelCategories:[any];
 
-  }
+    constructor(private  categoryService:CategoryService) {}
 
-  ngAfterContentInit(){
+    ngOnInit() {
+        this.categoryService.getFirstLevelCategories().subscribe(data=> {
+            this.firstLevelCategories =<[any]> data;
+        })
+    }
 
-  }
-  ngOnDestroy(){
-    // $j('body').removeClass('loaded');
-  }
+    ngAfterContentInit() {
+
+    }
+
+    ngOnDestroy() {
+        // $j('body').removeClass('loaded');
+    }
 
 }

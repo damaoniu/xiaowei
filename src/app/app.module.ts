@@ -8,6 +8,7 @@ import {Front} from "./frontend/front.module";
 import {CartService} from "./shared/services/cartService/cart.service";
 import {UserService} from "./shared/services/user/user.service";
 import {UxvRoutingModule} from "./app-routing.module";
+import {CategoryService} from "./shared/services/category/category.service";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import {UxvRoutingModule} from "./app-routing.module";
   ],
   providers: [
       CartService,
-      UserService
+      UserService,
+      CategoryService
   ],
   bootstrap: [AppComponent]
 })
