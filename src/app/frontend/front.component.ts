@@ -11,7 +11,7 @@ let $j=jQuery.noConflict();
 @Component({
     selector:"front",
     templateUrl:"./front.html",
-    styleUrls:["style.css","style-layout12.css"],
+    // styleUrls:["style.css","style-layout12.css"],
     encapsulation:ViewEncapsulation.None
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
@@ -32,16 +32,14 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     }
     ngOnInit(){
         //remove loader
-        jQuery('#loader-wrapper').addClass('loaded');
+        $j('body').addClass('loaded');
         // top menu(hover)
-        jQuery(function($j) {
-            $j('.nav.navbar-nav li').hover(function(){
-                $j(this).addClass('hover');
-            },function(){
-                $j(this).removeClass('hover');
-            })
 
-        });
+        $j('.nav.navbar-nav li').hover(function(){
+            $j(this).addClass('hover');
+        },function(){
+            $j(this).removeClass('hover');
+        })
         //newsletter modal
         if(!this.user){
             if ($j('#newsletterModal').length) {
@@ -74,7 +72,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
 
         //mobile menu
 
-            if ($j("#off-canvas-menu").length > 0) {
+        if ($j("#off-canvas-menu").length > 0) {
                 "use strict";
                 $j(document).bind('cbox_open', function() {
                     $j('html').css({

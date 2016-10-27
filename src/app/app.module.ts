@@ -8,13 +8,22 @@ import {Front} from "./frontend/front.module";
 import {CartService} from "./shared/services/cartService/cart.service";
 import {UserService} from "./shared/services/user/user.service";
 import {UxvRoutingModule} from "./app-routing.module";
+// import ApolloClient,{createNetworkInterface} from "apollo-client";
+import {AppConfig} from "./app.config";
+// import {ApolloModule} from "angular2-apollo/build/src/index";
 
+/*apollo client*/
+
+// const client = new ApolloClient({
+//   networkInterface:createNetworkInterface(AppConfig.graphqlUrl)
+// });
 
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
+    // ApolloModule.withClient(client),
     BrowserModule,
     FormsModule,
     Front,
