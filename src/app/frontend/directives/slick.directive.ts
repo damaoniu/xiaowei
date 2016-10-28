@@ -1,9 +1,10 @@
-import {AfterContentInit, ElementRef, Input, Directive, ViewChild} from "@angular/core";
+import {AfterContentInit, ElementRef, Input, Directive, ViewChild, ChangeDetectionStrategy} from "@angular/core";
+import {Observable} from "rxjs/Rx";
 declare var jQuery:any;
 declare var window:any;
 let $j=jQuery.noConflict();
 @Directive({
-    selector:"[slick]"
+    selector:"[slick]",
 })
 export class SlickDirective implements AfterContentInit{
     @Input('numberXl') numberXl:number;
@@ -13,9 +14,23 @@ export class SlickDirective implements AfterContentInit{
     @Input('numberXs') numberXs:number;
     @Input('arrows') arrows:boolean;
     @Input('dots') dots:boolean;
+    @Input() slides:Observable<any>;
 
     constructor(public el:ElementRef){}
+    ngOnInit(){
+        let that=this;
+        if(this.slides){
+            this.slides.subscribe((data)=>{
+                setTimeout(()=>{
+                    that.buildSlick();
+                })
+            })
+        }
+    }
     ngAfterContentInit():void {
+        this.buildSlick();
+    }
+    buildSlick(){
         // Fix z-index problem on carousel hover
         function fixCarouselHover(carousel) {
             carousel.find('.slick-slide').bind( "mouseenter mouseleave",

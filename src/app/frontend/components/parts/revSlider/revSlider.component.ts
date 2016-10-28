@@ -40,7 +40,6 @@ export class RevSliderComponent{
                 fullscreen = "off";
             }
         }
-        console.log(this.sliders.nativeElement);
         $j(this.sliders.nativeElement).show().revolution({
             dottedOverlay:"none",
             delay:1600,

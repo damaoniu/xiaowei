@@ -1,0 +1,5 @@
+<template [ngIf]="htmlTemplate" dynamic-component [componentTemplateUrl]="htmlTemplate"   [componentDefaultTemplate]='"<span >This is fallbacktemplate</span>"' >
+
+</template>
+{{htmlTemplate}}
+<!--<dynamic-html-outlet *ngIf="htmlTemplate" [htmlTemplate]="'app/frontend/parts/slick/slick.01.html'"></dynamic-html-outlet>-->
