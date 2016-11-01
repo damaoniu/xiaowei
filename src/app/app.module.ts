@@ -9,8 +9,6 @@ import {CartService} from "./shared/services/cartService/cart.service";
 import {UserService} from "./shared/services/user/user.service";
 import {UxvRoutingModule} from "./app-routing.module";
 import {CategoryService} from "./shared/services/category/category.service";
-import {DynamicComponentModule} from "angular2-dynamic-component/index";
-
 @NgModule({
   declarations: [
     AppComponent
@@ -20,8 +18,7 @@ import {DynamicComponentModule} from "angular2-dynamic-component/index";
     FormsModule,
     Front,
     HttpModule,
-    UxvRoutingModule,
-    DynamicComponentModule
+    UxvRoutingModule
   ],
   providers: [
       CartService,

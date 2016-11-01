@@ -1,0 +1,40 @@
+<div>
+    <div class="carousel-products row layout-none-xl carousel-slides" id="postsCarousel">
+        <!-- slide-->
+        <div class="col-sm-3 col-xl-6" *ngFor="let product of products|async">
+            <!--  -->
+            <div class="recent-post-box">
+                <div class="col-lg-12 col-xl-12">
+                    <a href="blog-post-right-column.html">
+                                            <span class="figure">
+                                            <img src="/assets/images/custom/recent-posts-01.jpg" alt="">
+                                            <span class="figcaption label-top-left">
+                                            <span>
+                                            <b>26</b>
+                                            <em>jun</em>
+                                            </span>
+                                            </span>
+                                            </span>
+                    </a>
+                </div>
+                <div class="col-lg-12 col-xl-12">
+                    <div class="recent-post-box__text">
+                        <h4><a href="blog-post-right-column.html">Mauris lacinia lectus</a></h4>
+                        <div class="author">by <b>Admin</b></div>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec eros tellus, scelerisque nec, rhoncus eget, laoreet sit amet.
+                        </p>
+                        <a class="link-commet" href="blog-post-right-column.html"><span class="icon icon-message "></span><span class="number">0</span> comment(s)</a>
+                    </div>
+                </div>
+            </div>
+            <!-- / -->
+        </div>
+        <!-- /slide -->
+        <!-- slide -->
+    </div>
+    <div class="carousel-products__button button-bottom carousel-products__button_aside">
+        <span class="btn-prev"></span>
+        <span class="btn-next"></span>
+    </div>
+</div>

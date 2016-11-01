@@ -1,6 +1,6 @@
 import {
     Component, ChangeDetectionStrategy, Input, ElementRef, NgZone, ViewEncapsulation,
-    ViewChild, Renderer
+    ViewChild, Renderer, OnInit
 } from "@angular/core";
 import {Observable} from "rxjs/Rx";
 declare var jQuery:any;
@@ -11,20 +11,20 @@ let $j=jQuery.noConflict();
         changeDetection:ChangeDetectionStrategy.OnPush,
         encapsulation:ViewEncapsulation.None
     })
-export class RevSliderComponent{
+export class RevSliderComponent implements OnInit{
     @Input('slides') slides:Observable<any>;
     @Input() wrapperClass:string='';
     @ViewChild('sliders') sliders:ElementRef;
     constructor(public el:ElementRef,private  renderer:Renderer){}
 
-    // ngOnInit(){
-    //     let that=this;
-    //     this.slides.subscribe((data)=>{
-    //         setTimeout(()=>{
-    //             that.buildSlider();
-    //         })
-    //     })
-    // }
+    ngOnInit(){
+        let that=this;
+        this.slides.subscribe((data)=>{
+            setTimeout(()=>{
+                that.buildSlider();
+            })
+        })
+    }
     buildSlider(){
         var windowW = window.innerWidth || $j(window).width();
         var fullwidth;

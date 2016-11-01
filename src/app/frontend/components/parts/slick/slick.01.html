@@ -1,5 +1,41 @@
-<div class="content-sm" >
-    <!-- title -->adfaf
-    {{test}}
-
+<div class="content-sm" #container>
+    <!-- title -->
+    <div class="title-with-button">
+        <div class="carousel-products__button pull-right"> <span class="btn-prev"></span> <span class="btn-next"></span> </div>
+        <h2 class="text-left text-uppercase title-default pull-left">{{title}}</h2>
+    </div>
+    <!-- /title -->
+    <!-- carousel -->
+    <div class="carousel-products row"  #slides >
+        <div class="col-lg-4" *ngFor="let product of products |async">
+            <!-- product -->
+            <div class="product">
+                <div class="product__inside">
+                    <!-- product image -->
+                    <div class="product__inside__image">
+                        <a href="product.html"> <img src="/assets/images/product/product-10.jpg" alt=""> </a>
+                        <!-- quick-view -->
+                        <a href="#" data-toggle="modal" data-target="#quickViewModal" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
+                        <!-- /quick-view -->
+                    </div>
+                    <!-- /product image -->
+                    <!-- product name -->
+                    <div class="product__inside__name">
+                        <h2><a href="product.html">Mauris lacinia lectus</a></h2>
+                    </div>
+                    <!-- /product name -->
+                    <!-- product price -->
+                    <div class="product__inside__price price-box">$86.00</div>
+                    <!-- /product price -->
+                    <div class="product__inside__hover">
+                        <!-- product info -->
+                        <addToCart  [item]="{id:'23',price:23,description:'na',name:'sa',img_src:'wwer'}"></addToCart>
+                        <!-- /product info -->
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
+        </div>
+    </div>
+    <!-- /carousel -->
 </div>
