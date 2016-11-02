@@ -9,6 +9,7 @@ import {CartService} from "./shared/services/cartService/cart.service";
 import {UserService} from "./shared/services/user/user.service";
 import {UxvRoutingModule} from "./app-routing.module";
 import {CategoryService} from "./shared/services/category/category.service";
+import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 @NgModule({
   declarations: [
     AppComponent
@@ -18,6 +19,7 @@ import {CategoryService} from "./shared/services/category/category.service";
     FormsModule,
     Front,
     HttpModule,
+    NgbModule.forRoot(),
     UxvRoutingModule
   ],
   providers: [

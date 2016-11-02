@@ -27,10 +27,10 @@
                             <h2><a routerLink="/products/{{item.id}}">{{item.name}}</a></h2>
                         </div>
                         <div class="cart__item__info__price"><span class="info-label">Price:</span><span>{{item.price}}</span></div>
-                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input type="number" class="input--ys" [(ngModel)]="item.quantity" /></div>
+                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input min="0" type="number" class="input--ys" [(ngModel)]="item.quantity" /></div>
                         <div class="cart__item__info__details">
                             <div class='multitooltip'>
-                                <a routerLink="#">Details</a>
+                                <a >Details</a>
                                 <div class="tip on-bottom">
                                     <span><strong>Color:</strong> Purple</span>
                                     <span><strong>Quantity:</strong> 200</span>
