@@ -1,39 +1,35 @@
 import {
-    Component, Directive, HostBinding, HostListener, trigger, state, style, transition,
-    animate, OnInit
+    Component, Directive, HostListener, trigger, state, style, transition,
+    animate, OnInit, ViewChild, ElementRef, OnDestroy, Input
 } from "@angular/core";
-import {NgbModal, ModalDismissReasons, NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+import {NgbModal, NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
+declare var jQuery:any;
+let $j = jQuery.noConflict();
 @Component({
-    selector:"login-",
-    templateUrl:"./login.html"
+    selector: "login-pop",
+    templateUrl: "./login.html"
 })
-export class LoginComponent{
-    closeResult:string;
-    constructor(private modalService:NgbModal){
+export class LoginComponent implements OnDestroy {
+    @ViewChild('modal') modal:ElementRef;
+    @Input() modalOnly:boolean;
 
-    }
-    open(content) {
-        this.modalService.open(content).result.then((result) => {
-            this.closeResult = `Closed with: ${result}`;
-        }, (reason) => {
-            this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
-        });
+    constructor() {}
+
+    open() {
+
+        $j(this.modal.nativeElement).appendTo('body');
+        $j(this.modal.nativeElement).modal('show');
+        console.log('oo');
     }
 
-    private getDismissReason(reason: any): string {
-        if (reason === ModalDismissReasons.ESC) {
-            return 'by pressing ESC';
-        } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
-            return 'by clicking on a backdrop';
-        } else {
-            return  `with: ${reason}`;
-        }
+    ngOnDestroy():void {
+        $j(this.modal.nativeElement).remove();
     }
 }
 
 @Component({
-    selector:'login-modal',
-    template:`
+    selector: 'login-modal',
+    template: `
         <div [@loaded]="loaded" class="modal-header" style="display: none">
                 <button type="button" class="close" (click)="activeModal.close()" aria-hidden="true"><span class="icon icon-clear"></span></button>
                 <h4 class="modal-title text-center text-uppercase">Login form</h4>
@@ -76,37 +72,43 @@ export class LoginComponent{
                 </div>
             </form>
     `,
-    animations:[
-        trigger('loaded',[
-            state('notYet',style({
-                display:'none'
+    animations: [
+        trigger('loaded', [
+            state('notYet', style({
+                display: 'none'
             })),
-            state('yes',style({
-                display:'block'
+            state('yes', style({
+                display: 'block'
             })),
-            transition('notYet=>yes',animate("1000ms ease-in"))
+            transition('notYet=>yes', animate("1000ms ease-in"))
         ])
     ]
 
 })
-export class LoginModal implements OnInit{
-    loaded:string='notYet';
-    constructor(public activeModal: NgbActiveModal) {}
-    ngOnInit(){
-        this.loaded="yes";
+export class LoginModal implements OnInit {
+    loaded:string = 'notYet';
+
+    constructor(public activeModal:NgbActiveModal) {
+    }
+
+    ngOnInit() {
+        this.loaded = "yes";
     }
 }
 
 @Directive({
-    selector:'[login-pop]'
+    selector: '[login-pop]'
 })
 export class LoginPopDirective {
-    constructor(private modalService: NgbModal) {}
-    @HostListener('click') onClick(){
+    constructor(private modalService:NgbModal) {
+    }
+
+    @HostListener('click') onClick() {
         this.open();
     }
+
     open() {
-        const modalRef = this.modalService.open(LoginModal,{windowClass:"white-modal"});
+        const modalRef = this.modalService.open(LoginModal, {windowClass: "white-modal"});
         modalRef.componentInstance.name = 'World';
     }
 }

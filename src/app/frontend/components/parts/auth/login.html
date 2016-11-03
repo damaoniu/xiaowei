@@ -1,9 +1,8 @@
-<!-- modalLoginForm-->
-<!--<li><a href="#"  data-toggle="modal" data-target="#modalLoginForm"><span class="icon icon-lock"></span>Log In</a></li>-->
-<li><a (click)="open(loginModal)" ><span class="icon icon-lock"></span>Log In</a></li>
+<li *ngIf="!modalOnly"><a (click)="open()"><span class="icon icon-lock"></span>Log In</a></li>
 
-<template let-c="close" let-d="dismiss"  #loginModal class="modal fade"  id="modalLoginForm" tabindex="-1" role="dialog" data-bgposition="body" aria-label="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog white-modal modal-sm">
+<!-- modalLoginForm-->
+<div #modal class="modal fade" role="dialog"   id="modalLoginForm" tabindex="-1" role="dialog" aria-label="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog white-modal">
         <div class="modal-content ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
@@ -48,5 +47,6 @@
             </form>
         </div>
     </div>
-</template>
+</div>
+
 <!-- /modalLoginForm-->
