@@ -14,18 +14,17 @@ export class CategoryService extends BaseService{
     }
     getFirstLevelCategories(){
         console.log(Config.categoryServiceUrl+"/firstLevelCategories");
-        return this._http.get(Config.categoryServiceUrl+"/firstLevelCategories",this._headers).map(res=>res.json())
+        return this._http.get(Config.categoryServiceUrl+"/firstLevelCategories")
             .map(this.prepareCategories)
             .catch(this._handleErrors);
     }
-    getSecondLevelCategory(firstLevelId:string){
-        return this._http.get(Config.categoryServiceUrl+"/secondLevelCategories",this._headers)
+    getSecondLevelCategory(firstLevelName:string){
+        return this._http.get(Config.categoryServiceUrl+"/secondLevelCategories/"+firstLevelName)
             .map(this.prepareCategories)
             .catch(this._handleErrors);
     }
     prepareCategories(res:Response){
         let data=res.json();
-        console.log(data);
         let categoryList = [];
         data['categories'].forEach((category)=>{
             categoryList.push(category);

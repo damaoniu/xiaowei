@@ -17,7 +17,9 @@ export class Home implements OnInit,OnDestroy,AfterContentInit {
     revSliders:Subject<[any]>;
     slickSlides:Subject<[any]>;
 
-    constructor(private  categoryService:CategoryService) {}
+    constructor(private  categoryService:CategoryService) {
+        this.secondLevelCategories={};
+    }
 
     ngOnInit() {
         let that=this;
@@ -46,20 +48,18 @@ export class Home implements OnInit,OnDestroy,AfterContentInit {
             that.slickSlides.next(slides);
         },1000);
         this.categoryService.getFirstLevelCategories().subscribe(data=> {
-            this.firstLevelCategories =<[any]> data;
+            that.firstLevelCategories = data;
             if(data.length>0){
                 data.map((category)=>{
-                    this.categoryService.getSecondLevelCategory(category.id).subscribe(data=>{
-                       this.secondLevelCategories[category.id]=data;
+                    that.categoryService.getSecondLevelCategory(category.name).subscribe(data=>{
+                       that.secondLevelCategories[category.id]=data;
                     })
                 })
             }
         })
     }
 
-    ngAfterContentInit() {
-
-    }
+    ngAfterContentInit() {}
 
     ngOnDestroy() {
         // $j('body').removeClass('loaded');
