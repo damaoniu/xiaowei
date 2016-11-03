@@ -5,17 +5,14 @@ import {Config} from "../config";
 import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import {BaseService} from "../BaseService.service";
 @Injectable()
-export class ProductService {
-    baseUrl:string;
+export class ProductService extends BaseService{
+    baseUrl:string=Config.productServiceUrl;
     getProductUrl:string="pms-product-service/products/";
-    constructor(private _http:Http,private _headers:Headers) {
-        this.baseUrl=Config.productServiceUrl+"/pms-product-service/"
-        this._headers.append("Content-Type", "application/json");
-        this._headers.append('token',Config.token);
-
+    constructor(http:Http){
+        super(http);
     }
-
     /*
     * @get all products
     * @params none
@@ -30,7 +27,7 @@ export class ProductService {
                 })
                 return productList;
             })
-            .catch(this.handleErrors);
+            .catch(this._handleErrors);
 
     }
     /*
@@ -43,11 +40,12 @@ export class ProductService {
         .map(data=>{
             return new Product(data.product)
         })
-        .catch(this.handleErrors);
+        .catch(this._handleErrors);
     }
-    handleErrors(error: Response) {
-        console.log(JSON.stringify(error.json()));
-        return Observable.throw(error);
+    getProductByCategory(categoryId:string){
+        return this._http.get(this.baseUrl+"/productsByCategory/"+categoryId)
+            .map(res=>res.json())
+            .map(res=>res.products)
+            .catch(this._handleErrors);
     }
-
 }

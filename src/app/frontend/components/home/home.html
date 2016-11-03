@@ -21,14 +21,14 @@
                         <ul class="nav navbar-nav">
                             <li class="dl-close"><a href="#"><span class="icon icon-close"></span>close</a></li>
                             <li *ngFor="let fc of firstLevelCategories"  class="dropdown dropdown-mega-menu dropdown-three-col">
-                                <a routerLink="products/findByFirstLevelCategories/{{fc.name}}" class="dropdown-toggle" data-toggle="dropdown">
+                                <a routerLink="products/{{fc.id}}#{{fc.name}}#first" class="dropdown-toggle" data-toggle="dropdown">
                                             {{fc.name}}
                                     <span class="icon icon-navigate_next pull-right"></span>
                                     <!--<span class="badge badge&#45;&#45;menu  pull-right">NEW</span>-->
                                 </a>
                                 <ul class="dropdown-menu multicolumn three-col" role="menu">
                                     <li class="dl-back"><a href="#"><span class="icon icon-chevron_left"></span>返回</a></li>
-                                    <li *ngFor="let sc of secondLevelCategories[fc.id]" ><a routerLink="products/findBySecondLevelCategories/{{sc.name}}">{{sc.name}}</a></li>
+                                    <li *ngFor="let sc of secondLevelCategories[fc.id]" ><a routerLink="products//{{sc.id}}#{{sc.name}}">{{sc.name}}</a></li>
                                 </ul>
                             </li>
                         </ul>

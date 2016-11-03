@@ -13,7 +13,6 @@ export class CategoryService extends BaseService{
         super(http);
     }
     getFirstLevelCategories(){
-        console.log(Config.categoryServiceUrl+"/firstLevelCategories");
         return this._http.get(Config.categoryServiceUrl+"/firstLevelCategories")
             .map(this.prepareCategories)
             .catch(this._handleErrors);

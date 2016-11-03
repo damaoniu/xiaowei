@@ -19,7 +19,11 @@ const routes =[
                 component:ProductsComponent
             },
             {
-                path:"products/:productId",
+                path:"products/:categoryId",
+                component:ProductsComponent
+            },
+            {
+                path:"product/:productId",
                 component:ProductComponent
             },
             {

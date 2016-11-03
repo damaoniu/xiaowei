@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterContentInit} from "@angular/core";
+import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterContentInit, OnChanges} from "@angular/core";
 import {CategoryService} from "../../../shared/services/category/category.service";
 import {Subject} from "rxjs/Rx";
 
@@ -11,7 +11,7 @@ let $j = jQuery.noConflict();
     styleUrls: [],
     encapsulation: ViewEncapsulation.None
 })
-export class Home implements OnInit,OnDestroy,AfterContentInit {
+export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     firstLevelCategories:[any];
     secondLevelCategories:{};
     revSliders:Subject<[any]>;
@@ -20,8 +20,20 @@ export class Home implements OnInit,OnDestroy,AfterContentInit {
     constructor(private  categoryService:CategoryService) {
         this.secondLevelCategories={};
     }
+    ngOnChanges(){}
 
     ngOnInit() {
+        this.getCategories();
+        this.getSliders();
+    }
+
+    ngAfterContentInit() {}
+
+    ngOnDestroy() {
+        // $j('body').removeClass('loaded');
+    }
+
+    getSliders(){
         let that=this;
         this.revSliders= new Subject<[any]>();
         this.slickSlides= new Subject<[any]>();
@@ -31,7 +43,7 @@ export class Home implements OnInit,OnDestroy,AfterContentInit {
                 firstTitle:"first",
                 secondTitle:"dd",
                 thirdTitle:'mma',
-                },
+            },
                 {
                     img_url:"/assets/images/slides/02/slide-2.jpg" ,
                     firstTitle:"second",
@@ -47,22 +59,20 @@ export class Home implements OnInit,OnDestroy,AfterContentInit {
             that.revSliders.next(slides);
             that.slickSlides.next(slides);
         },1000);
+    }
+    getCategories(){
+        let that=this;
         this.categoryService.getFirstLevelCategories().subscribe(data=> {
             that.firstLevelCategories = data;
             if(data.length>0){
                 data.map((category)=>{
                     that.categoryService.getSecondLevelCategory(category.name).subscribe(data=>{
-                       that.secondLevelCategories[category.id]=data;
+                        that.secondLevelCategories[category.id]=data;
                     })
                 })
             }
         })
-    }
 
-    ngAfterContentInit() {}
-
-    ngOnDestroy() {
-        // $j('body').removeClass('loaded');
     }
 
 }
