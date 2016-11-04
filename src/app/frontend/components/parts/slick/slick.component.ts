@@ -46,7 +46,7 @@ class SlickBase implements OnInit{
         var slidesToShowMd = (this.numberMd > 0) ? this.numberMd : this.numberLg;
         var slidesToShowSm = (this.numberSm > 0) ? this.numberSm : this.numberMd;
         var slidesToShowXs = (this.numberXs > 0) ? this.numberXs : 1;
-
+        if(!this.vc)return;
         var carousel = $j(this.vc.element.nativeElement);
         var speed = 500;
         let options={

@@ -1,0 +1,31 @@
+<div *ngIf="itemsNotEmpty()" class="filters-row">
+    <div class="pull-left">
+        <div class="filters-row__mode">
+            <a href="#" class="btn btn--ys slide-column-open visible-xs visible-sm hidden-xl hidden-lg hidden-md">Filter</a>
+            <a class="filters-row__view active link-grid-view btn-img btn-img-view_module"><span></span></a>
+            <a class="filters-row__view link-row-view btn-img btn-img-view_list"><span></span></a>
+        </div>
+    </div>
+    <div class="pull-right">
+        <div class="filters-row__items hidden-sm hidden-xs">总共{{products.length}}</div>
+        <div class="filters-row__select hidden-sm hidden-xs">
+            <label>显示: </label>
+            <div class="select-wrapper">
+                <select class="select--ys show-qty" [(ngModel)]="perPage">
+                    <option>25</option>
+                    <option>50</option>
+                    <option>100</option>
+                </select>
+            </div>
+            <a href="#" class="icon icon-arrow-down active"></a><a href="#" class="icon icon-arrow-up"></a>
+        </div>
+        <div class="filters-row__pagination">
+            <ul class="pagination">
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#"><span class="icon icon-chevron_right"></span></a></li>
+            </ul>
+        </div>
+    </div>
+</div>
