@@ -9,7 +9,8 @@ export class ProductModalDirective{
     @Input('product') product:any;
     constructor(private utils:UtilsService){}
     @HostListener('click') onClick(){
-        this.utils.setQuickViewProduct({name:"ooo"})
+        this.product=this.product||{};
+        this.utils.setQuickViewProduct(this.product)
        $j('#quickViewModal').modal('show');
     }
 

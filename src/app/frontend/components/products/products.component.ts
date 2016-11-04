@@ -60,7 +60,7 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
     setNewCategory(sc){
         this.categoryName=sc.name;
         this.currentCategory.next(sc);
-        this.products=[];
+        this.products=null;
         $j("html, body").animate({ scrollTop: 0 }, "slow");
 
     }

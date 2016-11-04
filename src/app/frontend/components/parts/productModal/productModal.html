@@ -1,0 +1,44 @@
+<div class="modal  modal--bg fade"  id="quickViewModal">
+    <div class="modal-dialog white-modal">
+        <div class="modal-content container">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
+            </div>
+            <!--  -->
+            <div class="product-popup">
+                <div class="product-popup-content">
+                    <div class="container-fluid">
+                        <div class="row product-info-outer">
+                            <div class="col-xs-12 col-sm-5 col-md-6 col-lg-6">
+                                <div class="product-main-image">
+                                    <div class="product-main-image__item"><img src='{{quickViewProduct.mainMedia|imgUrl}}' alt="" /></div>
+                                </div>
+                            </div>
+                            <div class="product-info col-xs-12 col-sm-7 col-md-6 col-lg-6">
+                                <div class="wrapper">
+                                    <div class="product-info__sku pull-left">SKU: <strong>mtk012c</strong></div>
+                                    <div class="product-info__availabilitu pull-right">:   <strong class="color">In Stock</strong></div>
+                                </div>
+                                <div class="product-info__title">
+                                    <a [routerLink]="'product/'+quickViewProduct.id"><h2>{{quickViewProduct.name}}</h2></a>
+                                </div>
+                                <div class="price-box product-info__price"><span class="price-box__new">${{price}}</span> <span *ngIf="quickViewProduct.sale" class="price-box__old">$84.00</span></div>
+                                <div class="divider divider--xs product-info__divider"></div>
+                                <div class="product-info__description">
+                                    <!--<div class="product-info__description__brand"><img src="/assets/images/custom/brand.png" alt=""> </div>-->
+                                    <div class="product-info__description__text">{{quickViewProduct.description}}</div>
+                                </div>
+                                <div class="divider divider--xs product-info__divider"></div>
+                               <addToCart [item]="quickViewProduct" [showQty]="'true'"></addToCart>
+                                <a routerLink="/product/{{quickViewProduct.id}}">
+                                    <button class="btn btn--bg-green btn--xxl"><i class="fa fa-eye"></i>&nbsp;查看详情</button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- / -->
+        </div>
+    </div>
+</div>

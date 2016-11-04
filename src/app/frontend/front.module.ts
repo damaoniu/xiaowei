@@ -9,13 +9,11 @@ import {PartsModule} from "./components/parts/parts.module";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FaqComponent} from "./components/faq/faq.component";
 import {FrontDirectivesModule} from "./directives/frontDirective.module";
-import {ImgUrlPipe} from "../shared/pipes/imgUrl.pipe";
 @NgModule({
     imports: [SharedModule,frontRoutes,PartsModule,FrontDirectivesModule],
     declarations:[
         FrontComponent,Home,ProductComponent,ProductsComponent,
-        CheckoutComponent,FaqComponent,
-        ImgUrlPipe
+        CheckoutComponent,FaqComponent
     ],
     exports:[
         FrontComponent,Home,ProductComponent,ProductsComponent,

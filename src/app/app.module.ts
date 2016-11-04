@@ -10,9 +10,10 @@ import {UserService} from "./shared/services/user/user.service";
 import {UxvRoutingModule} from "./app-routing.module";
 import {CategoryService} from "./shared/services/category/category.service";
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
+import {ImgUrlPipe} from "./shared/pipes/imgUrl.pipe";
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

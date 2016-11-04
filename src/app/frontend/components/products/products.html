@@ -50,7 +50,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="row" *ngIf="!productsNotEmpty()">
+                <div class="row" *ngIf="!fetching&&!productsNotEmpty()">
                     <div class="panel">
                         <div class="panel-body text-warning text-center">暂时没有这类产品,抱歉亲,我们正在努力添加&nbsp;<i class="fa fa-smile-o"></i></div>
                     </div>
@@ -73,7 +73,7 @@
                                     </div>
                                     <!-- /product image carousel -->
                                     <!-- quick-view -->
-                                    <a  productModal class="quick-view"><b><span class="icon icon-visibility"></span>预览</b> </a>
+                                    <a  productModal [product]="product"  class="quick-view"><b><span class="icon icon-visibility"></span>预览</b> </a>
                                     <!-- /quick-view -->
                                     <!-- countdown_box -->
                                     <div class="countdown_box">
