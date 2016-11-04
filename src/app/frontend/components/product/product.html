@@ -22,7 +22,8 @@
                     <div class="row">
                         <div class="col-sm-4 col-md-4 col-lg-4 col-xl-4 hidden-xs">
                             <div class="product-main-image">
-                                <div class="product-main-image__item"><img class="product-zoom" src='/assets/images/product/product-big-1.jpg' data-zoom-image="/assets/images/product/product-big-1-zoom.jpg" alt="" /></div>
+                                <div class="product-main-image__item">
+                                    <img class="product-zoom" src='{{product.mainMedia|imgUrl}}' data-zoom-image="/assets/images/product/product-big-1-zoom.jpg" alt="" /></div>
                                 <div class="product-main-image__zoom"></div>
                             </div>
                             <div class="product-images-carousel" slick [numberXl]="4" [numberLg]="4" [numberMd]="1" [numberSm]="1" [numberXs]="1">
@@ -42,7 +43,7 @@
                                 <div class="product-info__availability pull-right color-dark">Availability:   <strong class="color">In Stock</strong> &nbsp; <strong class="color-red">Out stock</strong></div>
                             </div>
                             <div class="product-info__title">
-                                <h2>Lorem ipsum dolor sit ctetur</h2>
+                                <h2>{{product.name}}</h2>
                             </div>
                             <div class="wrapper visible-xs">
                                 <div class="product-info__sku pull-left">SKU: <strong>mtk012c</strong></div>
@@ -58,15 +59,11 @@
                                     <li><a href="#" data-image="/assets/images/product/product-big-5.jpg" data-zoom-image="/assets/images/product/product-big-5-zoom.jpg"><img src="/assets/images/product/product-small-5.jpg" alt="" /></a></li>
                                 </ul>
                             </div>
-                            <div class="price-box product-info__price"><span class="price-box__new">$65.00</span> <span class="price-box__old">$84.00</span></div>
-                            <div class="product-info__review">
-                                <div class="rating"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
+                            <div class="price-box product-info__price"><span class="price-box__new">{{}}</span> <span *ngIf="product.sale" class="price-box__old">$84.00</span></div>
+
                             <div class="divider divider--xs product-info__divider hidden-xs"></div>
                             <div class="product-info__description hidden-xs">
-                                <div class="product-info__description__brand"><img src="/assets/images/custom/brand.png"  alt="" /> </div>
-                                <div class="product-info__description__text">Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex.</div>
+                                <div class="product-info__description__text">{{product.description}}</div>
                             </div>
                             <div class="divider divider--xs product-info__divider"></div>
                             <div class="product-info__description">
@@ -78,10 +75,7 @@
                                 <!-- /countdown_box -->
                             </div>
                             <div class="divider divider--xs product-info__divider"></div>
-                            <div class="wrapper">
-                                <div class="pull-left"><span class="option-label">COLOR:</span>  Red + $10.00 <span class="required">*</span></div>
-                                <div class="pull-right required">* Required Fields</div>
-                            </div>
+
                             <ul class="options-swatch options-swatch--color options-swatch--lg">
                                 <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/oldlace.png" alt=""/></span></a></li>
                                 <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/dark-grey.png" alt=""/></span></a></li>

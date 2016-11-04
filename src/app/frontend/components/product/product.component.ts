@@ -9,8 +9,11 @@ let $j=jQuery.noConflict();
     templateUrl:"./product.html"
 })
 export class ProductComponent implements OnInit{
-    private product:any;
+    private product:any={};
     constructor(private route:ActivatedRoute,private productService:ProductService){}
+    startZoom(){
+        elevateZoom();
+    }
     ngOnInit() {
         // Init All Carousel
         elevateZoom();

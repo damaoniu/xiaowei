@@ -7,22 +7,24 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {BaseService} from "../BaseService.service";
 @Injectable()
-export class ProductService extends BaseService{
-    baseUrl:string=Config.productServiceUrl;
-    getProductUrl:string="pms-product-service/products/";
-    constructor(http:Http){
+export class ProductService extends BaseService {
+    baseUrl:string = Config.productServiceUrl;
+    getProductUrl:string = "pms-product-service/products/";
+
+    constructor(http:Http) {
         super(http);
     }
+
     /*
-    * @get all products
-    * @params none
-    * */
-    getAll(){
-        return this._http.get(this.baseUrl+"/products",this._headers)
+     * @get all products
+     * @params none
+     * */
+    getAll() {
+        return this._http.get(this.baseUrl + "/products", this._headers)
             .map(res=>res.json())
-            .map(data=>{
+            .map(data=> {
                 let productList = [];
-                data.products.forEach((product)=>{
+                data.products.forEach((product)=> {
                     productList.push(new Product(product));
                 })
                 return productList;
@@ -30,20 +32,20 @@ export class ProductService extends BaseService{
             .catch(this._handleErrors);
 
     }
+
     /*
-    * @getProduct
-    * @params id
-    * */
-    getProduct(id:string){
-        return this._http.get(this.baseUrl+'/products/'+id)
+     * @getProduct
+     * @params id
+     * */
+    getProduct(id:string) {
+        return this._http.get(this.baseUrl + '/product/' + id)
             .map(res=>res.json())
-        .map(data=>{
-            return new Product(data.product)
-        })
-        .catch(this._handleErrors);
+            .map(data=>data.product)
+            .catch(this._handleErrors);
     }
-    getProductByCategory(categoryId:string){
-        return this._http.get(this.baseUrl+"/productsByCategory/"+categoryId)
+
+    getProductByCategory(categoryId:string) {
+        return this._http.get(this.baseUrl + "/productsByCategory/" + categoryId)
             .map(res=>res.json())
             .map(res=>res.products)
             .catch(this._handleErrors);

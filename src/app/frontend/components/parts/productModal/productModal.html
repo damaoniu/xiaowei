@@ -20,7 +20,7 @@
                                     <div class="product-info__availabilitu pull-right">:   <strong class="color">In Stock</strong></div>
                                 </div>
                                 <div class="product-info__title">
-                                    <a [routerLink]="'product/'+quickViewProduct.id"><h2>{{quickViewProduct.name}}</h2></a>
+                                    <a routerLink="/product/{{quickViewProduct.id}}"><h2>{{quickViewProduct.name}}</h2></a>
                                 </div>
                                 <div class="price-box product-info__price"><span class="price-box__new">${{price}}</span> <span *ngIf="quickViewProduct.sale" class="price-box__old">$84.00</span></div>
                                 <div class="divider divider--xs product-info__divider"></div>
