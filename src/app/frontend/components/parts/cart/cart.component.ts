@@ -35,8 +35,6 @@ export class Cart implements OnInit,OnDestroy{
         this.cartService.deleteItem(item);
     }
     ngOnInit(){
-        this.cartService.addItem({id:"100",description:"est",price:12,name:"as",img_src:"adsd",quantity:1,discount:{rate:10,startTime:"23",endTime:'3',productId:"100"}})
-
         // localStorage.setItem("test","test")
         if ($j("header .cart").length > 0) {
             $j('header .cart .dropdown-toggle').on('click', function(e){

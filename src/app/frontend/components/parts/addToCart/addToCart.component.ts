@@ -20,8 +20,8 @@ export class AddToCart implements AfterViewInit{
     qty:number=0;
     constructor(public _cartService:CartService){
     }
-    addToCart(){
-        this._cartService.addItem(this.item);
+    addToCart(quantity=1){
+        this._cartService.addItem(this.item,quantity);
     }
     ngAfterViewInit():void {
         if(this.showQty){
