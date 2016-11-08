@@ -47,7 +47,7 @@
                             </div>
                             <div class="wrapper visible-xs">
                                 <div class="product-info__sku pull-left">SKU: <strong>mtk012c</strong></div>
-                                <div class="product-info__availability pull-right">Availability:   <strong class="color">In Stock</strong></div>
+                                <div class="product-info__availability pull-right">Availability:{{product}}   <strong class="color">In Stock</strong></div>
                             </div>
                             <div class="visible-xs" slick [numberXl]="1" [numberLg]="1" [numberMd]="1" [numberSm]="1" [numberXs]="1">
                                 <div class="clearfix"></div>
@@ -66,68 +66,19 @@
                                 <div class="product-info__description__text">{{product.description}}</div>
                             </div>
                             <div class="divider divider--xs product-info__divider"></div>
-                            <div class="product-info__description">
-                                <div class="color-red"><span class="font35 font-lighter">35% Off.</span> Hurry, there are only 33 item(s) left! </div>
-                                <!-- countdown_box -->
-                                <div class="countdown-product">
-                                    <div id="countdown1"></div>
+                            <div *ngIf="product.sale">
+                                <div class="product-info__description" >
+                                    <div class="color-red"><span class="font35 font-lighter">立减{{product.sale.rate}}% </span> 赶快,还剩{{product.sale.quantity}} 件! </div>
+                                    <!-- countdown_box -->
+                                    <div class="countdown-product">
+                                        <div id="countdown1"></div>
+                                    </div>
+                                    <!-- /countdown_box -->
                                 </div>
-                                <!-- /countdown_box -->
-                            </div>
-                            <div class="divider divider--xs product-info__divider"></div>
 
-                            <ul class="options-swatch options-swatch--color options-swatch--lg">
-                                <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/oldlace.png" alt=""/></span></a></li>
-                                <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/dark-grey.png" alt=""/></span></a></li>
-                                <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/grey.png" alt=""/></span></a></li>
-                                <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/light-grey.png" alt=""/></span></a></li>
-                            </ul>
-                            <div class="wrapper">
-                                <div class="pull-left"><span class="option-label">SIZE:</span></div>
-                                <div class="pull-left required">*</div>
+                                <div class="divider divider--xs product-info__divider"></div>
                             </div>
-                            <ul class="options-swatch options-swatch--size options-swatch--lg">
-                                <li><a href="#">S</a></li>
-                                <li><a href="#">M</a></li>
-                                <li><a href="#">L</a></li>
-                                <li><a href="#">XL</a></li>
-                                <li><a href="#">2XL</a></li>
-                                <li><a href="#">3XL</a></li>
-                            </ul>
-                            <div class="divider divider--sm"></div>
-                            <div class="wrapper">
-                                <div class="pull-left"><span class="option-label text-uppercase">Image:</span></div>
-                                <div class="pull-left required">*</div>
-                            </div>
-                            <div class="form-group">
-                                <select  id="checkoutFormState" class="form-control selectpicker "  data-style="select--ys"  data-width="100%">
-                                    <option>select</option>
-                                </select>
-                            </div>
-                            <div class="divider divider--sm"></div>
-                            <div class="wrapper">
-                                <div class="pull-left"><span class="option-label text-uppercase">Type :</span></div>
-                                <div class="pull-left required">*</div>
-                            </div>
-                            <div class="form-group clearfix fill-bg radio-fill-inner-sx">
-                                <label class="radio">
-                                    <input id="radio1" type="radio" name="radios">
-                                    <span class="outer">
-				                        		<span class="inner"></span>
-				                        	</span>
-                                    Type 1
-                                </label>
-                            </div>
-                            <div class="form-group clearfix fill-bg radio-fill-inner-sx">
-                                <label class="radio">
-                                    <input id="radio2" type="radio" name="radios" checked>
-                                    <span class="outer">
-				                            	<span class="inner"></span>
-				                            </span>
-                                    Type 2
-                                </label>
-                            </div>
-                            <div class="divider divider--sm"></div>
+
                             <table class="table-product">
                                 <thead>
                                 <tr>

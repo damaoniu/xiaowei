@@ -41,13 +41,19 @@ export class CartService {
         if (currentItem && currentItem != undefined) {
             //increase the number of the existing product
             currentItem.quantity += quantity;
-        } else {
+        } else if(quantity>0) {
+
             this.cart.push({id: item.id, product: item, quantity: quantity});
         }
-        localStorage.setItem(cart, JSON.stringify(this.cart));
-        this.itemAdded$.emit(item);
+        if(currentItem &&currentItem.quantity<=0){
+            this.deleteItem(currentItem);
+        }else{
+            localStorage.setItem(cart, JSON.stringify(this.cart));
+            this.itemAdded$.emit(item);
+        }
 
     }
+
 
     deleteItem(item:Item) {
         this.cart = this.cart.filter(cartItem=>cartItem.id !== item.id);
@@ -56,6 +62,9 @@ export class CartService {
 
     clearCart() {
         this.cart = [];
+    }
+    getItem(id){
+        return _.findWhere(this.cart, {id: id})
     }
 
     getSubTotal(item:Item) {

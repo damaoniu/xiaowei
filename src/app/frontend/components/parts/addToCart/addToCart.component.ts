@@ -11,36 +11,46 @@ let $j=jQuery.noConflict();
     templateUrl:"./addToCart.html",
     encapsulation:ViewEncapsulation.None
 })
-export class AddToCart implements AfterViewInit{
+export class AddToCart{
     @Input('item') item:Item;
     @Input('showQty') showQty:boolean;
     @ViewChild('counter') counter:ElementRef;
     @ViewChild('plusButton') plusButton:ElementRef;
     @ViewChild('minusButton') minusButton:ElementRef;
+    @ViewChild('quantity') quantity:ElementRef;
     qty:number=0;
     constructor(public _cartService:CartService){
     }
+    get inCart(){
+       return this._cartService.getItem(this.item.id);
+    }
+    get cartItem(){
+        if(this.inCart){
+            return this.inCart;
+        }else {
+            return {id:this.item.id,item:this.item,quantity:0}
+        }
+
+    }
+    set cartItem(item){
+         this.cartItem=item;
+    }
+    updateQuantity(newQuantity){
+        if(!isNaN(newQuantity)){newQuantity=0};
+        console.log(isNaN(newQuantity));
+        console.log(newQuantity);
+        newQuantity=newQuantity||0;
+        if(newQuantity==null ||newQuantity==''){newQuantity =0};
+        if(this.inCart){
+            this.addToCart(-this.cartItem.quantity);
+        }
+        this.addToCart(newQuantity)
+        if(newQuantity==0){
+            this.cartItem={id:this.item.id,item:this.item,quantity:0};
+        }
+
+    }
     addToCart(quantity=1){
         this._cartService.addItem(this.item,quantity);
-    }
-    ngAfterViewInit():void {
-        if(this.showQty){
-            if ($j(this.counter.nativeElement).length > 0) {
-                $j(this.minusButton.nativeElement).click(function () {
-                    var $jinput = $j(this).parent().find('input');
-                    var count = parseInt($jinput.val()) - 1;
-                    count = count < 1 ? 1 : count;
-                    $jinput.val(count);
-                    $jinput.change();
-                    return false;
-                });
-                $j(this.plusButton.nativeElement).click(function () {
-                    var $jinput = $j(this).parent().find('input');
-                    $jinput.val(parseInt($jinput.val()) + 1);
-                    $jinput.change();
-                    return false;
-                });
-            }
-        }
     }
 }
