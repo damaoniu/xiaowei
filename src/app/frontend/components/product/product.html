@@ -79,43 +79,26 @@
                                 <div class="divider divider--xs product-info__divider"></div>
                             </div>
 
-                            <table class="table-product">
+                            <table class="table-product" *ngIf="product.products">
                                 <thead>
                                 <tr>
-                                    <th>Product Name</th>
-                                    <th>Price</th>
-                                    <th>Qty</th>
+                                    <th>产品</th>
+                                    <th>价格</th>
+                                    <th>数量</th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <td>Product 1</td>
-                                    <td><span class="color">$25.00</span></td>
-                                    <td>
-                                        <input type="text" placeholder="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Product 2</td>
-                                    <td>
-                                        <span class="color">$25.00</span>
-                                        <span class="color-red line-through">$25.00</span>
-                                    </td>
-                                    <td>
-                                        <input type="text" placeholder="0">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>Product 3</td>
-                                    <td><span class="color">$85.00</span></td>
-                                    <td>
-                                        <input type="text" placeholder="0">
-                                    </td>
-                                </tr>
+                                    <tr *ngFor="let pro of product.products">
+                                        <td>{{pro.product.name}}</td>
+                                        <td><span class="color">{{pro.product.price}}</span></td>
+                                        <td>
+                                            {{pro.quantity}}
+                                        </td>
+                                    </tr>
                                 </tbody>
                             </table>
 
-                            <addToCart [showQty]="true"  [item]="{id:'23',price:23,description:'na',name:'sa',img_src:'wwer'}"></addToCart>
+                            <addToCart [showQty]="true"  [item]="product"></addToCart>
 
 
                         </div>
@@ -128,33 +111,13 @@
                         <!-- Tab panes -->
                         <div class="tab-content tab-content--ys">
                             <div role="tabpanel" class="tab-pane active" id="Tab1">
-                                <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+                                <p>{{product.description}} </p>
                                 <div class="divider divider--md"></div>
                                 <table class="table table-params">
                                     <tbody>
                                     <tr>
                                         <td class="text-right"><span class="color">PROOF</span></td>
                                         <td>PDF Proof</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">SAMPLES</span></td>
-                                        <td>Digital, Printed</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">WRAPPING</span></td>
-                                        <td>Yes,  No</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">UV GLOSS COATING</span></td>
-                                        <td>Yes</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">SHRINK WRAPPING</span></td>
-                                        <td>No Shrink Wrapping, Shrink in 25s, Shrink in 50s, Shrink in 100s</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-right"><span class="color">WEIGHT</span></td>
-                                        <td>0.05, 0.06, 0.07ess cards</td>
                                     </tr>
                                     </tbody>
                                 </table>
@@ -253,362 +216,42 @@
     </section>
     <!-- related products -->
     <section class="content">
-        <div class="container" slick [numberXl]="6" [numberLg]="4" [numberMd]="4" [numberSm]="2" [numberXs]="1">
+        <div class="container"  slick [slides]="relatedProducts" [numberXl]="6" [numberLg]="4" [numberMd]="4" [numberSm]="2" [numberXs]="1">
             <!-- title -->
             <div class="title-with-button">
                 <div class="carousel-products__center pull-right"> <span class="btn-prev"></span> <span class="btn-next"></span> </div>
-                <h2 class="text-left text-uppercase title-under pull-left">YOU MAY ALSO BE INTERESTED IN THE FOLLOWING PRODUCT(S)</h2>
+                <h2 class="text-left text-uppercase title-under pull-left">你可能会喜欢下面的产品</h2>
             </div>
             <!-- /title -->
             <!-- carousel -->
             <div class="carousel-products row carousel-slides" id="carouselRelated">
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
+                <div *ngFor="let rP of relatedProducts |async" class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
                     <!-- product -->
                     <div class="product">
                         <div class="product__inside">
                             <!-- product image -->
                             <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-13.jpg" alt=""> </a>
+                                <a routerLink="/product/{{rP.id}}"> <img src="{{rP.mainMedia|imgUrl}}" alt=""> </a>
                                 <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
+                                <a productModal [product]="rP" class="quick-view"><b><span class="icon icon-visibility"></span> 预览</b> </a>
                                 <!-- /quick-view -->
                             </div>
                             <!-- /product image -->
                             <!-- product name -->
                             <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
+                                <h2><a routerLink="/product/{{rP.id}}">{{rP.name}}</a></h2>
                             </div>
                             <!-- /product name -->                 <!-- product description -->
                             <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
+                            <div class="product__inside__description row-mode-visible"> {{rP.description}} </div>
                             <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$143.00</div>
+                            <div class="product__inside__price price-box">{{rP.price}}</div>
                             <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
+
                             <div class="product__inside__hover">
                                 <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
+                                <addToCart  [item]="rP"></addToCart>
                                 <!-- /product info -->
-                                <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-14.jpg" alt=""> </a>
-                                <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
-                                <!-- /quick-view -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#"> Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$587.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <ul class="options-swatch options-swatch--color">
-                                        <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/blue.png"  alt=""/></span></a></li>
-                                        <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/yellow.png"  alt=""/></span></a></li>
-                                        <li><a href="#"><span class="swatch-label"><img src="/assets/images/colors/red.png"  alt=""/></span></a></li>
-                                    </ul>
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info --> <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-15.jpg" alt=""> </a>
-                                <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
-                                <!-- /quick-view -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$54.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info --> <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-16.jpg" alt=""> </a>
-                                <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
-                                <!-- /quick-view -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$66.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info --> <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product sold-out">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-17.jpg" alt=""> </a>
-                                <!-- label sold-out -->
-                                <div class="product__label--sold-out"> <span>sold<br>
-											out</span>
-                                </div>
-                                <!-- /label sold-out -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$73.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info --> <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-18.jpg" alt=""> </a>
-                                <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
-                                <!-- /quick-view -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$73.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info --> <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /product -->
-                </div>
-                <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3 col-xl-one-six">
-                    <!-- product -->
-                    <div class="product">
-                        <div class="product__inside">
-                            <!-- product image -->
-                            <div class="product__inside__image">
-                                <a href="#"> <img src="/assets/images/product/product-6.jpg" alt=""> </a>
-                                <!-- quick-view -->
-                                <a href="quick-view.html" class="quick-view"><b><span class="icon icon-visibility"></span> Quick view</b> </a>
-                                <!-- /quick-view -->
-                            </div>
-                            <!-- /product image -->
-                            <!-- product name -->
-                            <div class="product__inside__name">
-                                <h2><a href="#">Mauris lacinia lectus</a></h2>
-                            </div>
-                            <!-- /product name -->                 <!-- product description -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__description row-mode-visible"> Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam. </div>
-                            <!-- /product description -->                 <!-- product price -->
-                            <div class="product__inside__price price-box">$66.00</div>
-                            <!-- /product price -->                 <!-- product review -->
-                            <!-- visible only in row-view mode -->
-                            <div class="product__inside__review row-mode-visible">
-                                <div class="rating row-mode-visible"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <a href="#">1 Review(s)</a> <a href="#">Add Your Review</a>
-                            </div>
-                            <!-- /product review -->
-                            <div class="product__inside__hover">
-                                <!-- product info -->
-                                <div class="product__inside__info">
-                                    <div class="product__inside__info__btns"> <a href="#" class="btn btn--ys btn--xl"><span class="icon icon-shopping_basket"></span> Add to cart</a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-favorite_border"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl visible-xs"><span class="icon icon-sort"></span></a>
-                                        <a href="#" class="btn btn--ys btn--xl  row-mode-visible hidden-xs"><span class="icon icon-visibility"></span> Quick view</a>
-                                    </div>
-                                    <ul class="product__inside__info__link hidden-xs">
-                                        <li class="text-right"><span class="icon icon-favorite_border  tooltip-link"></span><a href="#"><span class="text">Add to wishlist</span></a></li>
-                                        <li class="text-left"><span class="icon icon-sort  tooltip-link"></span><a href="#" class="compare-link"><span class="text">Add to compare</span></a></li>
-                                    </ul>
-                                </div>
-                                <!-- /product info -->
-                                <!-- product rating -->
-                                <div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>
-                                <!-- /product rating -->
                             </div>
                         </div>
                     </div>
