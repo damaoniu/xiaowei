@@ -9,8 +9,6 @@ import {BaseService} from "../BaseService.service";
 @Injectable()
 export class ProductService extends BaseService {
     baseUrl:string = Config.productServiceUrl;
-    getProductUrl:string = "pms-product-service/products/";
-
     constructor(http:Http) {
         super(http);
     }

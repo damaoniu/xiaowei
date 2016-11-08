@@ -40,14 +40,14 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
             $j(this).removeClass('hover');
         })
         //newsletter modal
-        if(!this.user){
-            if ($j('#newsletterModal').length) {
-                var pause = $j('#newsletterModal').attr('data-pause');
-                setTimeout(function() {
-                    $j('#newsletterModal').modal('show');
-                }, pause);
-            }
-        }
+        // if(!this.user){
+        //     if ($j('#newsletterModal').length) {
+        //         var pause = $j('#newsletterModal').attr('data-pause');
+        //         setTimeout(function() {
+        //             $j('#newsletterModal').modal('show');
+        //         }, pause);
+        //     }
+        // }
         //parallax
         if ($j('.content--parallax, .carusel--parallax').length) {
             $j('.content--parallax, .carusel--parallax').each(function() {

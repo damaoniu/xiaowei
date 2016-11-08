@@ -2,18 +2,21 @@ import {Injectable, NgZone} from "@angular/core";
 import {Item} from "./item";
 import {EventEmitter} from "@angular/forms/src/facade/async";
 import {Discount} from "./discount";
+import {BaseService} from "../BaseService.service";
+import {Http} from "@angular/http";
 //this is the better way to use no typescript libraries
 declare var _:any;
 declare var localStorage:any;
 let cart = "cart";
 @Injectable()
-export class CartService {
+export class CartService extends BaseService{
     public cart:Item[] = [];
     public itemAdded$:EventEmitter<Item>;
     public itemDeleted$:EventEmitter<Item>;
     public discount:Discount;
 
-    constructor(public _ngzone:NgZone) {
+    constructor(http:Http,public _ngzone:NgZone) {
+        super(http);
         this.itemAdded$ = new EventEmitter<any>();
         this.itemDeleted$ = new EventEmitter<any>();
         if (localStorage.getItem(cart)) {
@@ -82,5 +85,6 @@ export class CartService {
         }, 0);
         return totalPrice.toFixed(2);
     }
+
 
 }
