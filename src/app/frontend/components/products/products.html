@@ -23,7 +23,7 @@
                     <h4 class="collapse-block__title">{{fc.name}}</h4>
                     <div class="collapse-block__content" [ngClass]="{'show ':isCurrentFirst(fc.id)}">
                         <ul class="tags-list">
-                            <li (click)="setNewCategory(sc)"  *ngFor="let sc of secondLevelCategories[fc.id]"><a [ngClass]="{'bg-ys':isCurrentCategory(sc.name)}">{{sc.name}}</a></li>
+                            <li routerLink="/products/{{sc.id}}" *ngFor="let sc of secondLevelCategories[fc.id]"><a [ngClass]="{'bg-ys':isCurrentCategory(sc.name)}">{{sc.name}}</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                 <div class="divider"></div>
                 <div class="row" *ngIf="firstLevelCategory">
                     <div *ngFor="let c of currentSecondLevelCategories" class="subcategory-item col-sm-4 col-xs-6 col-xl-one-fifth">
-                        <a routerLink="products/{{c.id}}#{{c.name}}">
+                        <a routerLink="/products/{{c.id}}#{{c.name}}">
                             <!--<span class="figure"> <img src="/assets/images/custom/subcategory-1.jpg" alt="" class="img-responsive" /> </span>-->
                             <h3 class="subcategory-item__title">{{c.name}}</h3>
                         </a>
