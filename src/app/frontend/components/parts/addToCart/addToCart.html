@@ -3,7 +3,7 @@
     <div *ngIf="showQty" [ngClass]="{'pull-left':showQty}">
         <div class="number input-counter">
             <span class="minus-btn" #minusButton (click)="addToCart(-1)" ></span>
-            <input type="number" disabled="true" step="1" min="0" #quantity (keyup)="updateQuantity(quantity.value)" [(ngModel)]="cartItem.quantity"/>
+            <input type="text" disabled="true" step="1" min="0" #quantity (keyup)="updateQuantity(quantity.value)" [(ngModel)]="cartItem.quantity"/>
             <span class="plus-btn" (click)="addToCart(1)" ></span>
         </div>
     </div>

@@ -20,11 +20,11 @@ export class OrderService extends BaseService {
     * to pay the cart
     * */
     payCart(cart:any) {
-        let orderCart = [];
+        let orderCart = {products:[],customer:{}};
         cart.forEach((item)=> {
-            orderCart.push({id: item.id, quantity: item.quantity, type: item['type']})
+            orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})
         })
-        return this._http.get(this.baseUrl + "/payCart/aa")
+        return this._http.post(this.baseUrl + "/payCart",orderCart)
             .map(res=>res.json())
             .catch(this._handleErrors)
     }

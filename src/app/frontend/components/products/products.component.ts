@@ -84,7 +84,6 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
     }
 
     ngOnChanges() {
-
     }
 
     ngAfterContentInit() {

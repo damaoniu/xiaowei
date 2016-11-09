@@ -15,15 +15,7 @@ let $j=jQuery.noConflict();
 export class Cart implements OnInit,OnDestroy{
     cartIsOpen:boolean=false;
     @ViewChild("badge") badge:ElementRef;
-    constructor( private _elf:ElementRef,public  cartService:CartService    ){
-        let that = this;
-        cartService.itemAdded$.subscribe((item)=>{
-            $j(this.badge.nativeElement).removeClass('magictime puffIn');
-            setTimeout(function () {
-                $j(that.badge.nativeElement).addClass('magictime puffIn');
-            },20)
-        })
-    }
+    constructor( private _elf:ElementRef,public  cartService:CartService    ){}
     //use this reactive we to set up reactive properties
     get cart(){
         return this.cartService.getCart();

@@ -28,7 +28,9 @@ export class SlickDirective implements AfterContentInit{
         }
     }
     ngAfterContentInit():void {
-        this.buildSlick();
+        if(!this.slides){
+            this.buildSlick();
+        }
     }
     buildSlick(){
         // Fix z-index problem on carousel hover
