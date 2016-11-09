@@ -10,17 +10,18 @@ import {LoginPopDirective, LoginModal, LoginComponent} from "./auth/login.compon
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
 import {ProductModalComponent} from "./productModal/productModal.component";
 import {ImgUrlPipe} from "../../../shared/pipes/imgUrl.pipe";
+import {CartButtonComponent} from "./cart/cartButton.component";
 @NgModule({
     imports:[SharedModule,FrontDirectivesModule,NgbModule],
     declarations:[
         Cart,SlideToggle,AddToCart,RevSliderComponent,SlickSliderComponent,
-        SlickO1,SlickO2,SlickO3,SlickO4,LoginPopDirective,LoginModal,LoginComponent,ProductModalComponent,
+        SlickO1,SlickO2,SlickO3,SlickO4,LoginPopDirective,LoginModal,LoginComponent,ProductModalComponent,CartButtonComponent
 
 
     ],
     exports:[
         Cart,SlideToggle,AddToCart,RevSliderComponent,SlickSliderComponent,
-        SlickO1,SlickO2,SlickO3,SlickO4,LoginPopDirective,LoginModal,LoginComponent,ProductModalComponent
+        SlickO1,SlickO2,SlickO3,SlickO4,LoginPopDirective,LoginModal,LoginComponent,ProductModalComponent,CartButtonComponent
     ],
     entryComponents:[LoginModal]
 })

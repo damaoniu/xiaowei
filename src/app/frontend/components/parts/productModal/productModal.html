@@ -1,10 +1,9 @@
-<div class="modal  modal--bg fade"  id="quickViewModal">
+<div class="modal modal--bg fade"  id="quickViewModal">
     <div class="modal-dialog white-modal">
         <div class="modal-content container">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
             </div>
-            <!--  -->
             <div class="product-popup">
                 <div class="product-popup-content">
                     <div class="container-fluid">
@@ -29,7 +28,7 @@
                                     <div class="product-info__description__text">{{quickViewProduct.description}}</div>
                                 </div>
                                 <div class="divider divider--xs product-info__divider"></div>
-                               <addToCart [item]="quickViewProduct" [showQty]="'true'"></addToCart>
+                                <addToCart [item]="quickViewProduct" [showQty]="'true'"></addToCart>
                                 <a routerLink="/product/{{quickViewProduct.id}}">
                                     <button class="btn btn--bg-green btn--xxl"><i class="fa fa-eye"></i>&nbsp;查看详情</button>
                                 </a>
@@ -38,7 +37,6 @@
                     </div>
                 </div>
             </div>
-            <!-- / -->
         </div>
     </div>
 </div>

@@ -1,54 +1,75 @@
 
-<div class="cart link-inline" >
-    <div class="dropdown text-right" >
-        <a class="dropdown-toggle">
-        <span class="badge badge--cart" #badge>{{itemsCount}}</span>
-        <span class="icon icon-shopping_basket"></span>
-        <span class="name-text">My Cart</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu--xs-full slide-from-top" role="menu">
-        <div class="container">
-            <div class="cart__top">Recently added item(s)</div>
-            <a routerLink="#" class="icon icon-close cart__close"><span>CLOSE</span></a>
-            <div *ngIf="itemsCount<=0">
-                <div class="cart__item__info__title">
-                    <h2><a routerLink="#">你的购物袋现在为空!</a></h2>
-                </div>
+<div class="modal  modal--bg  fade"  id="cartModal">
+    <div class="modal-dialog white-modal" style="width: inherit!important;">
+        <div class="modal-content container">
+            <div class="modal-header text-right">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
             </div>
-            <ul>
-                <li class="cart__item" *ngFor="let item of cart" >
-                    <div class="cart__item__image pull-left"><a routerLink="#"><img src="/assets/images/product/product-1.jpg" alt=""/></a></div>
-                    <div class="cart__item__control">
-                        <div class="cart__item__delete" (click)="deleteItem(item)"><a routerLink="#" class="icon icon-delete"><span>删除</span></a></div>
-                        <div class="cart__item__edit"><a  class="icon icon-edit"><span>编辑</span></a></div>
-                    </div>
-                    <div class="cart__item__info">
-                        <div class="cart__item__info__title">
-                            <h2><a routerLink="/product/{{item.id}}">{{item.product.name}}</a></h2>
-                        </div>
-                        <div class="cart__item__info__price"><span class="info-label">Price:</span><span>{{item.product.price}}</span></div>
-                        <div class="cart__item__info__qty"><span class="info-label">Qty:</span><input min="0" type="number" class="input--ys" [(ngModel)]="item.quantity" /></div>
-                        <div class="cart__item__info__details">
-                            <div class='multitooltip'>
-                                <a >Details</a>
-                                <div class="tip on-bottom">
-                                    <span><strong>Color:</strong> Purple</span>
-                                    <span><strong>Quantity:</strong> 200</span>
-                                    <span><strong>Image:</strong> No</span>
-                                    <span><strong>Paper:</strong> Type Linen</span>
-                                    <span><strong>Size:</strong> 4"x3.5"</span>
+            <div class="product-popup">
+                <div class="product-popup-content">
+                    <div class="container-fluid">
+                        <div class="row table-responsive">
+                            <h5 class="">您的产品</h5>
+                            <div *ngIf="itemsCount<=0">
+                                <div class="cart__item__info__title">
+                                    <h2><a routerLink="#">你的购物袋现在为空!</a></h2>
                                 </div>
                             </div>
+                            <table class="table table-params">
+                                <thead>
+                                <tr>
+                                    <th>产品</th>
+                                    <th>单价</th>
+                                    <th>数量</th>
+                                    <th>小计</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr *ngFor="let product of cart">
+                                    <td>
+                                        <h5 class="text-left text-uppercase">
+                                            <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
+                                        </h5>
+                                        <div class='multitooltip'>
+                                            <a>详情</a>
+                                            <div class="tip on-bottom">
+                                                <span><strong>颜色:</strong> Purple</span>
+                                                <span><strong>Size:</strong> 4"x3.5"</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="order-review-table__product-price unit-price">
+                                            {{product.price}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span class="color">{{product.quantity}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="order-review-table__product-price subtotal">
+                                            {{cartService.getSubTotal(product)}}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <a class="cart__item__delete" (click)="deleteItem(product)"><a  class="icon icon-delete"><span>&nbsp;删除</span></a></a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-                </li>
-            </ul>
-            <div class="cart__bottom">
-                <div class="cart__total">Cart subtotal: <span> {{cartService.getTotalPrice()}}</span></div>
-                <button class="btn btn--ys btn-checkout" routerLink="/checkout">Checkout <span class="icon icon--flippedX icon-reply"></span></button>
-                <a  class="btn btn--ys"><span class="icon icon-shopping_basket"></span> View Cart</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="text-right">
+                    <div class="">总价: <span> {{cartService.getTotalPrice()}}</span></div>
+                    <button class="btn btn--ys btn-checkout" routerLink="/checkout">付款 <span class="icon icon--flippedX icon-reply"></span></button>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="clearfix"></div>
     </div>
 </div>
+
