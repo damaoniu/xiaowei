@@ -48,4 +48,17 @@ export class ProductService extends BaseService {
             .map(res=>res.products)
             .catch(this._handleErrors);
     }
+    getPrice(product){
+        if(product){
+            if(product['unit']){
+                if(product['sale']){
+                    return product['unit']['levelThreePrice']*(100-product['sale']['rate'])/100;
+                }else{
+                    return product['unit']['levelThreePrice']
+                }
+            }else{
+                return 0;
+            }
+        }
+    }
 }

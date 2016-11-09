@@ -43,7 +43,7 @@ export class CartService extends BaseService{
         let currentItem = _.findWhere(this.cart, {id: item.id});
         if (currentItem && currentItem != undefined) {
             //increase the number of the existing product
-            currentItem.quantity += quantity;
+            currentItem.quantity += +quantity;
         } else if(quantity>0) {
 
             this.cart.push({id: item.id, product: item, quantity: quantity});

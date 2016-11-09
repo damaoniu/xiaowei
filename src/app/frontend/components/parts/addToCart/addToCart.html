@@ -1,15 +1,12 @@
 <div class="wrapper">
     <div *ngIf="showQty" [ngClass]="{'pull-left':showQty}"><span class="qty-label">数量:</span></div>
     <div *ngIf="showQty" [ngClass]="{'pull-left':showQty}">
-        <!--  -->
-        <div class="number input-counter" #counter>
+        <div class="number input-counter">
             <span class="minus-btn" #minusButton (click)="addToCart(-1)" ></span>
-            <input type="number" step="1" min="0"  #quantity (keyup)="updateQuantity(quantity.value)" [(ngModel)]="cartItem.quantity"/>
-            <span class="plus-btn" (click)="addToCart(1)"  #plusButton></span>
+            <input type="number" disabled="true" step="1" min="0" #quantity (keyup)="updateQuantity(quantity.value)" [(ngModel)]="cartItem.quantity"/>
+            <span class="plus-btn" (click)="addToCart(1)" ></span>
         </div>
-        <!-- / -->
     </div>
-
     <div [ngClass]="{'pull-left':showQty}">
         <button (click)="addToCart()" [ngClass]="showQty?'btn--xxl':'btn--xl'" class="btn btn--ys"><span class="icon icon-shopping_basket">
         </span >添加到购物车</button>

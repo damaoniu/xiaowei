@@ -23,7 +23,7 @@
                     <h4 class="collapse-block__title">{{fc.name}}</h4>
                     <div class="collapse-block__content" [ngClass]="{'show ':isCurrentFirst(fc.id)}">
                         <ul class="tags-list">
-                            <li routerLink="/products/{{sc.id}}" *ngFor="let sc of secondLevelCategories[fc.id]"><a [ngClass]="{'bg-ys':isCurrentCategory(sc.name)}">{{sc.name}}</a></li>
+                            <li routerLink="/products/{{sc.id}}" *ngFor="let sc of secondLevelCategories[fc.id]"><a [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a></li>
                         </ul>
                     </div>
                 </div>
