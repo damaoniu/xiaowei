@@ -3,7 +3,7 @@
     <div class="container">
         <!-- title -->
         <div class="title-box">
-            <h1 class="text-center text-uppercase title-under">Checkout</h1>
+            <h1 class="text-center text-uppercase title-under">付款</h1>
         </div>
         <!-- /title -->
         <div class="row">
@@ -27,6 +27,7 @@
                                         <thead>
                                         <tr>
                                             <th>产品</th>
+                                            <th>图片</th>
                                             <th>单价</th>
                                             <th>数量</th>
                                             <th>小计</th>
@@ -41,9 +42,11 @@
                                                 </h5>
                                                 <ul class="order-review-table__list-parameters">
                                                     <li>
-                                                        <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}">
                                                     </li>
                                                 </ul>
+                                            </td>
+                                            <td>
+                                                <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
                                             </td>
                                             <td>
                                                 <div class="order-review-table__product-price unit-price">
@@ -161,6 +164,25 @@
                                         <div class="form-group col-md-4">
                                             <label >房间号</label>
                                             <input type="text" class="form-control" formControlName="roomNumber">
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 card--padding">
+                                        <h5>若您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
+                                        <div class="col-md-6">
+                                            <h6>正面<sup>*</sup></h6>
+                                            <input type="file" file-added [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />
+                                            <div *ngIf="idCardFront" class="box-border--padding">
+                                                <img src="{{idCardFront}}">
+                                            </div>
+
+                                        </div>
+                                        <div class="col-md-6">
+                                           <h6>反面<sup>*</sup></h6>
+                                            <input type="file" class="form-control" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
+                                            <div *ngIf="idCardBack" class="box-border--padding">
+                                                <img src="{{idCardBack}}">
+                                            </div>
+
                                         </div>
                                     </div>
                                     <p class="clearfix text-right">

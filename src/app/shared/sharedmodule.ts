@@ -9,12 +9,14 @@ import {ImgUrlPipe} from "./pipes/imgUrl.pipe";
 import {TypeaheadModule} from 'ng2-bootstrap/ng2-bootstrap'
 import {GeoNamesService} from "./services/geonames.service";
 import {FileUploadModule} from "ng2-file-upload/ng2-file-upload";
+import {FileAddedDirective} from "./directives/fileAdded.directive";
 @NgModule({
     imports:[RouterModule,FormsModule,CommonModule],
-    declarations:[ImgUrlPipe],
+    declarations:[ImgUrlPipe,FileAddedDirective],
     exports:[
         RouterModule,FormsModule,CommonModule,ReactiveFormsModule,
-        ImgUrlPipe,TypeaheadModule,FileUploadModule
+        ImgUrlPipe,TypeaheadModule,FileUploadModule,
+        FileAddedDirective
     ],
     providers:[UtilsService,ProductService,GeoNamesService]
 })

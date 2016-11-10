@@ -4,6 +4,8 @@ import {UserService} from "../../../shared/services/user/user.service";
 import {OrderService} from "../../../shared/services/orders/order.service";
 import {FormGroup, FormBuilder, Validators} from "@angular/forms";
 import {GeoNamesService} from "../../../shared/services/geonames.service";
+import {FileUploader, FileItem} from "ng2-file-upload/ng2-file-upload";
+import {Config} from "../../../shared/services/config";
 @Component({
     selector: "checkout",
     templateUrl: "./checkout.html",
@@ -11,6 +13,7 @@ import {GeoNamesService} from "../../../shared/services/geonames.service";
 })
 export class CheckoutComponent implements OnInit {
     customerInfoForm:FormGroup;
+    public uploader:FileUploader = new FileUploader({url:Config.mediaServerUrl});
     countryOptions:Array<string> = [
         '中国', '加拿大'
     ];
@@ -20,6 +23,10 @@ export class CheckoutComponent implements OnInit {
     cityOptions:Array<string> = [
         '四川', '重庆'
     ];
+    idCardFront:any;
+    idCardFrontItem:FileItem;
+    idCardBack:any;
+    idCardBackItem:FileItem;
 
     constructor(private cartService:CartService, private userService:UserService,
                 private orderService:OrderService, public fb:FormBuilder,
@@ -53,7 +60,9 @@ export class CheckoutComponent implements OnInit {
     enableAddressEdit() {
 
     }
-
+    idCardBackChanged(e){
+        this.idCardBackItem= new FileItem(this.uploader,this.idCardBack,this.uploader.options)
+    }
     payCart() {
         if (this.customerInfoForm.valid) {
             this.orderService.payCart(this.cart, this.customerInfoForm.getRawValue())
