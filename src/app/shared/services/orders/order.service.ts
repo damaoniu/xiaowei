@@ -19,11 +19,13 @@ export class OrderService extends BaseService {
     * @params cart
     * to pay the cart
     * */
-    payCart(cart:any) {
-        let orderCart = {products:[],customer:{}};
+    payCart(cart:any,customerInfo) {
+        console.log(customerInfo);
+        let orderCart = {products:[],customerInformation:customerInfo};
         cart.forEach((item)=> {
             orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})
-        })
+        });
+
         return this._http.post(this.baseUrl + "/payCart",orderCart)
             .map(res=>res.json())
             .catch(this._handleErrors)

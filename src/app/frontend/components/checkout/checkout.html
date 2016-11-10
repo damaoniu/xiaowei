@@ -103,15 +103,15 @@
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label >电话号码  <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="phoneNumber">
+                                        <input type="text" class="form-control" formControlName="cellphone">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label >备用电话号码  <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="backupPhoneNumber">
+                                        <input type="text" class="form-control" formControlName="homephone">
                                     </div>
                                     <div class="form-group col-md-4">
                                         <label >证件号码: <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="id">
+                                        <input type="text" class="form-control" formControlName="idNumber">
                                     </div>
                                     <div class="col-sm-12" formGroupName="address">
                                         <h5>地址:</h5>
@@ -121,6 +121,7 @@
                                                    [typeahead]="countryOptions"
                                                    [typeaheadOptionField]="'国家'"
                                                    [typeaheadMinLength]="0"
+                                                   (typeaheadOnSelect)="countrySelected($event)"
                                                    class="form-control" formControlName="country">
                                         </div>
                                         <div class="form-group col-md-4">
@@ -129,15 +130,21 @@
                                                    [typeahead]="provinceOptions"
                                                    [typeaheadOptionField]="'省'"
                                                    [typeaheadMinLength]="0"
+                                                   (typeaheadOnSelect)="provinceSelected($event)"
                                                    class="form-control" formControlName="province">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label >城市 <sup>*</sup></label>
-                                            <input type="text" class="form-control" formControlName="city">
+                                            <input type="text"
+                                                   [typeahead]="cityOptions"
+                                                   [typeaheadOptionField]="'市'"
+                                                   [typeaheadMinLength]="0"
+                                                   (typeaheadOnSelect)="citySelected($event)"
+                                                   class="form-control" formControlName="city">
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label >邮政编码  <sup>*</sup></label>
-                                            <input type="text" class="form-control" formControlName="postcode">
+                                            <input type="text" class="form-control" formControlName="postcode" required>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label >乡镇/街道名称  <sup>*</sup></label>
@@ -147,7 +154,7 @@
                                             <label >小区/建筑名称</label>
                                             <input type="text" class="form-control" formControlName="buildingName">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-md-4" >
                                             <label >门牌号</label>
                                             <input type="text" class="form-control" formControlName="streetNumber">
                                         </div>
@@ -157,10 +164,9 @@
                                         </div>
                                     </div>
                                     <p class="clearfix text-right">
-                                        <a (click)="payCart()" class="btn btn--ys btn--xl">确认购买<span class="icon icon--flippedX icon-reply"></span></a>
+                                        <button (click)="payCart()" [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">确认购买<span class="icon icon--flippedX icon-reply"></span></button>
                                     </p>
                                 </form>
-                                {{customerInfoForm.value|json}}
                             </div>
                         </div>
                         <!-- /panel body -->

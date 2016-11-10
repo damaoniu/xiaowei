@@ -39,3 +39,12 @@
  height: 5em;
  vertical-align: middle;
 }
+
+
+/*form validation*/
+.ng-touched.ng-invalid{
+ border-color: red;
+}
+/*.ng-touched.ng-valid {*/
+ /*border-color: green;*/
+/*}*/
