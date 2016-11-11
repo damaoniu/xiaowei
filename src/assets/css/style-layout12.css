@@ -25397,26 +25397,26 @@ body.modal-open {
 }
 /* /modal-newsletter  */
 /* quickViewModal */
-#quickViewModal .modal-dialog {
+.new-modal .modal-dialog {
   width: inherit;
 }
-#quickViewModal .product-popup {
+.new-modal .product-popup {
   padding: 0;
   width: 100%;
   height: inherit !important;
   max-height: inherit !important;
 }
 @media (max-width: 992px) {
-  #quickViewModal .modal-content {
+  .new-modal .modal-content {
     padding: 20px 27px 10px 27px;
   }
 }
-#quickViewModal .modal-content.container {
+.new-modal .modal-content.container {
   max-width: 1244px;
   min-width: 320px;
 }
 @media (max-width: 450px) {
-  #quickViewModal .modal-content {
+  .new-modal.modal-content {
     padding: 20px 15px 10px 15px;
   }
 }

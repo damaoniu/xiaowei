@@ -7,7 +7,7 @@
         </div>
         <!-- /title -->
         <div class="row">
-            <section class="col-md-8 col-lg-8">
+            <section class="col-sm-8 col-lg-8">
                 <!-- checkout-step -->
                 <div class="panel-group" id="checkout">
                     <div class="panel panel-checkout" role="tablist">
@@ -24,13 +24,13 @@
                                 <div class="btn-top ">
                                     <!-- order-review-table -->
                                     <div class="list" >
-                                        <div class="list-group-item clearfix">
-                                            <div class="col-md-4">产品</div>
-                                            <div class="col-md-2">图片</div>
-                                            <div class="col-md-2">单价</div>
-                                            <div class="col-md-2">数量</div>
-                                            <div class="col-md-1">小计</div>
-                                            <div class="col-md-1">操作</div>
+                                        <div class="list-group-item clearfix hidden-xs">
+                                            <div class="col-sm-4">产品</div>
+                                            <div class="col-sm-2">图片</div>
+                                            <div class="col-sm-2">单价</div>
+                                            <div class="col-sm-2">数量</div>
+                                            <div class="col-sm-1">小计</div>
+                                            <div class="col-sm-1">操作</div>
                                         </div>
                                         <div class="list-group-item clearfix" *ngIf="cartService.getCart().length<1">
                                             <td>你还有没有添加任何的产品!&nbsp;<a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
@@ -40,7 +40,7 @@
                                             境内产品:
                                         </div>
                                         <div class="list-group-item clearfix" *ngFor="let product of nonOverseaProducts">
-                                            <div class="col-md-4">
+                                            <div class="col-sm-4">
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
                                                     <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
                                                 </h5>
@@ -49,35 +49,35 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <div class="order-review-table__product-price unit-price">
                                                     {{product.price}}
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <input type="number" step="1" min="1" [(ngModel)]="product.quantity" class="form-control">
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-1">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-1">
                                                 <a (click)="cartService.deleteItem(product)" class="btn btn--bg-green "><i class="fa fa-trash"></i></a>
                                             </div>
                                         </div>
                                         <div class="list-group-item clearfix" *ngIf="nonOverseaProducts.length>0">
-                                               境内产品总计:{{cartService.getNonOverseaTotalPrice()}}
+                                               境内产品总计:{{cartService.getNonOverseaTotalPrice().toFixed(2)}}
                                         </div>
                                         <div class="list-group-item clearfix" *ngIf="overseaProducts.length>0">
                                             <td>直邮产品:</td>
                                         </div>
 
                                         <div *ngFor="let product of overseaProducts">
-                                            <div class="col-md-4">
+                                            <div class="col-sm-4">
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
                                                     <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
                                                 </h5>
@@ -86,34 +86,34 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <div class="order-review-table__product-price unit-price">
                                                     {{product.price}}
                                                 </div>
                                             </div>
-                                            <div class="col-md-2">
+                                            <div class="col-sm-2">
                                                 <input step="1" type="number" min="1" class="form-control" [(ngModel)]="product.quantity">
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-1">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
                                             </div>
-                                            <div class="col-md-1">
+                                            <div class="col-sm-1">
                                                 <a (click)="cartService.deleteItem(product)" class="btn btn--bg-green "><i class="fa fa-trash"></i></a>
                                             </div>
                                         </div>
                                         <div class="list-group-item clearfix" *ngIf="overseaProducts.length>0">
-                                                直邮产品总计:{{cartService.getOverseaTotalPrice()}}
+                                                直邮产品总计:{{cartService.getOverseaTotalPrice().toFixed(2)}}
                                         </div>
                                     </div>
                                     <!-- /order-review-table -->
                                     <!-- order-review-total -->
                                     <div class="row clearfix" >
-                                        <div class="pull-right col-xl-6 col-lg-9 col-md-9 col-xs-12 btn-top">
+                                        <div class="pull-right col-xl-6 col-lg-9 col-sm-9 col-xs-12 btn-top">
                                             <div class="order-review-total">
                                                 <table class="table-total">
                                                     <tfoot>
@@ -146,15 +146,15 @@
                                 <form action="checkout-step_submit" (ngSubmit)="payCart()" [formGroup]="customerInfoForm" novalidate>
                                     <div class="row"><span class="note pull-left">*必填</span> </div>
                                     <div class="row">
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >姓名  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="name">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >电话号码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="cellphone">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >备用电话号码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="homephone">
                                         </div>
@@ -162,7 +162,7 @@
 
                                     <div class="row" formGroupName="address">
                                         <h5>地址:</h5>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >国家 <sup>*</sup></label>
                                             <input type="text"
                                                    [typeahead]="countryOptions"
@@ -171,7 +171,7 @@
                                                    (typeaheadOnSelect)="countrySelected($event)"
                                                    class="form-control" formControlName="country">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >省 <sup>*</sup></label>
                                             <input type="text"
                                                    [typeahead]="provinceOptions"
@@ -180,7 +180,7 @@
                                                    (typeaheadOnSelect)="provinceSelected($event)"
                                                    class="form-control" formControlName="province">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >城市 <sup>*</sup></label>
                                             <input type="text"
                                                    [typeahead]="cityOptions"
@@ -189,34 +189,34 @@
                                                    (typeaheadOnSelect)="citySelected($event)"
                                                    class="form-control" formControlName="city">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >邮政编码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="postcode" required>
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >乡镇/街道名称  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="streetName">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >小区/建筑名称</label>
                                             <input type="text" class="form-control" formControlName="buildingName">
                                         </div>
-                                        <div class="form-group col-md-4" >
+                                        <div class="form-group col-sm-4" >
                                             <label >门牌号</label>
                                             <input type="text" class="form-control" formControlName="streetNumber">
                                         </div>
-                                        <div class="form-group col-md-4">
+                                        <div class="form-group col-sm-4">
                                             <label >房间号</label>
                                             <input type="text" class="form-control" formControlName="roomNumber">
                                         </div>
                                     </div>
                                     <div class="row" *ngIf="cartService.hasOversea()">
                                         <h5 >您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
-                                        <div class="form-group col-md-12">
+                                        <div class="form-group col-sm-12">
                                             <label >证件号码: <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="idNumber">
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-sm-6">
                                             <h6>正面<sup>*</sup></h6>
                                             <input type="file" file-added formControlName="idCardFront" [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />
                                             <div *ngIf="idCardFront" class="box-border--padding">
@@ -224,7 +224,7 @@
                                             </div>
 
                                         </div>
-                                        <div class="col-md-6">
+                                        <div class="col-sm-6">
                                            <h6>反面<sup>*</sup></h6>
                                             <input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
                                             <div *ngIf="idCardBack" class="box-border--padding">
@@ -244,7 +244,7 @@
                 </div>
                 <!-- /checkout-step -->
             </section>
-            <aside class="col-md-4 col-lg-4 shopping_cart-aside">
+            <aside class="col-sm-4 col-lg-4 shopping_cart-aside">
                 <!--  -->
                 <div class="box-border box-border--padding fill-bg">
                     <h4 class="mega title-bottom1">你的进度</h4>

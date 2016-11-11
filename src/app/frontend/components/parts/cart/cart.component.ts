@@ -26,6 +26,13 @@ export class Cart implements OnInit,OnDestroy{
     deleteItem(item:Item){
         this.cartService.deleteItem(item);
     }
+    get overseaProducts(){
+        return this.cartService.overSeaProducts();
+    }
+    get nonOverseaProducts(){
+        return this.cartService.nonOverSearProducts();
+    }
+
     ngOnInit(){
         // localStorage.setItem("test","test")
         if ($j("header .cart").length > 0) {
