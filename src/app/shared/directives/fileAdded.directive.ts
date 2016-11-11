@@ -10,6 +10,5 @@ export class FileAddedDirective{
     public onFileAdded():any{
         this.fileHolder=this.el.nativeElement.files[0];
         this.fileHolderChange.emit(this.el.nativeElement.files[0])
-        console.log(this.el.nativeElement.files[0]);
     }
 }

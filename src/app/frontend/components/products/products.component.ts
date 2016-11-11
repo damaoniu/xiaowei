@@ -29,13 +29,26 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
         this.currentCategory = new Subject<any>();
         this.currentCategory.subscribe(data=> {
             this.fetching = true
-            this.productService.getProductByCategory(data['id'])
-                .subscribe((data)=> {
-                    this.products = data;
-                    this.fetching = false;
-                }, (error)=> {
-                    this.fetching = false;
-                })
+            let parts = data['id'].split('c');
+            if(parts.length>1)
+            {
+                this.productService.getComboByCategory(parts[0])
+                    .subscribe((data)=> {
+                        this.products = data;
+                        this.fetching = false;
+                    }, (error)=> {
+                        this.fetching = false;
+                    })
+            }else{
+                this.productService.getProductByCategory(parts[0])
+                    .subscribe((data)=> {
+                        this.products = data;
+                        this.fetching = false;
+                    }, (error)=> {
+                        this.fetching = false;
+                    })
+            }
+
         })
     }
 
@@ -93,7 +106,8 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
         //get the products
         let that = this;
         this.route.params.forEach((params:Params)=> {
-            that.currentCategoryId = params['categoryId'];
+            that.currentCategoryId = params['categoryId'].split('c')[0];
+
             that.currentCategory.next({id: params['categoryId']})
 
         })

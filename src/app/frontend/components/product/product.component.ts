@@ -25,14 +25,27 @@ export class ProductComponent implements OnInit {
         elevateZoom();
 
         this.route.params.forEach((params:Params)=> {
-            this.productService.getProduct(params['productId']).subscribe(data=> {
-                this.product = data;
-                this.productService.getProductByCategory(data['categoryId'])
-                    .map(data=>{return data.filter((product)=>{ return product.id!=that.product.id})})
-                    .subscribe(data=> {
-                        that.relatedProducts.next(data);
-                    })
-            });
+            let parts =  params['productId'].split('c');
+            if(parts.length>1){
+                this.productService.getCombo(parts[0]).subscribe(data=> {
+                    this.product = data;
+                    this.productService.getComboByCategory(data['categoryId'])
+                        .map(data=>{return data.filter((product)=>{ return product.id!=that.product.id})})
+                        .subscribe(data=> {
+                            that.relatedProducts.next(data);
+                        })
+                });
+            }else{
+
+                this.productService.getProduct(parts[0]).subscribe(data=> {
+                    this.product = data;
+                    this.productService.getProductByCategory(data['categoryId'])
+                        .map(data=>{return data.filter((product)=>{ return product.id!=that.product.id})})
+                        .subscribe(data=> {
+                            that.relatedProducts.next(data);
+                        })
+                });
+            }
         })
 
     }

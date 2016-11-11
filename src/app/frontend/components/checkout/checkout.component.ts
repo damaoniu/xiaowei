@@ -1,23 +1,21 @@
-import {Component, ViewEncapsulation, OnInit} from "@angular/core";
+import {Component, ViewEncapsulation, OnInit,ReflectiveInjector} from "@angular/core";
 import {CartService} from "../../../shared/services/cartService/cart.service";
 import {UserService} from "../../../shared/services/user/user.service";
 import {OrderService} from "../../../shared/services/orders/order.service";
-import {FormGroup, FormBuilder, Validators, AbstractControl} from "@angular/forms";
+import {FormGroup, FormBuilder, Validators, AbstractControl, NG_VALIDATORS} from "@angular/forms";
 import {GeoNamesService} from "../../../shared/services/geonames.service";
 import {FileUploader} from "ng2-file-upload/ng2-file-upload";
 import {FileItem} from "ng2-file-upload/components/file-upload/file-item.class"
 import {Config} from "../../../shared/services/config";
+import {Http} from "@angular/http";
 
-function requiredWhenOverSea(cart:CartService,c:AbstractControl){
-    if(cart.hasOversea){
-        return Validators.required;
-    }
-}
+
+
 
 @Component({
     selector: "checkout",
     templateUrl: "./checkout.html",
-    encapsulation: ViewEncapsulation.None
+    encapsulation: ViewEncapsulation.None,
 })
 
 export class CheckoutComponent implements OnInit {
@@ -51,6 +49,12 @@ export class CheckoutComponent implements OnInit {
 
     get cart() {
         return this.cartService.getCart();
+    }
+    get overseaProducts(){
+        return this.cartService.overSeaProducts();
+    }
+    get nonOverseaProducts(){
+        return this.cartService.nonOverSearProducts();
     }
 
     enableAddressEdit() {
@@ -96,7 +100,18 @@ export class CheckoutComponent implements OnInit {
     citySelected(e) {
 
     }
+  requiredWhenOverSea(c:AbstractControl){
+    // let cart= ;
+    if(this.cartService.hasOversea()){
+        if(c.value!=""){
+            return null;
+        }else {
+            return "This is needed" ;
+        }
+    }
+    return null;
 
+}
     ngOnInit():void {
         this.geoNameService.getCountries()
             .subscribe(data=> {
@@ -106,7 +121,7 @@ export class CheckoutComponent implements OnInit {
             name: ['',Validators.required],
             cellphone: ['',Validators.required],
             homephone: ['',Validators.required],
-            idNumber: ['',requiredWhenOverSea],
+            idNumber: ['',this.requiredWhenOverSea.bind(this)],
             address: this.fb.group({
                 country: ['中国',Validators.required],
                 province: ['北京',Validators.required],
@@ -117,8 +132,8 @@ export class CheckoutComponent implements OnInit {
                 postcode: '',
                 roomNumber: ''
             }),
-            idCardFront:['',requiredWhenOverSea],
-            idCardBack:['',requiredWhenOverSea],
+            idCardFront:['',this.requiredWhenOverSea.bind(this)],
+            idCardBack:['',this.requiredWhenOverSea.bind(this)],
         })
     }
 

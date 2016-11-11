@@ -41,11 +41,23 @@ export class ProductService extends BaseService {
             .map(data=>data.product)
             .catch(this._handleErrors);
     }
+    getCombo(id:string) {
+        return this._http.get(this.baseUrl + '/combo/' + id)
+            .map(res=>res.json())
+            .map(data=>data['combo'])
+            .catch(this._handleErrors);
+    }
 
     getProductByCategory(categoryId:string) {
         return this._http.get(this.baseUrl + "/productsByCategory/" + categoryId)
             .map(res=>res.json())
             .map(res=>res.products)
+            .catch(this._handleErrors);
+    }
+    getComboByCategory(categoryId:string) {
+        return this._http.get(this.baseUrl + "/combosByCategory/" + categoryId)
+            .map(res=>res.json())
+            .map(res=>res['combos'])
             .catch(this._handleErrors);
     }
     getPrice(product){

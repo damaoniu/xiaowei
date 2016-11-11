@@ -28,7 +28,11 @@
                                 </a>
                                 <ul class="dropdown-menu multicolumn three-col" role="menu">
                                     <li class="dl-back"><a href="#"><span class="icon icon-chevron_left"></span>返回</a></li>
-                                    <li *ngFor="let sc of secondLevelCategories[fc.id]" ><a routerLink="products/{{sc.id}}">{{sc.name}}</a></li>
+
+                                    <li *ngFor="let sc of secondLevelCategories[fc.id]" >
+                                        <a *ngIf="sc.name=='冻鲜礼包'"routerLink="products/{{sc.id}}co">{{sc.name}}</a>
+                                        <a *ngIf="sc.name!='冻鲜礼包'"routerLink="products/{{sc.id}}">{{sc.name}}</a>
+                                    </li>
                                 </ul>
                             </li>
                         </ul>

@@ -23,7 +23,10 @@
                     <h4 class="collapse-block__title">{{fc.name}}</h4>
                     <div class="collapse-block__content" [ngClass]="{'show ':isCurrentFirst(fc.id)}">
                         <ul class="tags-list">
-                            <li routerLink="/products/{{sc.id}}" *ngFor="let sc of secondLevelCategories[fc.id]"><a [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a></li>
+                            <li  *ngFor="let sc of secondLevelCategories[fc.id]">
+                                <a *ngIf="sc.name=='冻鲜礼包'" routerLink="/products/{{sc.id}}co" [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a>
+                                <a *ngIf="sc.name!='冻鲜礼包'" routerLink="/products/{{sc.id}}" [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +47,7 @@
                 <div class="divider"></div>
                 <div class="row" *ngIf="firstLevelCategory">
                     <div *ngFor="let c of currentSecondLevelCategories" class="subcategory-item col-sm-4 col-xs-6 col-xl-one-fifth">
-                        <a routerLink="/products/{{c.id}}#{{c.name}}">
+                        <a  routerLink="/products/{{c.id}}#{{c.name}}">
                             <!--<span class="figure"> <img src="/assets/images/custom/subcategory-1.jpg" alt="" class="img-responsive" /> </span>-->
                             <h3 class="subcategory-item__title">{{c.name}}</h3>
                         </a>
@@ -66,7 +69,14 @@
                                     <!-- product image carousel -->
                                     <div class="product__inside__carousel slide" data-ride="carousel">
                                         <div class="carousel-inner" role="listbox">
-                                            <div class="item active"> <a routerLink="/product/{{product.id}}"><img src="{{product.mainMedia | imgUrl}}" alt=""></a> </div>
+                                            <div class="item active">
+                                                <a routerLink="/product/{{product.id}}co" *ngIf="currentCategoryId=='96'">
+                                                    <img src="{{product.mainMedia | imgUrl}}" alt="">
+                                                </a>
+                                                <a routerLink="/product/{{product.id}}" *ngIf="currentCategoryId!='96'">
+                                                    <img src="{{product.mainMedia | imgUrl}}" alt="">
+                                                </a>
+                                            </div>
                                         </div>
                                         <!-- Controls -->
                                         <!--<a class="carousel-control next"></a> <a class="carousel-control prev"></a>-->
@@ -94,7 +104,10 @@
                                 <!-- /label sale -->
                                 <!-- product name -->
                                 <div class="product__inside__name">
-                                    <h2><a routerLink="/product/{{product.id}}">{{product.name}}</a></h2>
+                                    <h2>
+                                        <a *ngIf="currentCategoryId==96" routerLink="/product/{{product.id}}co">{{product.name}}</a>
+                                        <a *ngIf="currentCategoryId!=96" routerLink="/product/{{product.id}}">{{product.name}}</a>
+                                    </h2>
                                 </div>
                                 <!-- /product name -->
                                 <!-- product description -->
@@ -102,7 +115,7 @@
                                 <div class="product__inside__description row-mode-visible"> {{product.description}} </div>
                                 <!-- /product description -->
                                 <!-- product price -->
-                                <div class="product__inside__price price-box">{{product.unit.levelThreePrice}}<span *ngIf="product.sale" class="price-box__old">$28.00</span></div>
+                                <div class="product__inside__price price-box">{{product.unit?product.unit.levelThreePrice:product.levelThreePrice}}<span *ngIf="product.sale" class="price-box__old">$28.00</span></div>
 
                                 <div class="product__inside__hover">
 

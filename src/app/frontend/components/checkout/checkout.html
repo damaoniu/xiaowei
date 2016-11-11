@@ -21,58 +21,103 @@
                         <div id="collapseFive" class="panel-collapse collapse in" role="tabpanel">
                             <div class="panel-body">
                                 <div class="clearfix"></div>
-                                <div class="btn-top">
+                                <div class="btn-top ">
                                     <!-- order-review-table -->
-                                    <table class="order-review-table">
-                                        <thead>
-                                        <tr>
-                                            <th>产品</th>
-                                            <th>图片</th>
-                                            <th>单价</th>
-                                            <th>数量</th>
-                                            <th>小计</th>
-                                            <th>操作</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        <tr *ngFor="let product of cart">
-                                            <td>
+                                    <div class="list" >
+                                        <div class="list-group-item clearfix">
+                                            <div class="col-md-4">产品</div>
+                                            <div class="col-md-2">图片</div>
+                                            <div class="col-md-2">单价</div>
+                                            <div class="col-md-2">数量</div>
+                                            <div class="col-md-1">小计</div>
+                                            <div class="col-md-1">操作</div>
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngIf="cartService.getCart().length<1">
+                                            <td>你还有没有添加任何的产品!&nbsp;<a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
+                                            </td>
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngIf="nonOverseaProducts.length>0" >
+                                            境内产品:
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngFor="let product of nonOverseaProducts">
+                                            <div class="col-md-4">
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
-                                                    <a routerLink="/products/{{product.id}}">{{product.product.name}}</a>
+                                                    <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
                                                 </h5>
                                                 <ul class="order-review-table__list-parameters">
                                                     <li>
                                                     </li>
                                                 </ul>
-                                            </td>
-                                            <td>
+                                            </div>
+                                            <div class="col-md-2">
                                                 <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
-                                            </td>
-                                            <td>
+                                            </div>
+                                            <div class="col-md-2">
                                                 <div class="order-review-table__product-price unit-price">
                                                     {{product.price}}
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <span class="color">{{product.quantity}}</span>
-                                            </td>
-                                            <td>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input type="number" step="1" min="1" [(ngModel)]="product.quantity" class="form-control">
+                                            </div>
+                                            <div class="col-md-1">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
-                                            </td>
-                                            <td><a (click)="cartService.deleteItem(product)" class="btn btn--bg-green "><i class="fa fa-trash"></i></a></td>
-                                        </tr>
-                                        </tbody>
-                                    </table>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a (click)="cartService.deleteItem(product)" class="btn btn--bg-green "><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngIf="nonOverseaProducts.length>0">
+                                               境内产品总计:{{cartService.getNonOverseaTotalPrice()}}
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngIf="overseaProducts.length>0">
+                                            <td>直邮产品:</td>
+                                        </div>
+
+                                        <div *ngFor="let product of overseaProducts">
+                                            <div class="col-md-4">
+                                                <h5 class="order-review-table__product-name text-left text-uppercase">
+                                                    <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
+                                                </h5>
+                                                <ul class="order-review-table__list-parameters">
+                                                    <li>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="order-review-table__product-price unit-price">
+                                                    {{product.price}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <input step="1" type="number" min="1" class="form-control" [(ngModel)]="product.quantity">
+                                            </div>
+                                            <div class="col-md-1">
+                                                <div class="order-review-table__product-price subtotal">
+                                                    {{cartService.getSubTotal(product)}}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-1">
+                                                <a (click)="cartService.deleteItem(product)" class="btn btn--bg-green "><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item clearfix" *ngIf="overseaProducts.length>0">
+                                                直邮产品总计:{{cartService.getOverseaTotalPrice()}}
+                                        </div>
+                                    </div>
                                     <!-- /order-review-table -->
                                     <!-- order-review-total -->
-                                    <div class="row clearfix">
+                                    <div class="row clearfix" >
                                         <div class="pull-right col-xl-6 col-lg-9 col-md-9 col-xs-12 btn-top">
                                             <div class="order-review-total">
                                                 <table class="table-total">
                                                     <tfoot>
-                                                        <th>总计:</th>
+                                                        <th>产品总计:</th>
                                                         <td>{{cartService.getTotalPrice()}}</td>
                                                     </tfoot>
                                                 </table>
@@ -86,7 +131,7 @@
                         </div>
                         <!-- /panel body -->
                     </div>
-                    <div class="panel panel-checkout" role="tablist">
+                    <div *ngIf="cartService.getCart().length>0" class="panel panel-checkout" role="tablist">
                         <!-- panel heading -->
                         <div class="panel-heading active" role="tab">
                             <h4 class="panel-title"> <a role="button" data-toggle="collapse" href="#collapseOne">发货地址信息</a> </h4>
@@ -98,7 +143,7 @@
                             <div class="panel-body">
                                 <a class="pull-right link-functional" (click)="enableAddressEdit()"><span class="icon icon-create"></span>编辑</a>
                                 <div class="clearfix"></div>
-                                <form action="checkout-step_submit" [formGroup]="customerInfoForm" novalidate>
+                                <form action="checkout-step_submit" (ngSubmit)="payCart()" [formGroup]="customerInfoForm" novalidate>
                                     <div class="row"><span class="note pull-left">*必填</span> </div>
                                     <div class="row">
                                         <div class="form-group col-md-4">
@@ -165,7 +210,7 @@
                                             <input type="text" class="form-control" formControlName="roomNumber">
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <div class="row" *ngIf="cartService.hasOversea()">
                                         <h5 >您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
                                         <div class="form-group col-md-12">
                                             <label >证件号码: <sup>*</sup></label>
@@ -189,7 +234,7 @@
                                         </div>
                                     </div>
                                     <p class="clearfix text-right">
-                                        <button (click)="payCart()" [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">确认购买<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button type="submit" [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">确认购买<span class="icon icon--flippedX icon-reply"></span></button>
                                     </p>
                                 </form>
                             </div>

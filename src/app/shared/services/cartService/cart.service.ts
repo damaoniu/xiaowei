@@ -32,7 +32,52 @@ export class CartService extends BaseService{
         return this.cart
     }
     hasOversea():boolean{
-        return true
+        let has =false;
+        this.cart.forEach((cartItem)=>{
+            if(cartItem.product.unit.currency!='CNY'){
+                has=true;
+            }
+        })
+        return has
+    }
+    overSeaProducts(){
+        let overSeaProducts=[];
+        let that=this;
+        this.cart.forEach(product=>{
+            if(that.isOversea(product.product)){
+                overSeaProducts.push(product);
+            }
+        })
+        return overSeaProducts;
+
+    }
+    getOverseaTotalPrice(){
+        let price=0;
+        this.overSeaProducts().forEach((product)=>{
+            price+=product.quantity*product.product['unit']['levelThreePrice'];
+        })
+        return price;
+    }
+
+    nonOverSearProducts(){
+        let nonVerSeaProducts=[];
+        let that=this;
+        this.cart.forEach(product=>{
+            if(!that.isOversea(product.product)){
+                nonVerSeaProducts.push(product);
+            }
+        })
+        return nonVerSeaProducts
+    }
+    getNonOverseaTotalPrice(){
+        let price=0;
+        this.nonOverSearProducts().forEach((product)=>{
+            price+=product.quantity*product.product['unit']['levelThreePrice'];
+        })
+        return price;
+    }
+    isOversea(product){
+        return product.unit&&product.unit.currency!="CNY";
     }
     getItemsCount():number {
         let count=0;
@@ -68,6 +113,7 @@ export class CartService extends BaseService{
     clearCart() {
         this.cart = [];
     }
+
     getItem(id){
         return _.findWhere(this.cart, {id: id})
     }
