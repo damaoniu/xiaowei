@@ -11,7 +11,7 @@ import {CartService} from "../cartService/cart.service";
 export class OrderService extends BaseService {
     baseUrl:string=Config.orderServiceUrl;
 
-    constructor(_http:Http) {
+    constructor(_http:Http,private cartService:CartService) {
         super(_http);
     }
 
@@ -19,9 +19,9 @@ export class OrderService extends BaseService {
     * @params cart
     * to pay the cart
     * */
-    payCart(cart:any,customerInfo) {
+    payCart(cart:any,customerInfo,currency='CNY') {
         console.log(customerInfo);
-        let orderCart = {products:[],customerInformation:customerInfo};
+        let orderCart = {products:[],customerInformation:customerInfo,currency:currency};
         cart.forEach((item)=> {
             orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})
         });
@@ -29,6 +29,12 @@ export class OrderService extends BaseService {
         return this._http.post(this.baseUrl + "/payCart",orderCart)
             .map(res=>res.json())
             .catch(this._handleErrors)
+    }
+    payOverseaProducts(customerInfo,currency){
+       return this.payCart(this.cartService.overSeaProducts(),customerInfo,currency)
+    }
+    payNonOverseaProducts(customerInfo,currency){
+       return this.payCart(this.cartService.nonOverSearProducts(),customerInfo,currency)
     }
 
     /*
