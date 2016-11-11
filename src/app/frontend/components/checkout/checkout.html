@@ -99,24 +99,23 @@
                                 <a class="pull-right link-functional" (click)="enableAddressEdit()"><span class="icon icon-create"></span>编辑</a>
                                 <div class="clearfix"></div>
                                 <form action="checkout-step_submit" [formGroup]="customerInfoForm" novalidate>
-                                    <div class="col-sm-12"><span class="note pull-left">*必填</span> </div>
-                                    <div class="form-group col-md-4">
-                                        <label >姓名  <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="name">
+                                    <div class="row"><span class="note pull-left">*必填</span> </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-4">
+                                            <label >姓名  <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="name">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label >电话号码  <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="cellphone">
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label >备用电话号码  <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="homephone">
+                                        </div>
                                     </div>
-                                    <div class="form-group col-md-4">
-                                        <label >电话号码  <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="cellphone">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label >备用电话号码  <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="homephone">
-                                    </div>
-                                    <div class="form-group col-md-4">
-                                        <label >证件号码: <sup>*</sup></label>
-                                        <input type="text" class="form-control" formControlName="idNumber">
-                                    </div>
-                                    <div class="col-sm-12" formGroupName="address">
+
+                                    <div class="row" formGroupName="address">
                                         <h5>地址:</h5>
                                         <div class="form-group col-md-4">
                                             <label >国家 <sup>*</sup></label>
@@ -166,21 +165,25 @@
                                             <input type="text" class="form-control" formControlName="roomNumber">
                                         </div>
                                     </div>
-                                    <div class="col-sm-12 card--padding">
-                                        <h5>若您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
+                                    <div class="row">
+                                        <h5 >您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
+                                        <div class="form-group col-md-12">
+                                            <label >证件号码: <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="idNumber">
+                                        </div>
                                         <div class="col-md-6">
                                             <h6>正面<sup>*</sup></h6>
-                                            <input type="file" file-added [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />
+                                            <input type="file" file-added formControlName="idCardFront" [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />
                                             <div *ngIf="idCardFront" class="box-border--padding">
-                                                <img src="{{idCardFront}}">
+                                                <img src="{{idCardFrontUrl}}" width="100%">
                                             </div>
 
                                         </div>
                                         <div class="col-md-6">
                                            <h6>反面<sup>*</sup></h6>
-                                            <input type="file" class="form-control" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
+                                            <input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
                                             <div *ngIf="idCardBack" class="box-border--padding">
-                                                <img src="{{idCardBack}}">
+                                                <img src="{{idCardBackUrl}}" width="100%">
                                             </div>
 
                                         </div>

@@ -31,7 +31,9 @@ export class CartService extends BaseService{
     getCart() {
         return this.cart
     }
-
+    hasOversea():boolean{
+        return true
+    }
     getItemsCount():number {
         let count=0;
         this.cart.forEach((item)=>count+=item.quantity);
