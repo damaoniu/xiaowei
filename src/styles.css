@@ -487,3 +487,8 @@ a.bg-danger:hover {
 .vertical-align-top {
  vertical-align: top !important;
 }
+
+/*break the word*/
+body{
+ word-break: break-all;
+}

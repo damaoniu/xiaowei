@@ -7,10 +7,8 @@ import {GeoNamesService} from "../../../shared/services/geonames.service";
 import {FileUploader} from "ng2-file-upload/ng2-file-upload";
 import {FileItem} from "ng2-file-upload/components/file-upload/file-item.class"
 import {Config} from "../../../shared/services/config";
-import {Http} from "@angular/http";
 
-
-
+declare var _:any;
 
 @Component({
     selector: "checkout",
@@ -57,7 +55,13 @@ export class CheckoutComponent implements OnInit {
     get nonOverseaProducts(){
         return this.cartService.nonOverSearProducts();
     }
+    payOverseaProducts(){
+        this.orderService.payOverseaProducts(_.extend(this.customerInfoForm.getRawValue(),this.idCardForm.getRawValue()))
+    }
+    payNonOverseaProducts(){
 
+        this.orderService.payNonOverseaProducts(this.customerInfoForm.getRawValue())
+    }
     enableAddressEdit() {
 
     }
@@ -136,8 +140,8 @@ export class CheckoutComponent implements OnInit {
         })
         this.idCardForm=this.fb.group({
             idNumber: ['',this.requiredWhenOverSea.bind(this)],
-            idCardFront:['',this.requiredWhenOverSea.bind(this)],
-            idCardBack:['',this.requiredWhenOverSea.bind(this)],
+            idCardFront:[''],
+            idCardBack:[''],
         })
     }
 

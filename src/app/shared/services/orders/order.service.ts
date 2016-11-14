@@ -30,11 +30,22 @@ export class OrderService extends BaseService {
             .map(res=>res.json())
             .catch(this._handleErrors)
     }
-    payOverseaProducts(customerInfo,currency){
-       return this.payCart(this.cartService.overSeaProducts(),customerInfo,currency)
+    payOverseaProducts(customerInfo){
+
+       return this.payCart(this.cartService.overSeaProducts(),customerInfo,this.getProductCurrency(this.cartService.overSeaProducts()[0]))
     }
-    payNonOverseaProducts(customerInfo,currency){
-       return this.payCart(this.cartService.nonOverSearProducts(),customerInfo,currency)
+    getProductCurrency(product){
+        if(!product){
+            return 'CNY';
+        }
+        if(product.products){
+            return product.products[0].product.unit.currency;
+        }else {
+            return product.unit.currency;
+        }
+    }
+    payNonOverseaProducts(customerInfo){
+       return this.payCart(this.cartService.nonOverSearProducts(),customerInfo,this.getProductCurrency(this.cartService.nonOverSearProducts()[0]))
     }
 
     /*

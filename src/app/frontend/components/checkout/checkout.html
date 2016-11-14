@@ -241,10 +241,10 @@
                                 </form>
                                 <div class="clearfix row text-right p-t-lg">
                                     <div class="col-sm-6 pull-left text-left" *ngIf="nonOverseaProducts.length>0">
-                                        <button (click)="payNonOverseaProduct()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                     <div class="col-sm-6 pull-right text-right" *ngIf="overseaProducts.length>0">
-                                        <button (click)="payOverseaProduct()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys btn--xl">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payOverseaProducts()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys btn--xl">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                 </div>
                             </div>
