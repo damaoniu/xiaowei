@@ -9,7 +9,12 @@
         <div class="row">
             <section class="col-sm-8 col-lg-8">
                 <!-- checkout-step -->
-                <div class="panel-group" id="checkout">
+                <div class="row clearfix text-center" *ngIf="cartService.getCart().length<1">
+                    <p>你还有没有添加任何的产品!&nbsp;</p>
+                    <a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
+
+                </div>
+                <div *ngIf="cartService.getCart().length>1"  class="panel-group" id="checkout">
                     <div class="panel panel-checkout" role="tablist">
                         <!-- panel heading -->
                         <div class="panel-heading active" role="tab">
@@ -23,24 +28,22 @@
                                 <div class="clearfix"></div>
                                 <div class="btn-top ">
                                     <!-- order-review-table -->
+
                                     <div class="list" >
                                         <div class="list-group-item clearfix hidden-xs">
-                                            <div class="col-sm-4">产品</div>
+                                            <div class="col-sm-3">产品</div>
                                             <div class="col-sm-2">图片</div>
                                             <div class="col-sm-2">单价</div>
                                             <div class="col-sm-2">数量</div>
-                                            <div class="col-sm-1">小计</div>
+                                            <div class="col-sm-2">小计</div>
                                             <div class="col-sm-1">操作</div>
                                         </div>
-                                        <div class="list-group-item clearfix" *ngIf="cartService.getCart().length<1">
-                                            <td>你还有没有添加任何的产品!&nbsp;<a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
-                                            </td>
-                                        </div>
+
                                         <div class="list-group-item clearfix" *ngIf="nonOverseaProducts.length>0" >
                                             境内产品:
                                         </div>
                                         <div class="list-group-item clearfix" *ngFor="let product of nonOverseaProducts">
-                                            <div class="col-sm-4">
+                                            <div class="col-sm-3">
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
                                                     <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
                                                 </h5>
@@ -60,7 +63,7 @@
                                             <div class="col-sm-2">
                                                 <input type="number" step="1" min="1" [(ngModel)]="product.quantity" class="form-control">
                                             </div>
-                                            <div class="col-sm-1">
+                                            <div class="col-sm-2">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
@@ -72,12 +75,12 @@
                                         <div class="list-group-item clearfix" *ngIf="nonOverseaProducts.length>0">
                                                境内产品总计:{{cartService.getNonOverseaTotalPrice().toFixed(2)}}
                                         </div>
-                                        <div class="list-group-item clearfix" *ngIf="overseaProducts.length>0">
+                                        <div class="list-group-item clearfix m-t-lg " *ngIf="overseaProducts.length>0">
                                             <td>直邮产品:</td>
                                         </div>
 
-                                        <div *ngFor="let product of overseaProducts">
-                                            <div class="col-sm-4">
+                                        <div class="list-group-item clearfix" *ngFor="let product of overseaProducts">
+                                            <div class="col-sm-3">
                                                 <h5 class="order-review-table__product-name text-left text-uppercase">
                                                     <a routerLink="/product/{{product.id}}">{{product.product.name}}</a>
                                                 </h5>
@@ -97,7 +100,7 @@
                                             <div class="col-sm-2">
                                                 <input step="1" type="number" min="1" class="form-control" [(ngModel)]="product.quantity">
                                             </div>
-                                            <div class="col-sm-1">
+                                            <div class="col-sm-2">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
@@ -143,7 +146,7 @@
                             <div class="panel-body">
                                 <a class="pull-right link-functional" (click)="enableAddressEdit()"><span class="icon icon-create"></span>编辑</a>
                                 <div class="clearfix"></div>
-                                <form action="checkout-step_submit" (ngSubmit)="payCart()" [formGroup]="customerInfoForm" novalidate>
+                                <form  (ngSubmit)="payCart()" [formGroup]="customerInfoForm" novalidate>
                                     <div class="row"><span class="note pull-left">*必填</span> </div>
                                     <div class="row">
                                         <div class="form-group col-sm-4">
@@ -210,6 +213,8 @@
                                             <input type="text" class="form-control" formControlName="roomNumber">
                                         </div>
                                     </div>
+                                </form>
+                                <form class="m-t" [formGroup]="idCardForm" novalidate *ngIf="overseaProducts.length>0">
                                     <div class="row" *ngIf="cartService.hasOversea()">
                                         <h5 >您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
                                         <div class="form-group col-sm-12">
@@ -225,7 +230,7 @@
 
                                         </div>
                                         <div class="col-sm-6">
-                                           <h6>反面<sup>*</sup></h6>
+                                            <h6>反面<sup>*</sup></h6>
                                             <input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
                                             <div *ngIf="idCardBack" class="box-border--padding">
                                                 <img src="{{idCardBackUrl}}" width="100%">
@@ -233,10 +238,15 @@
 
                                         </div>
                                     </div>
-                                    <p class="clearfix text-right p-t-lg">
-                                        <button type="submit" [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">确认购买<span class="icon icon--flippedX icon-reply"></span></button>
-                                    </p>
                                 </form>
+                                <div class="clearfix row text-right p-t-lg">
+                                    <div class="col-sm-6 pull-left text-left" *ngIf="nonOverseaProducts.length>0">
+                                        <button (click)="payNonOverseaProduct()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
+                                    </div>
+                                    <div class="col-sm-6 pull-right text-right" *ngIf="overseaProducts.length>0">
+                                        <button (click)="payOverseaProduct()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys btn--xl">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <!-- /panel body -->

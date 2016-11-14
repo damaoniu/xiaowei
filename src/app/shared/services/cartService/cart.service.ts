@@ -34,8 +34,14 @@ export class CartService extends BaseService{
     hasOversea():boolean{
         let has =false;
         this.cart.forEach((cartItem)=>{
-            if(cartItem.product.unit.currency!='CNY'){
-                has=true;
+            if(cartItem.product['products']){
+                if(cartItem.product.currency!='CNY'){
+                    has=true;
+                }
+            }else {
+                if(cartItem.product.unit.currency!='CNY'){
+                    has=true;
+                }
             }
         })
         return has
@@ -53,8 +59,9 @@ export class CartService extends BaseService{
     }
     getOverseaTotalPrice(){
         let price=0;
+        let that=this;
         this.overSeaProducts().forEach((product)=>{
-            price+=product.quantity*product.product['unit']['levelThreePrice'];
+            price+=that.getSubTotal(product);
         })
         return price;
     }
@@ -71,13 +78,14 @@ export class CartService extends BaseService{
     }
     getNonOverseaTotalPrice(){
         let price=0;
+        let that =this;
         this.nonOverSearProducts().forEach((product)=>{
-            price+=product.quantity*product.product['unit']['levelThreePrice'];
+            price+=that.getSubTotal(product);
         })
         return price;
     }
     isOversea(product){
-        return product.unit&&product.unit.currency!="CNY";
+        return (product.unit&&product.unit.currency!="CNY")||(product.products&&product.products[0].product.unit.currency!='CNY');
     }
     getItemsCount():number {
         let count=0;
@@ -119,8 +127,18 @@ export class CartService extends BaseService{
     }
 
     getSubTotal(item:Item) {
-        if (item.quantity && item.product && item.product.price) {
-            let subTotal = item.product.sale ? item.quantity * item.product.price * (100 - item.product.sale.rate) / 100 : item.quantity * item.product.price;
+        /*
+        * when there is sale,
+        * there price returned by the service will already have been discounted
+        * */
+        if (item.quantity && item.product) {
+            let price =0;
+            if(item.product.products){
+                price=item.product.levelThreePrice;
+            }else {
+                price=item.product.unit.levelThreePrice
+            }
+            let subTotal = item.quantity * price;
             return subTotal
         } else {
             return 0

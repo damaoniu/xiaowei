@@ -20,6 +20,7 @@ import {Http} from "@angular/http";
 
 export class CheckoutComponent implements OnInit {
     customerInfoForm:FormGroup;
+    idCardForm:FormGroup;
     public uploader:FileUploader = new FileUploader({url:Config.mediaServerUrl});
     countryOptions:Array<string> = [
         '中国', '加拿大'
@@ -121,7 +122,6 @@ export class CheckoutComponent implements OnInit {
             name: ['',Validators.required],
             cellphone: ['',Validators.required],
             homephone: ['',Validators.required],
-            idNumber: ['',this.requiredWhenOverSea.bind(this)],
             address: this.fb.group({
                 country: ['中国',Validators.required],
                 province: ['北京',Validators.required],
@@ -132,6 +132,10 @@ export class CheckoutComponent implements OnInit {
                 postcode: '',
                 roomNumber: ''
             }),
+
+        })
+        this.idCardForm=this.fb.group({
+            idNumber: ['',this.requiredWhenOverSea.bind(this)],
             idCardFront:['',this.requiredWhenOverSea.bind(this)],
             idCardBack:['',this.requiredWhenOverSea.bind(this)],
         })
