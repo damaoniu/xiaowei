@@ -1,4 +1,4 @@
-import {Component,forwardRef} from "@angular/core";
+import {Component, forwardRef, Input} from "@angular/core";
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 
 @Component({
@@ -11,11 +11,11 @@ import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
 export class FileInputComponent implements ControlValueAccessor{
     //Placeholders for the callbacks which are later providesd
     //by the Control Value Accessor
+    @Input() type:string="image/*";
      _onTouch: (value: any) => void ;
     _onChange: (value: any) => void ;
     file:any;
     fileChanged(e){
-        console.log(JSON.stringify(e))
         this.file =e;
         let fr = new FileReader();
         let that =this;

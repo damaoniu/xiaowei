@@ -6,44 +6,159 @@
         <div class="modal-content ">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"><span class="icon icon-clear"></span></button>
-                <h4 class="modal-title text-center text-uppercase">Login form</h4>
             </div>
-            <form>
+            <div class="text-center">
+                    <img class="logo replace-2x " width="200" src="/assets/images/logo.png" alt=""/>
+            </div>
+            <form *ngIf="section=='LOGIN'" #lf="ngForm" (ngSubmit)="lf.valid&&login($event,lf)">
+                <h4 class="modal-title text-center text-uppercase">登录</h4>
                 <div class="modal-body indent-bot-none">
                     <div class="form-group">
                         <div class="input-group">
 						    <span class="input-group-addon">
 						    	<span class="icon icon-person"></span>
 						    </span>
-                            <input type="text" id="LoginFormName" class="form-control" placeholder="Name:">
+                            <input type="email" ngModel  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #loginEmail="ngModel" required id="LoginFormName"  name="email" class="form-control" placeholder="邮箱:">
                         </div>
+                        <small class="alert-danger p-a p-t-sm p-a" [hidden]="loginEmail.valid || (loginEmail.pristine && !lf.submitted)">
+                            请填入正确的邮箱
+                        </small>
                     </div>
                     <div class="form-group">
                         <div class="input-group">
-                            <span class="input-group-addon">@</span>
-                            <input type="password" id="LoginFormPass" class="form-control" placeholder="Password:">
+                            <span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
+                            <input type="password" id="LoginFormPass" required minlength="6" ngModel #loginFormPass="ngModel" name="loginPass" class="form-control" placeholder="密码:">
                         </div>
+                        <small class="alert-danger p-a p-t-sm p-a" [hidden]="loginFormPass.valid || (loginFormPass.pristine && !lf.submitted)">
+                            请输入密码
+                        </small>
                     </div>
-                    <div class="checkbox-group">
-                        <input type="checkbox" id="checkBox2">
-                        <label for="checkBox2">
-                            <span class="check"></span>
-                            <span class="box"></span>
-                            Remember me
-                        </label>
-                    </div>
-                    <button type="button" class="btn btn--ys btn--full btn--lg">Login</button>
+                    <button type="submit" class="btn btn--ys btn--full btn--lg"><i class="fa fa-sign-in"></i> 登录</button>
                     <div class="divider divider--xs"></div>
-                    <button type="button" class="btn btn--ys btn--full btn--lg btn-blue"><span class="fa fa-facebook"></span> Login with Facebook</button>
+                    <button type="button" (click)="loginWithWeichat()" class="btn btn--ys btn--full btn--lg btn-blue"><span class="fa fa-wechat"></span> 微信登录</button>
                     <div class="divider divider--xs"></div>
-                    <button type="button" class="btn btn--ys btn--full btn--lg btn-red"><span class="fa fa-google-plus"></span> Login with Google</button>
+                    <button type="button" (click)="loginWithWeibo()" class="btn btn--ys btn--full btn--lg btn-red"><span class="fa fa-weibo"></span> 微博登录</button>
                     <div class="divider divider--xs"></div>
                     <ul class="list-arrow-right">
-                        <li><a href="#">Forgot your username?</a></li>
-                        <li><a href="#">Forgot your password?</a></li>
-                        <li><a href="#">Create an account</a></li>
+                        <li><a (click)="section='FORGOT_PASS'">忘记密码?</a></li>
+                        <li><a (click)="section='CREATE_ACCOUNT'">创建账户</a></li>
                     </ul>
                 </div>
+            </form>
+            <form *ngIf="section=='CREATE_ACCOUNT'" novalidate #caf="ngForm" (ngSubmit)="caf.valid&&createAccount($event,caf.value)">
+                <h4 class="modal-title text-center text-uppercase">创建账户</h4>
+                <div class="form-group">
+                    <div class="input-group">
+						    <span class="input-group-addon">
+						    	<span class="icon icon-person"></span>
+						    </span>
+                        <input type="text" #email="ngModel" ngModel name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邮箱:">
+                    </div>
+                    <small class="alert-danger p-a p-t-sm" [hidden]="email.valid || (email.pristine && !caf.submitted)">
+                        请填入正确的邮箱
+                    </small>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
+                                <input type="password"  required validateEqual="passwordR" reverse="true" #password="ngModel" minlength="6" ngModel name="password" class="form-control" placeholder="密码:">
+                            </div>
+                            <small class="alert-danger p-a p-t-sm" [hidden]="password.valid || (password.pristine && !caf.submitted)">
+                                密码至少6位
+                            </small>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user-secret"></i></span>
+                                <input type="password" validateEqual="password" required minlength="6" #passwordR="ngModel" ngModel name="passwordR" class="form-control" placeholder="重复密码:">
+                            </div>
+                            <small class="alert-danger p-a p-t-sm" [hidden]="passwordR.valid || (passwordR.pristine && !caf.submitted)">
+                                密码不一致
+                            </small>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                <input type="text" ngModel name="username" class="form-control" placeholder="姓名:">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-mobile-phone"></i></span>
+                                <input type="text" ngModel name="cellphone" class="form-control" placeholder="手机:">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-wechat"></i>&nbsp;</span>
+                                <input type="text" ngModel name="weichat" class="form-control" placeholder="微信:">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                        <input type="text" ngModel #invitee="ngModel" name="invitee" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邀请人邮箱:">
+                    </div>
+                    <small class="alert-danger p-a p-t-sm" [hidden]="invitee.valid || (invitee.pristine && !caf.submitted)">
+                        请填入正确的邮箱地址
+                    </small>
+                </div>
+                <div class="checkbox-group">
+                    <input type="checkbox" ngModel #agreeTerms="ngModel" required name="agreeTerms" id="agreeTerm" >
+                    <label for="agreeTerm">
+                        <span class="check"></span>
+                        <span class="box"></span>
+                        已阅读并同意<a class="link text-danger">用户协议</a>
+                    </label>
+                    <small class="alert-danger p-a p-t-sm" [hidden]="agreeTerms.value || (agreeTerms.pristine && !caf.submitted)">
+                        请同意用户协议
+                    </small>
+                </div>
+                <div class="row text-right">
+                        <button type="submit" class="btn  btn--xl btn--ys">注册</button>
+                </div>
+                <div class="divider divider--xs"></div>
+                <ul class="list-arrow-right">
+                    <li><a (click)="section='LOGIN'">已有账户?登录</a></li>
+                </ul>
+
+            </form>
+            <form *ngIf="section=='FORGOT_PASS'" #ff="ngForm" (ngSubmit)="ff.valid&&forgotPass($event,ff)" novalidate>
+                <h4 class="modal-title text-center text-uppercase">忘记密码</h4>
+                <div class="form-group">
+                    <h6>请输入找回密码的邮箱:</h6>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                        <input type="text" required ngModel #retriveEmail="ngModel" name="retriveEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邀请人邮箱:">
+                    </div>
+                    <small class="alert-danger p-a p-t-sm p-a p-t-sm"  [hidden]="retriveEmail.valid || (retriveEmail.pristine && !ff.submitted)">
+                        请填入正确的邮箱地址
+                    </small>
+                </div>
+                <div class="row text-right">
+                    <button type="submit" class="btn  btn--xl btn--ys">找回密码</button>
+                </div>
+                <div class="divider divider--xs"></div>
+                <ul class="list-arrow-right">
+                    <li><a (click)="section='LOGIN'">已有账户?登录</a></li>
+                </ul>
+
             </form>
         </div>
     </div>

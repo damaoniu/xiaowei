@@ -6,23 +6,29 @@ import {Observable} from "rxjs/Rx";
 import 'rxjs';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
+import {BaseService} from "../BaseService.service";
 @Injectable()
-export class UserService {
-    public user:User;
-    constructor(private _http:Http) {
+export class UserService extends BaseService {
+    private _user:User;
+
+    constructor(_http:Http) {
+        super(_http);
     }
-    getUser(){
-        return this.user;
+
+    get user() {
+        return this._user;
     }
-    setUser(newUser:User){
-        this.user=newUser;
+
+    set user(newUser:User) {
+        this._user = newUser;
     }
+
     register(user:User) {
         let headers = new Headers();
         headers.append("Content-Type", "application/json");
 
         return this._http.post(
-            Config.webServiceUrl + "Users",
+            Config.userServiceUrl + "/register",
             JSON.stringify({
                 Username: user.email,
                 Email: user.email,
@@ -43,19 +49,28 @@ export class UserService {
         headers.append("Content-Type", "application/json");
 
         return this._http.post(
-            Config.webServiceUrl + "oauth/token",
+            Config.userServiceUrl + "/login",
             JSON.stringify({
                 username: user.email,
                 password: user.password,
                 grant_type: "password"
             }),
-            {headers: headers}
+            this._headers
         )
             .map(response => response.json())
             .do(data => {
                 Config.token = data.Result.access_token;
             })
             .catch(this.handleErrors);
+    }
+
+    forgotPass(email:string) {
+        return this._http.post(Config.userServiceUrl + "/forgotPass",
+            email,
+            this._headers
+        )
+            .map(res=>res.json())
+            .catch(this._handleErrors);
     }
 
     handleErrors(error:Response) {

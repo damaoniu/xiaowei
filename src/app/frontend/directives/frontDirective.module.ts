@@ -6,15 +6,19 @@ import {MagnificPopUp} from "./magnificPopup.directive";
 import {ProductModalDirective} from "./productModal.directive";
 import {DynamicHtmlOutlet} from "./dynamicHtmlOutlet.directive";
 import {ToggleDirective} from "./toggle.directive";
+import {NoAttachmentValidator} from "./noAttachment.directive";
+import {EqualValidator} from "./validateEqual.directive";
 @NgModule({
     imports:[SharedModule],
     declarations:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective
+        ToggleDirective,
+        NoAttachmentValidator,EqualValidator
     ],
     exports:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective
+        ToggleDirective,
+        NoAttachmentValidator,EqualValidator
     ]
 })
 export class FrontDirectivesModule{

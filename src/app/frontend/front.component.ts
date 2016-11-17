@@ -27,7 +27,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
         });
     }
     get user(){
-        return this.userService.getUser();
+        return this.userService.user;
     }
     ngOnInit(){
         //remove loader

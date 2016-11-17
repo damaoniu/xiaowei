@@ -43,7 +43,7 @@ export class CheckoutComponent implements OnInit {
                 private geoNameService:GeoNamesService) {
     }
     get user() {
-        return this.userService.getUser();
+        return this.userService.user;
     }
 
     get cart() {
@@ -141,7 +141,7 @@ export class CheckoutComponent implements OnInit {
         this.idCardForm=this.fb.group({
             idNumber: ['',this.requiredWhenOverSea.bind(this)],
             idCardFront:['',Validators.required],
-            idCardBack:[''],
+            idCardBack:['',Validators.required],
         })
     }
 
