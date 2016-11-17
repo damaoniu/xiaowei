@@ -1,23 +1,57 @@
-import {Component} from "@angular/core";
+import {Component,forwardRef} from "@angular/core";
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
+
 @Component({
     selector:"file-input",
-    templateUrl:'.fileInput.html',
+    templateUrl:'./fileInput.html',
     providers:[
-        {provide:NG_VALUE_ACCESSOR,multi:true,useExisting:FileInputComponent}
+        {provide:NG_VALUE_ACCESSOR,multi:true,useExisting:forwardRef(()=>FileInputComponent)}
     ]
 })
 export class FileInputComponent implements ControlValueAccessor{
-    file:File;
+    //Placeholders for the callbacks which are later providesd
+    //by the Control Value Accessor
+     _onTouch: (value: any) => void ;
+    _onChange: (value: any) => void ;
+    file:any;
+    fileChanged(e){
+        console.log(JSON.stringify(e))
+        this.file =e;
+        let fr = new FileReader();
+        let that =this;
+        fr.addEventListener('load',()=>{
+            that._onChange({
+                name:that.file.name,
+                dataUrl:fr.result
+            })
+        })
+        fr.readAsDataURL(this.file)
 
+
+    }
+    get value(): any {
+        return this.file;
+    };
+
+    //set accessor including call the onchange callback
+    set value(v: any) {
+        if (v !== this.file) {
+            this.file = v;
+            this._onChange(v);
+        }
+    }
     writeValue(obj:any):void {
-
+        if(obj!=this.file){
+            this.file=obj
+        }
     }
 
-    registerOnChange(fn:any):void {
+    registerOnChange(fn:(value:any)=>void):void {
+        this._onChange=fn
     }
 
-    registerOnTouched(fn:any):void {
+    registerOnTouched(fn:(value:any)=>void):void {
+        this._onTouch=fn;
     }
 
 }

@@ -10,17 +10,18 @@ import { LoginComponent} from "./auth/login.component";
 import {ProductModalComponent} from "./productModal/productModal.component";
 import {ImgUrlPipe} from "../../../shared/pipes/imgUrl.pipe";
 import {CartButtonComponent} from "./cart/cartButton.component";
+import {FileInputComponent} from "./fileInput/fileinput.component";
 @NgModule({
     imports:[SharedModule,FrontDirectivesModule],
     declarations:[
         Cart,SlideToggle,AddToCart,RevSliderComponent,SlickSliderComponent,
-        SlickO1,SlickO2,SlickO3,SlickO4,LoginComponent,ProductModalComponent,CartButtonComponent
+        SlickO1,SlickO2,SlickO3,SlickO4,LoginComponent,ProductModalComponent,CartButtonComponent,FileInputComponent
 
 
     ],
     exports:[
         Cart,SlideToggle,AddToCart,RevSliderComponent,SlickSliderComponent,
-        SlickO1,SlickO2,SlickO3,SlickO4,LoginComponent,ProductModalComponent,CartButtonComponent
+        SlickO1,SlickO2,SlickO3,SlickO4,LoginComponent,ProductModalComponent,CartButtonComponent,FileInputComponent
     ],
     entryComponents:[]
 })

@@ -140,7 +140,7 @@ export class CheckoutComponent implements OnInit {
         })
         this.idCardForm=this.fb.group({
             idNumber: ['',this.requiredWhenOverSea.bind(this)],
-            idCardFront:[''],
+            idCardFront:['',Validators.required],
             idCardBack:[''],
         })
     }

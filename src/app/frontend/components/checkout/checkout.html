@@ -223,17 +223,19 @@
                                         </div>
                                         <div class="col-sm-6">
                                             <h6>正面<sup>*</sup></h6>
-                                            <input type="file" file-added formControlName="idCardFront" [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />
-                                            <div *ngIf="idCardFront" class="box-border--padding">
-                                                <img src="{{idCardFrontUrl}}" width="100%">
+                                            <!--<input type="file" file-added formControlName="idCardFront" [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />-->
+                                            <file-input formControlName="idCardFront"></file-input>
+                                            <div *ngIf="idCardForm.get('idCardFront').value!=''" class="box-border--padding">
+                                                <img [src]="idCardForm.get('idCardFront').value.dataUrl" width="100%">
                                             </div>
 
                                         </div>
                                         <div class="col-sm-6">
                                             <h6>反面<sup>*</sup></h6>
-                                            <input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />
-                                            <div *ngIf="idCardBack" class="box-border--padding">
-                                                <img src="{{idCardBackUrl}}" width="100%">
+                                            <file-input formControlName="idCardBack"></file-input>
+                                            <!--<input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />-->
+                                            <div *ngIf="idCardForm.get('idCardBack').value!=''" class="box-border--padding">
+                                                <img [src]="idCardForm.get('idCardFront').value.dataUrl" width="100%">
                                             </div>
 
                                         </div>

@@ -489,6 +489,6 @@ a.bg-danger:hover {
 }
 
 /*break the word*/
-body{
- word-break: break-all;
-}
+/*body{*/
+ /*word-break: break-all;*/
+/*}*/
