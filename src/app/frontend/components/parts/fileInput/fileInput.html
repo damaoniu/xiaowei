@@ -1,1 +1,4 @@
-<input type="file" class="form-control" [accept]="type"  file-added (fileHolderChange)="fileChanged($event)" [(fileHolder)]="file"  />
+<div class="box text-center">
+    <input #fileInput type="file"  class="form-control inputfile inputfile-1" [accept]="type"  file-added (fileHolderChange)="fileChanged($event)" [(fileHolder)]="file"  />
+    <label (click)="clickInput()" ><i class="fa fa-file"></i><span>&nbsp;{{labelText}}</span></label>
+</div>

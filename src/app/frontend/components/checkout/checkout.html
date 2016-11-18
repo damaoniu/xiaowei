@@ -152,17 +152,25 @@
                                         <div class="form-group col-sm-4">
                                             <label >姓名  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="name">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.name.valid || (customerInfoForm.controls.name.pristine)">
+                                                请填写姓名
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >电话号码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="cellphone">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.cellphone.valid || (customerInfoForm.controls.cellphone.pristine)">
+                                                请填写电话号码
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >备用电话号码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="homephone">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.homephone.valid || (customerInfoForm.controls.homephone.pristine)">
+                                                请填写备用电话号码
+                                            </small>
                                         </div>
                                     </div>
-
                                     <div class="row" formGroupName="address">
                                         <h5>地址:</h5>
                                         <div class="form-group col-sm-4">
@@ -173,6 +181,9 @@
                                                    [typeaheadMinLength]="0"
                                                    (typeaheadOnSelect)="countrySelected($event)"
                                                    class="form-control" formControlName="country">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.country.valid || (customerInfoForm.controls.address.controls.country.pristine)">
+                                                请选择国家
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >省 <sup>*</sup></label>
@@ -182,6 +193,9 @@
                                                    [typeaheadMinLength]="0"
                                                    (typeaheadOnSelect)="provinceSelected($event)"
                                                    class="form-control" formControlName="province">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.province.valid || (customerInfoForm.controls.address.controls.province.pristine)">
+                                                请选择省
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >城市 <sup>*</sup></label>
@@ -191,19 +205,30 @@
                                                    [typeaheadMinLength]="0"
                                                    (typeaheadOnSelect)="citySelected($event)"
                                                    class="form-control" formControlName="city">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.city.valid || (customerInfoForm.controls.address.controls.city.pristine)">
+                                                请选择城市
+                                            </small>
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="form-group col-sm-4">
                                             <label >邮政编码  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="postcode" required>
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.postcode.valid || (customerInfoForm.controls.address.controls.postcode.pristine)">
+                                                请填写邮编
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >乡镇/街道名称  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="streetName">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.streetName.valid || (customerInfoForm.controls.address.controls.streetName.pristine)">
+                                                请填写街道
+                                            </small>
                                         </div>
                                         <div class="form-group col-sm-4">
                                             <label >小区/建筑名称</label>
                                             <input type="text" class="form-control" formControlName="buildingName">
                                         </div>
+                                        <div class="clearfix"></div>
                                         <div class="form-group col-sm-4" >
                                             <label >门牌号</label>
                                             <input type="text" class="form-control" formControlName="streetNumber">
@@ -220,24 +245,34 @@
                                         <div class="form-group col-sm-12">
                                             <label >证件号码: <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="idNumber">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="idCardForm.controls.idNumber.valid || (idCardForm.controls.idNumber.pristine && !overseaSubmitted)">
+                                                请填入18位有效的身份证号码!
+                                            </small>
                                         </div>
                                         <div class="col-sm-6">
                                             <h6>正面<sup>*</sup></h6>
                                             <!--<input type="file" noAttachmentValidator file-added formControlName="idCardFront"  [(fileHolder)]="idCardFront"  (fileHolderChange)="idCardFrontChanged($event)" class="form-control" ng2FileSelect  [uploader]="uploader" />-->
                                             <file-input formControlName="idCardFront" ></file-input>
-                                            {{idCardForm.get('idCardFront').errors|json}}
-                                            <div *ngIf="idCardForm.get('idCardFront').value!=''" class="box-border--padding">
+                                            <div *ngIf="idCardForm.get('idCardFront').value!=''" class="m-t">
+                                                <button class="btn btn--ys m-b" (click)="idCardForm.controls.idCardFront.setValue('')"><i class="fa fa-trash"></i>&nbsp;删除</button>
                                                 <img [src]="idCardForm.get('idCardFront').value.dataUrl" width="100%">
                                             </div>
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="idCardForm.controls.idCardFront.valid || (idCardForm.controls.idCardFront.pristine && !overseaSubmitted)">
+                                                请添加身份证正面照
+                                            </small>
 
                                         </div>
                                         <div class="col-sm-6">
                                             <h6>反面<sup>*</sup></h6>
                                             <file-input formControlName="idCardBack" ></file-input>
                                             <!--<input type="file" class="form-control" formControlName="idCardBack" file-added (fileHolderChange)="idCardBackChanged($event)" [(fileHolder)]="idCardBack"  ng2FileSelect [uploader]="uploader" />-->
-                                            <div *ngIf="idCardForm.get('idCardBack').value!=''" class="box-border--padding">
-                                                <img [src]="idCardForm.get('idCardFront').value.dataUrl" width="100%">
+                                            <div *ngIf="idCardForm.get('idCardBack').value!=''" class="m-t">
+                                                <button class="btn btn--ys m-b" (click)="idCardForm.controls.idCardBack.setValue('')"><i class="fa fa-trash"></i>&nbsp;删除</button>
+                                                <img [src]="idCardForm.controls.idCardBack.value.dataUrl" width="100%" class="clearfix">
                                             </div>
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="idCardForm.controls.idCardBack.valid || (idCardForm.controls.idCardBack.pristine && !overseaSubmitted)">
+                                                请添加身份证反面照
+                                            </small>
 
                                         </div>
                                     </div>

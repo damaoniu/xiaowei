@@ -1,24 +1,30 @@
-import {Component, forwardRef, Input} from "@angular/core";
+import {Component, forwardRef, Input, ViewChild, ElementRef} from "@angular/core";
 import {NG_VALUE_ACCESSOR, ControlValueAccessor} from "@angular/forms";
-
+declare  var jQuery:any;
 @Component({
     selector:"file-input",
     templateUrl:'./fileInput.html',
     providers:[
         {provide:NG_VALUE_ACCESSOR,multi:true,useExisting:forwardRef(()=>FileInputComponent)}
-    ]
+    ],
+    styleUrls:['./fileInput.css']
 })
 export class FileInputComponent implements ControlValueAccessor{
-    //Placeholders for the callbacks which are later providesd
-    //by the Control Value Accessor
     @Input() type:string="image/*";
+    @ViewChild('fileInput') input:ElementRef;
      _onTouch: (value: any) => void ;
     _onChange: (value: any) => void ;
     file:any;
+    @Input() id;
+    labelText:string="添加文件...";
+    clickInput(){
+        jQuery(this.input.nativeElement).trigger('click');
+    }
     fileChanged(e){
         this.file =e;
         let fr = new FileReader();
         let that =this;
+        this.labelText=e.name;
         fr.addEventListener('load',()=>{
             that._onChange({
                 name:that.file.name,

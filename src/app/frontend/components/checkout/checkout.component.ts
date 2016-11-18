@@ -31,10 +31,10 @@ export class CheckoutComponent implements OnInit {
     ];
     idCardFront:any;
     idCardFrontUrl:string='';
-    idCardFrontItem:FileItem;
     idCardBack:any;
     idCardBackUrl:string='';
-    idCardBackItem:FileItem;
+    overseaSubmitted:boolean;
+    nonOverseaSubmitted:boolean;
 
 
 
@@ -56,10 +56,11 @@ export class CheckoutComponent implements OnInit {
         return this.cartService.nonOverSearProducts();
     }
     payOverseaProducts(){
+        this.overseaSubmitted=true;
         this.orderService.payOverseaProducts(_.extend(this.customerInfoForm.getRawValue(),this.idCardForm.getRawValue()))
     }
     payNonOverseaProducts(){
-
+        this.nonOverseaSubmitted=true;
         this.orderService.payNonOverseaProducts(this.customerInfoForm.getRawValue())
     }
     enableAddressEdit() {
