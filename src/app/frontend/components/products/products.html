@@ -24,8 +24,8 @@
                     <div class="collapse-block__content" [ngClass]="{'show ':isCurrentFirst(fc.id)}">
                         <ul class="tags-list">
                             <li  *ngFor="let sc of secondLevelCategories[fc.id]">
-                                <a *ngIf="sc.name=='冻鲜礼包'" routerLink="/products/{{sc.id}}co" [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a>
-                                <a *ngIf="sc.name!='冻鲜礼包'" routerLink="/products/{{sc.id}}" [ngClass]="{'bg-ys':isCurrentCategory(sc.id)}">{{sc.name}}</a>
+                                <a *ngIf="sc.name=='冻鲜礼包'" routerLink="/products/{{sc.id}}co" [ngClass]="{'bg-ys':isCurrentCategory(sc.id,sc.name)}">{{sc.name}}</a>
+                                <a *ngIf="sc.name!='冻鲜礼包'" routerLink="/products/{{sc.id}}" [ngClass]="{'bg-ys':isCurrentCategory(sc.id,sc.name)}">{{sc.name}}</a>
                             </li>
                         </ul>
                     </div>

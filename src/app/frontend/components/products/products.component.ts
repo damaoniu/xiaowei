@@ -69,8 +69,12 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
         return result;
     }
 
-    isCurrentCategory(currentCategoryId:number) {
-        return currentCategoryId == this.currentCategoryId;
+    isCurrentCategory(currentCategoryId:number,categoryName:string) {
+        if( currentCategoryId == this.currentCategoryId){
+          this.categoryName=categoryName;
+            return true
+        }
+        return false;
     }
 
     setNewCategory(sc) {
