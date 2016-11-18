@@ -17,7 +17,7 @@ export class SearchBarComponent implements OnInit{
     }
     search(searchKey){
         if(searchKey=="")return;
-        this.router.navigate(['/search',searchKey.trim()])
+        this.router.navigate(['search',searchKey.trim()])
     }
     ngOnInit():void {
         //search dropdwon

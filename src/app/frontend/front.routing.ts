@@ -5,6 +5,7 @@ import {ProductComponent} from "./components/product/product.component";
 import {ProductsComponent} from "./components/products/products.component";
 import {CheckoutComponent} from "./components/checkout/checkout.component";
 import {FaqComponent} from "./components/faq/faq.component";
+import {SearchComponent} from "./components/search/search.component";
 const routes =[
     {
         path:"",
@@ -33,6 +34,10 @@ const routes =[
             {
                 path:"faq",
                 component:FaqComponent
+            },
+            {
+                path:"search/:searchKey",
+                component:SearchComponent
             }
 
         ]
