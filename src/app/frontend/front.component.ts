@@ -55,19 +55,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
                 $j(this).css({'background-image': 'url('+attr+')'});
             })
         }
-        //search dropdwon
-        $j('.search__open').on('click', function(e) {
-            e.preventDefault();
-            $j(this).parent('.search').addClass('open');
-            $j(this).next('#search-dropdown, .search-dropdown').addClass('open');
-            $j('header .badge').addClass('badge--hidden');
-        });
-        $j('.search__close').on('click', function(e) {
-            e.preventDefault();
-            $j(this).closest('.search').removeClass('open');
-            $j(this).closest('#search-dropdown, .search-dropdown').removeClass('open');
-            $j('header .badge').removeClass('badge--hidden');
-        });
+
 
         //mobile menu
 

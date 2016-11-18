@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <div class="input-group">
 						    <span class="input-group-addon">
-						    	<span class="icon icon-person"></span>
+						    	<span class="icon icon-email"></span>
 						    </span>
                             <input type="email" ngModel  pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #loginEmail="ngModel" required id="LoginFormName"  name="email" class="form-control" placeholder="邮箱:">
                         </div>
@@ -50,7 +50,7 @@
                 <div class="form-group">
                     <div class="input-group">
 						    <span class="input-group-addon">
-						    	<span class="icon icon-person"></span>
+						    	<span class="icon icon-email"></span>
 						    </span>
                         <input type="text" #email="ngModel" ngModel name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邮箱:">
                     </div>
@@ -144,7 +144,7 @@
                 <div class="form-group">
                     <h6>请输入找回密码的邮箱:</h6>
                     <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="text" required ngModel #retriveEmail="ngModel" name="retriveEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邀请人邮箱:">
                     </div>
                     <small class="alert-danger p-a p-t-sm p-a p-t-sm"  [hidden]="retriveEmail.valid || (retriveEmail.pristine && !ff.submitted)">

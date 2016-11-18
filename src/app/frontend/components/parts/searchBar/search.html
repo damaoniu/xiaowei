@@ -1,0 +1,10 @@
+<div class="search link-inline" [ngClass]="{'pull-right mobile-menu-off':noMobile}">
+    <a href="#" class="search__open"><span class="icon icon-search"></span></a>
+    <div class="search-dropdown">
+        <div class="input-outer">
+            <input (keyup)="searchKeyup($event,search.value)"  #search type="search" name="search" value="" maxlength="128" placeholder="搜索产品,订单,发货单:">
+            <button (click)="search(search.value)"  title="" class="icon icon-search"></button>
+        </div>
+        <a href="#" class="search__close"><span class="icon icon-close"></span></a>
+    </div>
+</div>

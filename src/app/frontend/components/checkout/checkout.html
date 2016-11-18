@@ -33,9 +33,9 @@
                                         <div class="list-group-item clearfix hidden-xs">
                                             <div class="col-sm-3">产品</div>
                                             <div class="col-sm-2">图片</div>
-                                            <div class="col-sm-2">单价</div>
+                                            <div class="col-sm-1">单价</div>
                                             <div class="col-sm-2">数量</div>
-                                            <div class="col-sm-2">小计</div>
+                                            <div class="col-sm-3">小计</div>
                                             <div class="col-sm-1">操作</div>
                                         </div>
 
@@ -55,7 +55,7 @@
                                             <div class="col-sm-2">
                                                 <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-1">
                                                 <div class="order-review-table__product-price unit-price">
                                                     {{product.price}}
                                                 </div>
@@ -63,7 +63,7 @@
                                             <div class="col-sm-2">
                                                 <input type="number" step="1" min="1" [(ngModel)]="product.quantity" class="form-control">
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-3">
                                                 <div class="order-review-table__product-price subtotal">
                                                     {{cartService.getSubTotal(product)}}
                                                 </div>
@@ -92,7 +92,7 @@
                                             <div class="col-sm-2">
                                                 <img src="{{product.product.mainMedia+'?size=80x120'|imgUrl}}"/>
                                             </div>
-                                            <div class="col-sm-2">
+                                            <div class="col-sm-1">
                                                 <div class="order-review-table__product-price unit-price">
                                                     {{product.price}}
                                                 </div>
@@ -238,14 +238,15 @@
                                             <input type="text" class="form-control" formControlName="roomNumber">
                                         </div>
                                     </div>
+
                                 </form>
                                 <form class="m-t" [formGroup]="idCardForm" novalidate *ngIf="overseaProducts.length>0">
                                     <div class="row" *ngIf="cartService.hasOversea()">
                                         <h5 >您选有海外直邮的产品,您需要提供您身份证的正反面照</h5>
                                         <div class="form-group col-sm-12">
                                             <label >证件号码: <sup>*</sup></label>
-                                            <input type="text" class="form-control" formControlName="idNumber">
-                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="idCardForm.controls.idNumber.valid || (idCardForm.controls.idNumber.pristine && !overseaSubmitted)">
+                                            <input type="text" class="form-control" formControlName="idNumber"  minlength="18">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" [hidden]="idCardForm.controls.idNumber.valid || (idCardForm.controls.idNumber.pristine && !overseaSubmitted)">
                                                 请填入18位有效的身份证号码!
                                             </small>
                                         </div>
@@ -279,10 +280,10 @@
                                 </form>
                                 <div class="clearfix row text-right p-t-lg">
                                     <div class="col-sm-6 pull-left text-left" *ngIf="nonOverseaProducts.length>0">
-                                        <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys btn--xl">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                     <div class="col-sm-6 pull-right text-right" *ngIf="overseaProducts.length>0">
-                                        <button (click)="payOverseaProducts()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys btn--xl">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payOverseaProducts()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys ">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                 </div>
                             </div>

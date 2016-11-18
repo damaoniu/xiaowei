@@ -12,6 +12,7 @@ export class LoginComponent implements OnDestroy {
     @ViewChild('modal') modal:ElementRef;
     @Input() modalOnly:boolean;
     section:string='LOGIN';
+    test=true;
     constructor(private userService:UserService){}
 
     open() {
