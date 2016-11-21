@@ -1,5 +1,76 @@
 <div *ngIf="searchResult.products">
+    <div class="product-listing row" style="min-height: 400px;">
+        <div class="float-above" *ngIf="fetching"><span class="fa fa-spin fa-spinner"></span></div>
+        <div *ngFor="let product of searchResult.products" class="col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-one-fifth" [ngStyle]="{'opacity':(fetching?0.5:1)}">
+            <!-- product -->
+            <div class="product product--zoom">
+                <div class="product__inside">
+                    <!-- product image -->
+                    <div class="product__inside__image">
+                        <!-- product image carousel -->
+                        <div class="product__inside__carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="item active">
+                                    <a routerLink="/product/{{product.id}}co" *ngIf="currentCategoryId=='96'">
+                                        <img src="{{product.mainMedia | imgUrl}}" alt="">
+                                    </a>
+                                    <a routerLink="/product/{{product.id}}" *ngIf="currentCategoryId!='96'">
+                                        <img src="{{product.mainMedia | imgUrl}}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                            <!-- Controls -->
+                            <!--<a class="carousel-control next"></a> <a class="carousel-control prev"></a>-->
+                        </div>
+                        <!-- /product image carousel -->
+                        <!-- quick-view -->
+                        <a  productModal [product]="product"  class="quick-view"><b><span class="icon icon-visibility"></span>预览</b> </a>
+                        <!-- /quick-view -->
+                        <!-- countdown_box -->
+                        <div class="countdown_box">
+                            <div class="countdown_inner">
+                                <div id="countdown1"></div>
+                            </div>
+                        </div>
+                        <!-- /countdown_box -->
+                    </div>
+                    <!-- /product image -->
+                    <!-- label news -->
+                    <!--<div class="product__label product__label&#45;&#45;right product__label&#45;&#45;new"> <span>new</span> </div>-->
+                    <!-- /label news -->
+                    <!-- label sale -->
+                    <div *ngIf="product.sale" class="product__label product__label--left product__label--sale"> <span>促销<br>
+											-{{product.sale.rate}}%</span>
+                    </div>
+                    <!-- /label sale -->
+                    <!-- product name -->
+                    <div class="product__inside__name">
+                        <h2>
+                            <a *ngIf="currentCategoryId==96" routerLink="/product/{{product.id}}co">{{product.name}}</a>
+                            <a *ngIf="currentCategoryId!=96" routerLink="/product/{{product.id}}">{{product.name}}</a>
+                        </h2>
+                    </div>
+                    <!-- /product name -->
+                    <!-- product description -->
+                    <!-- visible only in row-view mode -->
+                    <div class="product__inside__description row-mode-visible"> {{product.description}} </div>
+                    <!-- /product description -->
+                    <!-- product price -->
+                    <div class="product__inside__price price-box">{{product.unit?product.unit.levelThreePrice:product.levelThreePrice}}<span *ngIf="product.sale" class="price-box__old">$28.00</span></div>
 
+                    <div class="product__inside__hover">
+
+                        <addToCart [item]="product"></addToCart>
+                        <!-- /product info -->
+                        <!-- product rating -->
+                        <!--<div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>-->
+                        <!-- /product rating -->
+                    </div>
+                </div>
+            </div>
+            <!-- /product -->
+        </div>
+    </div>
 </div>
 <div *ngIf="searchResult.orders"></div>
 <div *ngIf="searchResult.shippingLists"></div>

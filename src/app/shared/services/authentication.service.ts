@@ -14,11 +14,11 @@ import {User} from "./user/user";
 
 const user ="user";
 @Injectable()
-export class LoginService extends BaseService{
-    baseUrl:string
+export class AuthenticationService extends BaseService{
+    baseUrl:string=Config.authenticationServiceUrl;
+    _user:User;
     constructor(_http:Http, ){
         super(_http);
-        this.baseUrl=Config.webServiceUrl+"/auth"
     }
     get isLoggedIn(): boolean {
         return true;
@@ -32,18 +32,14 @@ export class LoginService extends BaseService{
         Cookie.set(tokenKey, theToken);
     }
 
-    private get user():any{
-        return
+    private get user():User{
+        return this._user;
     }
     private set user(user:User){
+        this._user=user;
 
     }
 
-    // constructor(private backend: BackendService) {
-    //     if (this.token) {
-    //         this.backend.el.authentication.setAuthorization(this.token, "bearer");
-    //     }
-    // }
 
     register(user: User) {
         return this._http.post(this.baseUrl+"/register",user,this._headers)
@@ -52,17 +48,12 @@ export class LoginService extends BaseService{
                 return res.json()
             })
             .catch(this._handleErrors);
-        // return this.backend.el.Users.register(user.email, user.password)
-        //     .catch(this.handleErrors);
+
     }
 
     login(user: User) {
-        // return this.backend.el.authentication.login(user.email, user.password).then((data) => {
-        //     this.token = data.result.access_token;
-        //     this.backend.el.authentication.setAuthorization(this.token, "bearer");
-        //     return Promise.resolve();
-        // }).catch(this.handleErrors);
-        return this._http.post(this.baseUrl+"/login",user,this._headers)
+
+        return this._http.post(this.baseUrl+"/authenticate?email="+user.email+"&password="+user.password,this._headers)
             .map(res=>{
                 //save current user to local reference
                 res.json()
@@ -72,7 +63,6 @@ export class LoginService extends BaseService{
 
     logoff() {
         let that = this;
-        // this.backend.el.authentication.clearAuthorization();
         return this._http.post(this.baseUrl+"/logout",this._headers)
             .map((res)=>{
                 that.token="";
@@ -83,8 +73,7 @@ export class LoginService extends BaseService{
     }
 
     resetPassword(email) {
-        // return this.backend.el.Users.resetPassword({ Username: email })
-        //     .catch(this.handleErrors);
+
         return this._http.post(this.baseUrl+"/reset-pass",{email:email},this._headers)
             .map(res=>res.json())
             .catch(this._handleErrors);

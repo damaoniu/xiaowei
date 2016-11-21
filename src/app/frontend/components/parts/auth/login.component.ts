@@ -2,6 +2,7 @@ import {
     Component, ViewChild, ElementRef, OnDestroy, Input
 } from "@angular/core";
 import {UserService} from "../../../../shared/services/user/user.service";
+import {AuthenticationService} from "../../../../shared/services/authentication.service";
 declare var jQuery:any;
 let $j = jQuery.noConflict();
 @Component({
@@ -13,7 +14,7 @@ export class LoginComponent implements OnDestroy {
     @Input() modalOnly:boolean;
     section:string='LOGIN';
     test=true;
-    constructor(private userService:UserService){}
+    constructor(private userService:UserService, private authService:AuthenticationService){}
 
     open() {
 
@@ -23,7 +24,9 @@ export class LoginComponent implements OnDestroy {
     }
     login(e,form){
         e.preventDefault();
-        this.userService.login(form.value);
+        this.authService.login(form.value).subscribe(data=>{
+
+        });
     }
     createAccount(e,form){
         e.preventDefault();

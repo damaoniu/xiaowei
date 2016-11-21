@@ -2,7 +2,10 @@ import * as validator from 'email-validator';
 export class User{
     email:string;
     password:string;
-     isValidEmail() {
+    username:string;
+
+
+     issValidEmail() {
     return validator.validate(this.email);
   }
 }

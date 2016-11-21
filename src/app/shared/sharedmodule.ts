@@ -10,7 +10,12 @@ import {TypeaheadModule} from 'ng2-bootstrap/ng2-bootstrap'
 import {GeoNamesService} from "./services/geonames.service";
 import {FileUploadModule} from "ng2-file-upload/ng2-file-upload";
 import {FileAddedDirective} from "./directives/fileAdded.directive";
-import {SearchService} from "./services/search/search.service";
+import {SearchService} from "./services/search.service";
+import {AuthenticationService} from "./services/authentication.service";
+import {CartService} from "./services/cartService/cart.service";
+import {CategoryService} from "./services/category/category.service";
+import {OrderService} from "./services/orders/order.service";
+import {UserService} from "./services/user/user.service";
 @NgModule({
     imports:[RouterModule,FormsModule,CommonModule],
     declarations:[ImgUrlPipe,FileAddedDirective],
@@ -19,7 +24,9 @@ import {SearchService} from "./services/search/search.service";
         ImgUrlPipe,TypeaheadModule,FileUploadModule,
         FileAddedDirective
     ],
-    providers:[UtilsService,ProductService,GeoNamesService,SearchService]
+    providers:[UtilsService,ProductService,GeoNamesService,SearchService,AuthenticationService, CartService,UserService,
+        CategoryService,
+        OrderService]
 })
 export class SharedModule{
 

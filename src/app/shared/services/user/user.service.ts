@@ -28,7 +28,7 @@ export class UserService extends BaseService {
         headers.append("Content-Type", "application/json");
 
         return this._http.post(
-            Config.userServiceUrl + "/register",
+            Config.userServiceUrl + "/save",
             JSON.stringify({
                 Username: user.email,
                 Email: user.email,
@@ -44,25 +44,6 @@ export class UserService extends BaseService {
             .catch(this.handleErrors);
     }
 
-    login(user:User) {
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
-        return this._http.post(
-            Config.userServiceUrl + "/login",
-            JSON.stringify({
-                username: user.email,
-                password: user.password,
-                grant_type: "password"
-            }),
-            this._headers
-        )
-            .map(response => response.json())
-            .do(data => {
-                Config.token = data.Result.access_token;
-            })
-            .catch(this.handleErrors);
-    }
 
     forgotPass(email:string) {
         return this._http.post(Config.userServiceUrl + "/forgotPass",

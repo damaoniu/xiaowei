@@ -21,12 +21,7 @@ import {OrderService} from "./shared/services/orders/order.service";
     HttpModule,
     UxvRoutingModule
   ],
-  providers: [
-      CartService,
-      UserService,
-      CategoryService,
-      OrderService
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

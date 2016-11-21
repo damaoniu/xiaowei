@@ -6,7 +6,7 @@ import {SearchService} from "../../../shared/services/search.service";
     templateUrl:'./search.html'
 })
 export class SearchComponent implements OnInit{
-    searchResult:any;
+    searchResult:any={};
     constructor(private route:ActivatedRoute,private searchService:SearchService){}
     ngOnInit():void {
         this.route.params.subscribe(data=>{
