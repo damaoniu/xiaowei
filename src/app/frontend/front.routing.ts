@@ -36,7 +36,7 @@ const routes =[
                 component:FaqComponent
             },
             {
-                path:"search/:searchKey",
+                path:"search/:queryString",
                 component:SearchComponent
             }
 

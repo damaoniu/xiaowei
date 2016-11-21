@@ -10,7 +10,7 @@
             <div class="text-center">
                     <img class="logo replace-2x " width="200" src="/assets/images/logo.png" alt=""/>
             </div>
-            <form *ngIf="section=='LOGIN'" #lf="ngForm" (ngSubmit)="lf.valid&&login($event,lf)">
+            <form novalidate *ngIf="section=='LOGIN'" #lf="ngForm" (ngSubmit)="lf.valid&&login($event,lf)">
                 <h4 class="modal-title text-center text-uppercase">登录</h4>
                 <div class="modal-body indent-bot-none">
                     <div class="form-group">
