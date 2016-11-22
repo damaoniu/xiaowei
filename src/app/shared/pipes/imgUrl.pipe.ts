@@ -5,7 +5,7 @@ export class ImgUrlPipe implements PipeTransform{
         if(url){
             return "https://uxiaov.com/pms-media-service/media/"+url;
         }else{
-            return "/assets/imagea/waitingpic.jepg"
+            return "/assets/images/waitingpic.jpeg"
         }
     }
 

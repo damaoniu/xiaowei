@@ -5,7 +5,7 @@ export class Config {
   static userServiceUrl="https://dev.xianfengzu.com/sms-user-service";
   static authenticationServiceUrl="https://dev.xianfengzu.com/sms-authentication-service";
   static searchServiceUrl="https://dev.xianfengzu.com/sms-search-service";
-  static productSetServiceUrl="https://dev.xianfengzu.com/sms-productset-service";
+  static productSetServiceUrl="https://dev.xianfengzu.com/sms-product-set-service";
   static categoryServiceUrl="https://dev.xianfengzu.com/sms-category-service";
   static addressServiceUrl="https://dev.xianfengzu.com/pms-address-service";
   static geoNamesServiceUrl="https://dev.xianfengzu.com/pms-geonames-service";

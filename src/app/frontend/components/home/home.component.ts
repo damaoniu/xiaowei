@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewEncapsulation, OnDestroy, AfterContentInit, OnChanges} from "@angular/core";
 import {CategoryService} from "../../../shared/services/category/category.service";
 import {Subject} from "rxjs/Rx";
+import {ProductSetService} from "../../../shared/services/productSet/productSet.service";
 
 declare var jQuery:any;
 declare var window:any;
@@ -15,9 +16,10 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     firstLevelCategories:[any];
     secondLevelCategories:{};
     revSliders:Subject<[any]>;
-    slickSlides:Subject<[any]>;
+    featuredProducts:Subject<[any]>;
+    productSets:[any];
 
-    constructor(private  categoryService:CategoryService) {
+    constructor(private  categoryService:CategoryService, private productSetService:ProductSetService) {
         this.secondLevelCategories={};
     }
     ngOnChanges(){}
@@ -25,6 +27,11 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     ngOnInit() {
         this.getCategories();
         this.getSliders();
+        this.productSetService.getProductSets()
+            .subscribe(data=>{
+                this.featuredProducts.next(data);
+            });
+
     }
 
     ngAfterContentInit() {}
@@ -36,7 +43,7 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     getSliders(){
         let that=this;
         this.revSliders= new Subject<[any]>();
-        this.slickSlides= new Subject<[any]>();
+        this.featuredProducts= new Subject<[any]>();
         setTimeout(function () {
             let slides:[any] =[{
                 img_url:"/assets/images/slides/02/slide-1.jpg" ,
@@ -57,7 +64,6 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
                     thirdTitle:'mma',
                 }];
             that.revSliders.next(slides);
-            that.slickSlides.next(slides);
         },1000);
     }
     getCategories(){

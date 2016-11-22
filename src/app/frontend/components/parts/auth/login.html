@@ -147,7 +147,7 @@
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
                         <input type="text" required ngModel #retriveEmail="ngModel" name="retriveEmail" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邀请人邮箱:">
                     </div>
-                    <small class="alert-danger p-a p-t-sm p-a p-t-sm"  [hidden]="retriveEmail.valid || (retriveEmail.pristine && !ff.submitted)">
+                    <small class="alert-danger p-a p-t-sm p-a p-t-sm p-r"  [hidden]="retriveEmail.valid || (retriveEmail.pristine && !ff.submitted)">
                         请填入正确的邮箱地址
                     </small>
                 </div>

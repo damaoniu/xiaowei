@@ -16,6 +16,7 @@ import {CartService} from "./services/cartService/cart.service";
 import {CategoryService} from "./services/category/category.service";
 import {OrderService} from "./services/orders/order.service";
 import {UserService} from "./services/user/user.service";
+import {ProductSetService} from "./services/productSet/productSet.service";
 @NgModule({
     imports:[RouterModule,FormsModule,CommonModule],
     declarations:[ImgUrlPipe,FileAddedDirective],
@@ -25,7 +26,7 @@ import {UserService} from "./services/user/user.service";
         FileAddedDirective
     ],
     providers:[UtilsService,ProductService,GeoNamesService,SearchService,AuthenticationService, CartService,UserService,
-        CategoryService,
+        CategoryService, ProductSetService,
         OrderService]
 })
 export class SharedModule{

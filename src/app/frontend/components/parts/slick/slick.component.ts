@@ -1,12 +1,12 @@
 import {
     Component, ChangeDetectionStrategy, Input, ElementRef, NgZone, ViewEncapsulation,
-    ViewChild, Renderer, ComponentFactoryResolver, Directive, ViewContainerRef, OnInit
+    ViewChild, Renderer, ComponentFactoryResolver, Directive, ViewContainerRef, OnInit, AfterContentInit
 } from "@angular/core";
 import {Observable} from "rxjs/Rx";
 declare var jQuery:any;
 let $j=jQuery.noConflict();
 
-class SlickBase implements OnInit{
+class SlickBase implements AfterContentInit,OnInit{
     @Input() products:Observable<any>;
     @Input() wrapperClass:string='';
     @ViewChild('slides') slides:ElementRef;
@@ -17,9 +17,12 @@ class SlickBase implements OnInit{
     @Input('numberXs') numberXs:number;
     @Input('arrows') arrows:boolean;
     @Input('dots') dots:boolean;
-    constructor(private vc:ViewContainerRef){
+
+    constructor(public vc:ViewContainerRef){
     }
     ngOnInit(){
+        console.log(this.vc);
+        console.log(this.dots)
         let that=this;
         if(this.products){
             this.products.subscribe((data)=>{
@@ -29,7 +32,13 @@ class SlickBase implements OnInit{
             })
         }
     }
+    ngAfterContentInit(){
+        if(!this.products){
+           this.buildSlick();
+        }
+    }
     buildSlick(){
+        console.log('building slick')
         let that = this;
         // Fix z-index problem on carousel hover
         function fixCarouselHover(carousel) {
@@ -87,10 +96,10 @@ class SlickBase implements OnInit{
         }
         else {
         }
-        $j(carousel.find(".carousel-slides")).slick(options);
+        $j(this.slides.nativeElement).slick(options);
 
 
-        fixCarouselHover($j(carousel.find(".carousel-slides")));
+        fixCarouselHover($j(this.slides.nativeElement));
     }
 }
 
@@ -112,6 +121,9 @@ export class SlickO1 extends SlickBase{
     @Input('numberXs') numberXs:number;
     @Input('arrows') arrows:boolean;
     @Input('dots') dots:boolean;
+    constructor(vc:ViewContainerRef){
+        super(vc);
+    }
 }
 @Component({
     selector:'slick02',
