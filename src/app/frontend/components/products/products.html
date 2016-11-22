@@ -60,7 +60,7 @@
                 </div>
                 <div class="product-listing row" style="min-height: 400px;">
                     <div class="float-above" *ngIf="fetching"><span class="fa fa-spin fa-spinner"></span></div>
-                    <div *ngFor="let product of products" class="col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-one-fifth" [ngStyle]="{'opacity':(fetching?0.5:1)}">
+                    <div *ngFor="let product of products" class="col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-one-fifth p-a" [ngStyle]="{'opacity':(fetching?0.5:1)}">
                         <!-- product -->
                         <div class="product product--zoom">
                             <div class="product__inside">
@@ -99,7 +99,7 @@
                                 <!-- /label news -->
                                 <!-- label sale -->
                                 <div *ngIf="product.sale" class="product__label product__label--left product__label--sale"> <span>促销<br>
-											-{{product.sale.rate}}%</span>
+											立减{{product.sale.rate}}%</span>
                                 </div>
                                 <!-- /label sale -->
                                 <!-- product name -->

@@ -17,15 +17,13 @@ export class LoginComponent implements OnDestroy {
     constructor(private userService:UserService, private authService:AuthenticationService){}
 
     open() {
-
         $j(this.modal.nativeElement).appendTo('body');
         $j(this.modal.nativeElement).modal('show');
-        console.log('oo');
     }
     login(e,form){
         e.preventDefault();
         this.authService.login(form.value).subscribe(data=>{
-
+            $j('.modal').modal('hide');
         });
     }
     createAccount(e,form){
