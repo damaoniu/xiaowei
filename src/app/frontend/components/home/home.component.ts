@@ -16,8 +16,10 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     firstLevelCategories:[any];
     secondLevelCategories:{};
     revSliders:Subject<[any]>;
-    featuredProducts:Subject<[any]>;
-    productSets:[any];
+    newProducts:Subject<[any]>;
+    saleProducts:Subject<[any]>;
+    hotSalesProducts:Subject<[any]>;
+    regularProducts:Subject<[any]>;
 
     constructor(private  categoryService:CategoryService, private productSetService:ProductSetService) {
         this.secondLevelCategories={};
@@ -29,7 +31,11 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
         this.getSliders();
         this.productSetService.getProductSets()
             .subscribe(data=>{
-                this.featuredProducts.next(data);
+                this.newProducts.next(data['NEW']);
+                this.revSliders.next(data['SLIDER']);
+                this.saleProducts.next(data['SALE']);
+                this.hotSalesProducts.next(data['HOT_SALES']);
+                this.regularProducts.next(data['REGULAR'])
             });
 
     }
@@ -43,28 +49,10 @@ export class Home implements OnInit,OnDestroy,AfterContentInit,OnChanges {
     getSliders(){
         let that=this;
         this.revSliders= new Subject<[any]>();
-        this.featuredProducts= new Subject<[any]>();
-        setTimeout(function () {
-            let slides:[any] =[{
-                img_url:"/assets/images/slides/02/slide-1.jpg" ,
-                firstTitle:"first",
-                secondTitle:"dd",
-                thirdTitle:'mma',
-            },
-                {
-                    img_url:"/assets/images/slides/02/slide-2.jpg" ,
-                    firstTitle:"second",
-                    secondTitle:"dd",
-                    thirdTitle:'mma',
-                },
-                {
-                    img_url:"/assets/images/slides/02/slide-3.jpg" ,
-                    firstTitle:"third",
-                    secondTitle:"dd",
-                    thirdTitle:'mma',
-                }];
-            that.revSliders.next(slides);
-        },1000);
+        this.newProducts= new Subject<[any]>();
+        this.hotSalesProducts= new Subject<[any]>();
+        this.regularProducts= new Subject<[any]>();
+        this.saleProducts= new Subject<[any]>();
     }
     getCategories(){
         let that=this;

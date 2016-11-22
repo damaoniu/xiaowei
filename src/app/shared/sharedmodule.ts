@@ -17,12 +17,14 @@ import {CategoryService} from "./services/category/category.service";
 import {OrderService} from "./services/orders/order.service";
 import {UserService} from "./services/user/user.service";
 import {ProductSetService} from "./services/productSet/productSet.service";
+import {LimitTextPipe} from "./pipes/limitText.pipe";
 @NgModule({
     imports:[RouterModule,FormsModule,CommonModule],
-    declarations:[ImgUrlPipe,FileAddedDirective],
+    declarations:[ImgUrlPipe,FileAddedDirective,LimitTextPipe],
     exports:[
         RouterModule,FormsModule,CommonModule,ReactiveFormsModule,
-        ImgUrlPipe,TypeaheadModule,FileUploadModule,
+        ImgUrlPipe,LimitTextPipe,
+        TypeaheadModule,FileUploadModule,
         FileAddedDirective
     ],
     providers:[UtilsService,ProductService,GeoNamesService,SearchService,AuthenticationService, CartService,UserService,

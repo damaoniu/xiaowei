@@ -4,7 +4,7 @@
             <!-- SLIDE -1 -->
             <li *ngFor="let slide of slides | async; let last=last" data-transition="fade" data-slotamount="1" data-masterspeed="1000" data-saveperformance="off"  data-title="Slide">
                 <!-- MAIN IMAGE -->
-                <img [src]="slide.img_url"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
+                <img src="{{slide.mainMedia|imgUrl}}"  alt="slide1"  data-bgposition="center center" data-bgfit="cover" data-bgrepeat="no-repeat" >
                 <!-- LAYERS -->
                 <!-- TEXT -->
                 <div class="tp-caption lfl stb"
@@ -16,12 +16,11 @@
                      data-easing="Power4.easeOut"
                      data-endeasing="Power4.easeIn"
                      style="z-index: 2;">
-                    <div class="tp-caption1--wd-1">{{slide.firstTitle}}</div>
-                    <div class="tp-caption1--wd-2">{{slide.secondTitle}}</div>
+                    <div class="tp-caption1--wd-1">{{slide.description |limitText:80}}</div>
+                    <div class="tp-caption1--wd-2">{{slide.title}}</div>
                     <div class="tp-caption1--wd-3">{{slide.thirdTitle}} </div>
-                    <a href="listing.html" class="link-button button--border-thick" data-text="Shop now!">Shop now!</a>
+                    <a routerLink="" class="link-button button--border-thick" data-text="Shop now!">现在购买</a>
                 </div>
-                {{last?buildSlider():""}}
             </li>
             <!-- /SLIDE -1 -->
         </ul>

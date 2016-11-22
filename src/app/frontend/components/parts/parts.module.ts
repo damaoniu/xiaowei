@@ -8,7 +8,6 @@ import {SlickSliderComponent, SlickO1, SlickO3, SlickO2, SlickO4} from "./slick/
 import {FrontDirectivesModule} from "../../directives/frontDirective.module";
 import { LoginComponent} from "./auth/login.component";
 import {ProductModalComponent} from "./productModal/productModal.component";
-import {ImgUrlPipe} from "../../../shared/pipes/imgUrl.pipe";
 import {CartButtonComponent} from "./cart/cartButton.component";
 import {FileInputComponent} from "./fileInput/fileinput.component";
 import {SearchBarComponent} from "./searchBar/searchBar.component";
