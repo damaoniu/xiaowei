@@ -21,8 +21,7 @@ class SlickBase implements AfterContentInit,OnInit{
     constructor(public vc:ViewContainerRef){
     }
     ngOnInit(){
-        console.log(this.vc);
-        console.log(this.dots)
+
         let that=this;
         if(this.products){
             this.products.subscribe((data)=>{
@@ -38,7 +37,6 @@ class SlickBase implements AfterContentInit,OnInit{
         }
     }
     buildSlick(){
-        console.log('building slick')
         let that = this;
         // Fix z-index problem on carousel hover
         function fixCarouselHover(carousel) {

@@ -12,12 +12,12 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {User} from "./user/user";
 
-const user ="user";
+const userLit ="user";
+declare var localStorage:any;
 @Injectable()
 export class AuthenticationService extends BaseService{
     baseUrl:string=Config.authenticationServiceUrl;
-    _user:User;
-    constructor(_http:Http, ){
+    constructor(_http:Http ){
         super(_http);
     }
     get isLoggedIn(): boolean {
@@ -25,18 +25,18 @@ export class AuthenticationService extends BaseService{
         // return !!getString(tokenKey);
     }
 
-    private get token(): string {
+    get token(): string {
         return Cookie.get(tokenKey);
     }
-    private set token(theToken: string) {
+    set token(theToken: string) {
         Cookie.set(tokenKey, theToken);
     }
 
-    private get user():User{
-        return this._user;
+    get user():User{
+        return <User>JSON.parse(localStorage.getItem(userLit));
     }
-    private set user(user:User){
-        this._user=user;
+    set user(user:User){
+        localStorage.setItem(userLit,JSON.stringify(user));
 
     }
 
@@ -52,11 +52,15 @@ export class AuthenticationService extends BaseService{
     }
 
     login(user: User) {
+        let that =this;
+        return this._http.get(this.baseUrl+"/authenticate?email="+user.email+"&password="+user.password,this._headers)
+            .map(res=>res.json())
+            .map(res=> {
+                if(res['user']){
+                    that.user=res['user']
+                    return res['user'];
+                }
 
-        return this._http.post(this.baseUrl+"/authenticate?email="+user.email+"&password="+user.password,this._headers)
-            .map(res=>{
-                //save current user to local reference
-                res.json()
             })
             .catch(this._handleErrors);
     }

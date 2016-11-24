@@ -12,40 +12,71 @@ let $j = jQuery.noConflict();
 export class LoginComponent implements OnDestroy {
     @ViewChild('modal') modal:ElementRef;
     @Input() modalOnly:boolean;
-    section:string='LOGIN';
-    test=true;
-    constructor(private userService:UserService, private authService:AuthenticationService){}
+    section:string = 'LOGIN';
+    test = true;
+    fetching:boolean = false;
+    err:string;
+
+    constructor(private userService:UserService, private authService:AuthenticationService) {
+    }
 
     open() {
         $j(this.modal.nativeElement).appendTo('body');
         $j(this.modal.nativeElement).modal('show');
     }
-    login(e,form){
+
+    login(e, form) {
         e.preventDefault();
-        this.authService.login(form.value).subscribe(data=>{
+        this.fetching = true;
+        this.err = null;
+        this.authService.login(form.value).subscribe(data=> {
             $j('.modal').modal('hide');
+            this.fetching = false;
+        }, err=> {
+            err=JSON.parse(err);
+            this.fetching = false;
+            this.err = err;
+
         });
     }
-    createAccount(e,form){
+
+    createAccount(e, form) {
         e.preventDefault();
+        this.fetching = true;
+        this.err = null;
         this.userService.register(form)
-            .subscribe(data=>{
+            .subscribe(data=> {
+                    this.fetching = false
+                },
+                err => {
+                    this.fetching = false
+                    this.err = err.message
 
-            });
+                }
+            );
     }
-    forgotPass(e,form){
+
+    forgotPass(e, form) {
         e.preventDefault();
+        this.fetching = true;
+        this.err = null;
         this.userService.forgotPass(form.value)
-            .subscribe(data=>{
+            .subscribe(data=> {
+                this.fetching = false;
 
+            }, err=> {
+                this.fetching = false;
             });
     }
-    loginWithWeichat(){
+
+    loginWithWeichat() {
 
     }
-    loginWithWeibo(){
+
+    loginWithWeibo() {
 
     }
+
     ngOnDestroy():void {
         $j(this.modal.nativeElement).remove();
     }
