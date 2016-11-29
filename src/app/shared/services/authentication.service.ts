@@ -12,7 +12,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {User} from "./user/user";
 
-const userLit ="currentUser";
+const currenUser ="user";
 declare var localStorage:any;
 @Injectable()
 export class AuthenticationService extends BaseService{
@@ -33,10 +33,10 @@ export class AuthenticationService extends BaseService{
     }
 
     get currentUser():User{
-        return <User>JSON.parse(localStorage.getItem(userLit));
+        return <User>JSON.parse(localStorage.getItem(currenUser));
     }
     set currentUser(user:User){
-        localStorage.setItem(userLit,JSON.stringify(user));
+        localStorage.setItem(currenUser,JSON.stringify(user));
 
     }
 
@@ -46,16 +46,16 @@ export class AuthenticationService extends BaseService{
             .map(res=>res.json())
             .map(res=> {
                 console.log(res)
-                if(res['currentUser']){
-                    that.currentUser=res['currentUser']
-                    return res['currentUser'];
+                if(res['user']){
+                    that.currentUser=res['user']
+                    return res['user'];
                 }
 
             })
             .catch(this._handleErrors);
     }
 
-    logOff() {
+    logOut() {
         let that = this;
         return this._http.post(this.baseUrl+"/logout",this._headers)
             .map((res)=>{

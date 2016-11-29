@@ -18,6 +18,7 @@ import {AuthenticationService} from "../authentication.service";
 @Injectable()
 export class UserService extends BaseService {
     private _currentUser:User;
+    baseUrl:string=Config.userServiceUrl;
     constructor(_http:Http, private authService:AuthenticationService) {
         super(_http);
         this._currentUser=authService.currentUser;
@@ -28,6 +29,8 @@ export class UserService extends BaseService {
      * @param
     * */
     getUsers(){
-
+        return this._http.get(this.baseUrl+"/users")
+            .map(res=>res.json())
+            .catch(this._handleErrors);
     }
 }

@@ -1,12 +1,12 @@
 import {Component, ViewEncapsulation, OnInit,ReflectiveInjector} from "@angular/core";
 import {CartService} from "../../../shared/services/cartService/cart.service";
-import {UserService} from "../../../shared/services/user/user.service";
 import {OrderService} from "../../../shared/services/orders/order.service";
 import {FormGroup, FormBuilder, Validators, AbstractControl, NG_VALIDATORS} from "@angular/forms";
 import {GeoNamesService} from "../../../shared/services/geonames.service";
 import {FileUploader} from "ng2-file-upload/ng2-file-upload";
 import {FileItem} from "ng2-file-upload/components/file-upload/file-item.class"
 import {Config} from "../../../shared/services/config";
+import {AuthenticationService} from "../../../shared/services/authentication.service";
 
 declare var _:any;
 
@@ -38,12 +38,12 @@ export class CheckoutComponent implements OnInit {
 
 
 
-    constructor(private cartService:CartService, private userService:UserService,
+    constructor(private cartService:CartService, private authService:AuthenticationService,
                 private orderService:OrderService, public fb:FormBuilder,
                 private geoNameService:GeoNamesService) {
     }
     get user() {
-        return this.userService.user;
+        return this.authService.currentUser;
     }
 
     get cart() {

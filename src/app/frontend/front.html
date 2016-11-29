@@ -521,9 +521,17 @@
                     <!-- account menu start -->
                     <div class="account-row-list pull-right mobile-menu-off">
                         <ul>
-                            <li><a routerLink="account"><span class="icon icon-person"></span>我的账户</a></li>
+                            <li *ngIf="user" class="dropdown">
+								<a  class="dropdown-toggle" data-toggle="dropdown"><span class="icon icon-person"></span>我的账户<span class="caret"></span></a>
+								<ul class="dropdown-menu  p-a">
+									<li routerLink="/account"><a ><span class="icon icon-verified_user"></span>个人中心</a></li>
+									<li routerLink="/account/orders"><a><span class="icon fa fa-file-archive-o"></span>我的订单</a></li>
+									<li (click)="logout()" class="dropdown-menu__close"><a><span class="icon fa fa-power-off"></span>退出</a></li>
+								</ul>
+
+							</li>
                             <li><a routerLink="/checkout"><span class="icon icon-done_all"></span>付款</a></li>
-                            <li><a   data-toggle="modal" data-target="#modalLoginForm"><span class="icon icon-lock"></span>登录</a></li>
+                            <li *ngIf="!user"> <a   data-toggle="modal" data-target="#modalLoginForm"><span class="icon icon-lock"></span>登录</a></li>
                             <!--<li><a login-pop><span class="icon icon-lock"></span>Log In</a></li>-->
                         	<!--<login-pop></login-pop>-->
 						</ul>

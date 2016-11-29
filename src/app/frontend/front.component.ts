@@ -4,6 +4,7 @@ import {
 } from "@angular/core";
 import {Router, NavigationEnd, NavigationStart} from "@angular/router";
 import {UserService} from "../shared/services/user/user.service";
+import {AuthenticationService} from "../shared/services/authentication.service";
 declare  var jQuery:any;
 declare  var window:any;
 let $j=jQuery.noConflict();
@@ -15,7 +16,7 @@ let $j=jQuery.noConflict();
 })
 export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
     @ViewChild("header") header:ElementRef;
-    constructor(public ngZone:NgZone, private router:Router,private userService:UserService){
+    constructor(public ngZone:NgZone, private router:Router,private authService:AuthenticationService){
         router.events.subscribe((event)=>{
             if(event instanceof NavigationEnd){
                 $j("html, body").animate({ scrollTop: 0 }, "slow");
@@ -27,7 +28,11 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
         });
     }
     get user(){
-        return this.userService.user;
+        return this.authService.currentUser;
+    }
+    logout() {
+        localStorage.removeItem('user');
+        this.router.navigate(['']);
     }
     ngOnInit(){
         //remove loader
@@ -39,15 +44,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
         },function(){
             $j(this).removeClass('hover');
         })
-        //newsletter modal
-        // if(!this.currentUser){
-        //     if ($j('#newsletterModal').length) {
-        //         var pause = $j('#newsletterModal').attr('data-pause');
-        //         setTimeout(function() {
-        //             $j('#newsletterModal').modal('show');
-        //         }, pause);
-        //     }
-        // }
+
         //parallax
         if ($j('.content--parallax, .carusel--parallax').length) {
             $j('.content--parallax, .carusel--parallax').each(function() {
@@ -131,7 +128,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
                 return false;
             })
 
-            $j(window).scroll(function () {
+            $j(window).scroll(function() {
                 if ( $j(window).scrollTop() > 500) {$j(".back-to-top").stop(false).fadeIn(110)}
                 else {$j(".back-to-top").stop(true).fadeOut(110)}
             })
