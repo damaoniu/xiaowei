@@ -3,9 +3,9 @@ export class Config {
     static local = true;
 
     static get productServiceUrl() {
-        if (this.local) {
-            return "http://localhost:9004";
-        }
+        // if (this.local) {
+        //     return "http://localhost:9008";
+        // }
         return "https://dev.xianfengzu.com/sms-product-service";
     };
 

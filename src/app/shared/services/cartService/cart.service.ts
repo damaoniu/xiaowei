@@ -10,7 +10,7 @@ declare var localStorage:any;
 let cart = "cart";
 @Injectable()
 export class CartService extends BaseService{
-    public cart:Item[] = [];
+    public _cart:Item[] = [];
     public itemAdded$:EventEmitter<Item>;
     public itemDeleted$:EventEmitter<Item>;
     public discount:Discount;
@@ -20,20 +20,20 @@ export class CartService extends BaseService{
         this.itemAdded$ = new EventEmitter<any>();
         this.itemDeleted$ = new EventEmitter<any>();
         if (localStorage.getItem(cart)) {
-            this.cart = JSON.parse(localStorage.getItem(cart));
+            this._cart = JSON.parse(localStorage.getItem(cart));
         }
     }
 
-    setCart(value) {
-        this.cart = value;
+    set cart(value) {
+        this._cart = value;
     }
 
-    getCart() {
-        return this.cart
+    get cart() {
+        return this._cart
     }
     hasOversea():boolean{
         let has =false;
-        this.cart.forEach((cartItem)=>{
+        this._cart.forEach((cartItem)=>{
             if(cartItem.product['products']){
                 if(cartItem.product.currency!='CNY'){
                     has=true;
@@ -49,7 +49,7 @@ export class CartService extends BaseService{
     overSeaProducts(){
         let overSeaProducts=[];
         let that=this;
-        this.cart.forEach(product=>{
+        this._cart.forEach(product=>{
             if(that.isOversea(product.product)){
                 overSeaProducts.push(product);
             }
@@ -69,7 +69,7 @@ export class CartService extends BaseService{
     nonOverSearProducts(){
         let nonVerSeaProducts=[];
         let that=this;
-        this.cart.forEach(product=>{
+        this._cart.forEach(product=>{
             if(!that.isOversea(product.product)){
                 nonVerSeaProducts.push(product);
             }
@@ -89,24 +89,24 @@ export class CartService extends BaseService{
     }
     getItemsCount():number {
         let count=0;
-        this.cart.forEach((item)=>count+=item.quantity);
+        this._cart.forEach((item)=>count+=item.quantity);
         return count;
     }
 
     addItem(item:Item, quantity:number) {
         quantity = quantity || 1;
-        let currentItem = _.findWhere(this.cart, {id: item.id});
+        let currentItem = _.findWhere(this._cart, {id: item.id});
         if (currentItem && currentItem != undefined) {
             //increase the number of the existing product
             currentItem.quantity += +quantity;
         } else if(quantity>0) {
 
-            this.cart.push({id: item.id, product: item, quantity: quantity});
+            this._cart.push({id: item.id, product: item, quantity: quantity});
         }
         if(currentItem &&currentItem.quantity<=0){
             this.deleteItem(currentItem);
         }else{
-            localStorage.setItem(cart, JSON.stringify(this.cart));
+            localStorage.setItem(cart, JSON.stringify(this._cart));
             this.itemAdded$.emit(item);
         }
 
@@ -114,18 +114,26 @@ export class CartService extends BaseService{
 
 
     deleteItem(item:Item) {
-        this.cart = this.cart.filter(cartItem=>cartItem.id !== item.id);
-        localStorage.setItem(cart, JSON.stringify(this.cart));
+        this._cart = this._cart.filter(cartItem=>cartItem.id !== item.id);
+        localStorage.setItem(cart, JSON.stringify(this._cart));
     }
 
     clearCart() {
-        this.cart = [];
+        this._cart = [];
     }
 
     getItem(id){
-        return _.findWhere(this.cart, {id: id})
+        return _.findWhere(this._cart, {id: id})
     }
-
+    getTotalWeight(){
+        let weight=0;
+           this._cart.forEach((product)=>{
+                if(product['products']){
+                    console.log(product);
+                }
+           });
+        return weight;
+    }
     getSubTotal(item:Item) {
         /*
         * when there is sale,
@@ -146,7 +154,7 @@ export class CartService extends BaseService{
     }
 
     getTotalPrice() {
-        let totalPrice = this.cart.reduce((sum, cartItem)=> {
+        let totalPrice = this._cart.reduce((sum, cartItem)=> {
             return sum += this.getSubTotal(cartItem), sum;
         }, 0);
         return totalPrice.toFixed(2);

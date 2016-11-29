@@ -48,7 +48,7 @@ export class CheckoutComponent implements OnInit {
     }
 
     get cart() {
-        return this.cartService.getCart();
+        return this.cartService.cart;
     }
     get overseaProducts(){
         return this.cartService.overSeaProducts();
@@ -119,7 +119,7 @@ export class CheckoutComponent implements OnInit {
 
     }
   requiredWhenOverSea(c:AbstractControl){
-    // let cart= ;
+    // let _cart= ;
     if(this.cartService.hasOversea()){
         if(c.value!=""){
             return null;

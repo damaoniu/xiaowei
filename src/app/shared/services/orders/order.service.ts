@@ -16,13 +16,14 @@ export class OrderService extends BaseService {
     }
 
     /*
-    * @params cart
-    * to pay the cart
+    * @params _cart
+    * to pay the _cart
     * */
     payCart(cart:any,customerInfo,currency='CNY') {
         console.log(customerInfo);
         let orderCart = {products:[],customerInformation:customerInfo,currency:currency};
         cart.forEach((item)=> {
+
             orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})
         });
 
@@ -38,7 +39,6 @@ export class OrderService extends BaseService {
         if(!product){
             return 'CNY';
         }
-        console.log(product)
         if(product.products){
             return product.products[0].product.unit.currency;
         }else {

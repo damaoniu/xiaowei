@@ -29,7 +29,7 @@ export class ProductsComponent implements OnInit,OnChanges,AfterContentInit {
         this.currentCategory = new Subject<any>();
         this.currentCategory.subscribe(data=> {
             this.fetching = true
-            let parts = data['id'].split('c');
+            let parts = data['id'].split('c')
             if(parts.length>1)
             {
                 this.productService.getComboByCategory(parts[0])

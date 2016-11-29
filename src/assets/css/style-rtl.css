@@ -360,7 +360,7 @@ html {
     padding: 0 2px 0 12px;
   }
 }
-/* cart */
+/* _cart */
 @media (min-width: 1025px) {
   .cart .dropdown-menu .cart__close {
     right: auto;
@@ -474,7 +474,7 @@ html {
     left: auto;
   }
 }
-/* /cart */
+/* /_cart */
 @media (max-width: 1024px) {
   .dropdown .dropdown-menu--xs-full a:not(.btn) .icon {
     padding: 0 2px 0 10px;

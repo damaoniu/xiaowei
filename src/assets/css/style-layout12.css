@@ -15685,7 +15685,7 @@ aside .recent-post-box {
 * end search
 *****************************************/
 /****************************************
-* shopping cart
+* shopping _cart
 *****************************************/
 .cart .dropdown > a {
   text-decoration: none;
@@ -16067,7 +16067,7 @@ aside .recent-post-box {
   }
 }
 /****************************************
-* end shopping cart
+* end shopping _cart
 *****************************************/
 /****************************************
 * banner
@@ -20014,7 +20014,7 @@ li.open .expander-list ul {
     float: none !important;
   }
 }
-/* shopping-cart-table
+/* shopping-_cart-table
 ==================================== */
 @media (min-width: 992px) and (max-width: 1199px) {
   .filters-row-layout .filters-row__pagination {
@@ -20036,7 +20036,7 @@ li.open .expander-list ul {
     padding-top: 0;
   }
 }
-/* shopping-cart-table
+/* shopping-_cart-table
 ==================================== */
 /* filter-popup
 ==================================== */
@@ -21265,9 +21265,9 @@ li.open .expander-list ul {
 * end gallery
 *****************************************/
 /****************************************
-* Shopping-cart-page
+* Shopping-_cart-page
 *****************************************/
-/* shopping-cart-table
+/* shopping-_cart-table
 ==================================== */
 .shopping-cart-table {
   width: 100%;
@@ -21466,9 +21466,9 @@ li.open .expander-list ul {
     margin-left: 7px;
   }
 }
-/* /shopping-cart-table
+/* /shopping-_cart-table
 ==================================== */
-/* shopping-cart-btns
+/* shopping-_cart-btns
 ==================================== */
 .shopping-cart-btns button.pull-right,
 .shopping-cart-btns .btn.pull-right {
@@ -21494,7 +21494,7 @@ li.open .expander-list ul {
     margin-right: 0;
   }
 }
-/* /shopping-cart-btns
+/* /shopping-_cart-btns
 ==================================== */
 /* card
 ==================================== */
@@ -21565,7 +21565,7 @@ li.open .expander-list ul {
 /* /table-total
 ==================================== */
 /****************************************
-* End Shopping-cart-page
+* End Shopping-_cart-page
 *****************************************/
 /****************************************
 * Checkout step

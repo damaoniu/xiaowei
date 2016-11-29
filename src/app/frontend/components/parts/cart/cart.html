@@ -24,7 +24,7 @@
                                     <div class="col-sm-3">小计</div>
                                     <div class="col-sm-1">操作</div>
                                 </div>
-                                <div class="list-group-item clearfix" *ngIf="cartService.getCart().length<1">
+                                <div class="list-group-item clearfix" *ngIf="cartService.cart.length<1">
                                     <td>你还有没有添加任何的产品!&nbsp;<a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
                                     </td>
                                 </div>

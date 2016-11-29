@@ -6,6 +6,7 @@ import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {BaseService} from "../BaseService.service";
+declare var _:any;
 @Injectable()
 export class ProductService extends BaseService {
     baseUrl:string = Config.productServiceUrl;
@@ -51,13 +52,27 @@ export class ProductService extends BaseService {
     getProductByCategory(categoryId:string) {
         return this._http.get(this.baseUrl + "/productsByCategory/" + categoryId)
             .map(res=>res.json())
-            .map(res=>res.products)
+            .map(res=>res['products'])
+            .map(res=>{
+                let newProducts = [];
+                res.forEach(product=>{
+                    newProducts.push(_.omit(product,"availabilities"))
+                })
+                return newProducts;
+            })
             .catch(this._handleErrors);
     }
     getComboByCategory(categoryId:string) {
         return this._http.get(this.baseUrl + "/combosByCategory/" + categoryId)
             .map(res=>res.json())
             .map(res=>res['combos'])
+            .map(res=>{
+                let newProducts = [];
+                res.forEach(product=>{
+                    newProducts.push(_.omit(product,"availabilities"))
+                })
+                return newProducts;
+            })
             .catch(this._handleErrors);
     }
     getPrice(product){

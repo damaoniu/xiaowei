@@ -18,7 +18,7 @@ export class Cart implements OnInit,OnDestroy{
     constructor( private _elf:ElementRef,public  cartService:CartService    ){}
     //use this reactive we to set up reactive properties
     get cart(){
-        return this.cartService.getCart();
+        return this.cartService.cart;
     }
     get itemsCount(){
         return this.cartService.getItemsCount();
@@ -35,14 +35,14 @@ export class Cart implements OnInit,OnDestroy{
 
     ngOnInit(){
         // localStorage.setItem("test","test")
-        if ($j("header .cart").length > 0) {
-            $j('header .cart .dropdown-toggle').on('click', function(e){
-                $j("header .cart .dropdown").toggleClass('open');
+        if ($j("header ._cart").length > 0) {
+            $j('header ._cart .dropdown-toggle').on('click', function(e){
+                $j("header ._cart .dropdown").toggleClass('open');
                 headerCartSize();
                 e.preventDefault();
             });
-            $j('header .cart .cart__close').on('click', function(e){
-                $j("header .cart .dropdown").toggleClass('open');
+            $j('header ._cart .cart__close').on('click', function(e){
+                $j("header ._cart .dropdown").toggleClass('open');
                 e.preventDefault();
             });
         }
