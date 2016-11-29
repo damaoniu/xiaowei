@@ -10,9 +10,10 @@
             <div class="text-center">
                     <img class="logo replace-2x " width="200" src="/assets/images/logo.png" alt=""/>
             </div>
-             <div *ngIf="err" class="alert alert-danger">
+             <div *ngIf="err" class="alert alert-danger p-a">
                   <span class="fa fa-times pull-right" (click)="err=null"></span>
                  <p>{{err.message}}</p>
+                 <div class="clearfix"></div>
              </div>
             <div class="float-above" *ngIf="fetching"><span class="fa fa-spin fa-spinner"></span></div>
             <form novalidate *ngIf="section=='LOGIN'" #lf="ngForm" (ngSubmit)="lf.valid&&login($event,lf)">
@@ -110,7 +111,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-wechat"></i>&nbsp;</span>
-                                <input type="text" ngModel name="weichat" class="form-control" placeholder="微信:">
+                                <input type="text" ngModel name="wechatAccount" class="form-control" placeholder="微信:">
                             </div>
                         </div>
                     </div>

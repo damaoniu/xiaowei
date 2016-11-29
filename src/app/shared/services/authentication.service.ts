@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 
-import {Http} from "@angular/http";
+import {Http, Headers} from "@angular/http";
 import {BaseService} from "./BaseService.service";
 import {Config} from "./config";
 import {Cookie} from "ng2-cookies/ng2-cookies";
@@ -12,7 +12,7 @@ import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {User} from "./user/user";
 
-const userLit ="user";
+const userLit ="currentUser";
 declare var localStorage:any;
 @Injectable()
 export class AuthenticationService extends BaseService{
@@ -32,40 +32,30 @@ export class AuthenticationService extends BaseService{
         Cookie.set(tokenKey, theToken);
     }
 
-    get user():User{
+    get currentUser():User{
         return <User>JSON.parse(localStorage.getItem(userLit));
     }
-    set user(user:User){
+    set currentUser(user:User){
         localStorage.setItem(userLit,JSON.stringify(user));
 
     }
 
-
-    register(user: User) {
-        return this._http.post(this.baseUrl+"/register",user,this._headers)
-            .map(res=>{
-                //save current user to local reference
-                return res.json()
-            })
-            .catch(this._handleErrors);
-
-    }
-
-    login(user: User) {
+    login(user: any) {
         let that =this;
         return this._http.get(this.baseUrl+"/authenticate?email="+user.email+"&password="+user.password,this._headers)
             .map(res=>res.json())
             .map(res=> {
-                if(res['user']){
-                    that.user=res['user']
-                    return res['user'];
+                console.log(res)
+                if(res['currentUser']){
+                    that.currentUser=res['currentUser']
+                    return res['currentUser'];
                 }
 
             })
             .catch(this._handleErrors);
     }
 
-    logoff() {
+    logOff() {
         let that = this;
         return this._http.post(this.baseUrl+"/logout",this._headers)
             .map((res)=>{
@@ -82,7 +72,27 @@ export class AuthenticationService extends BaseService{
             .map(res=>res.json())
             .catch(this._handleErrors);
     }
+    register(user:any) {
+        return this._http.post(
+            Config.userServiceUrl + "/save",
+            user,
+        )
+            .map(res=> {
+                //persist certain data
+                return res.json();
+            })
+            .catch(this.handleErrors);
+    }
 
+
+    forgotPass(email:string) {
+        return this._http.post(Config.userServiceUrl + "/forgotPass",
+            email,
+            this._headers
+        )
+            .map(res=>res.json())
+            .catch(this._handleErrors);
+    }
     handleErrors(error) {
         console.log(JSON.stringify(error));
         return Promise.reject(error.message);

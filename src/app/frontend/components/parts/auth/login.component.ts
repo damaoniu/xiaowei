@@ -44,14 +44,14 @@ export class LoginComponent implements OnDestroy {
         e.preventDefault();
         this.fetching = true;
         this.err = null;
-        this.userService.register(form)
+        this.authService.register(form)
             .subscribe(data=> {
-                    this.fetching = false
+                    this.fetching = false;
                 },
                 err => {
-                    this.fetching = false
-                    this.err = err.message
-
+                    this.fetching = false;
+                     console.log(err.body);
+                    this.err = JSON.parse(err.body).message;
                 }
             );
     }
@@ -60,7 +60,7 @@ export class LoginComponent implements OnDestroy {
         e.preventDefault();
         this.fetching = true;
         this.err = null;
-        this.userService.forgotPass(form.value)
+        this.authService.forgotPass(form.value)
             .subscribe(data=> {
                 this.fetching = false;
 

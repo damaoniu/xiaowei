@@ -40,7 +40,7 @@ export class FrontComponent implements OnInit,AfterContentInit,AfterViewInit{
             $j(this).removeClass('hover');
         })
         //newsletter modal
-        // if(!this.user){
+        // if(!this.currentUser){
         //     if ($j('#newsletterModal').length) {
         //         var pause = $j('#newsletterModal').attr('data-pause');
         //         setTimeout(function() {

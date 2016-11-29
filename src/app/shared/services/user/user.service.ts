@@ -7,55 +7,27 @@ import 'rxjs';
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {BaseService} from "../BaseService.service";
+import {AuthenticationService} from "../authentication.service";
+/*
+* @UserService
+* this service is used for retrieving and updating currentUser resources
+* for registration, login, password resetting, current currentUser please refer to authentication service
+* @author Joe Zhou 2016-11-1
+* */
+
 @Injectable()
 export class UserService extends BaseService {
-    private _user:User;
-
-    constructor(_http:Http) {
+    private _currentUser:User;
+    constructor(_http:Http, private authService:AuthenticationService) {
         super(_http);
+        this._currentUser=authService.currentUser;
     }
 
-    get user() {
-        return this._user;
-    }
+    /*
+    *@method get users
+     * @param
+    * */
+    getUsers(){
 
-    set user(newUser:User) {
-        this._user = newUser;
-    }
-
-    register(user:User) {
-        let headers = new Headers();
-        headers.append("Content-Type", "application/json");
-
-        return this._http.post(
-            Config.userServiceUrl + "/save",
-            JSON.stringify({
-                Username: user.email,
-                Email: user.email,
-                Password: user.password
-            }),
-            {headers: headers}
-        )
-            .map(res=> {
-                //persist certain data
-                return res.json();
-            })
-
-            .catch(this.handleErrors);
-    }
-
-
-    forgotPass(email:string) {
-        return this._http.post(Config.userServiceUrl + "/forgotPass",
-            email,
-            this._headers
-        )
-            .map(res=>res.json())
-            .catch(this._handleErrors);
-    }
-
-    handleErrors(error:Response) {
-        console.log(JSON.stringify(error.json()));
-        return Observable.throw(error);
     }
 }
