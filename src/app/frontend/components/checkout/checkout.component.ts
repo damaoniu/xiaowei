@@ -19,7 +19,8 @@ declare var _:any;
 export class CheckoutComponent implements OnInit {
     customerInfoForm:FormGroup;
     idCardForm:FormGroup;
-    public uploader:FileUploader = new FileUploader({url:Config.mediaServerUrl});
+    fetching:boolean=false;
+    uploader:FileUploader = new FileUploader({url:Config.mediaServerUrl});
     countryOptions:Array<string> = [
         '中国', '加拿大'
     ];
@@ -35,7 +36,7 @@ export class CheckoutComponent implements OnInit {
     idCardBackUrl:string='';
     overseaSubmitted:boolean;
     nonOverseaSubmitted:boolean;
-
+    payingNonOversea:boolean;
 
 
     constructor(private cartService:CartService, private authService:AuthenticationService,
@@ -61,7 +62,17 @@ export class CheckoutComponent implements OnInit {
     }
     payNonOverseaProducts(){
         this.nonOverseaSubmitted=true;
+        this.payingNonOversea=true;
+        this.fetching=true;
         this.orderService.payNonOverseaProducts(this.customerInfoForm.getRawValue())
+            .subscribe(data=>{
+                this.fetching=false;
+            },
+             err=>{
+                 this.fetching=false;
+             }
+            );
+
     }
     enableAddressEdit() {
 
@@ -88,6 +99,7 @@ export class CheckoutComponent implements OnInit {
     }
     payCart() {
         if (this.customerInfoForm.valid) {
+
             this.orderService.payCart(this.cart, this.customerInfoForm.getRawValue())
                 .subscribe(data=> {
                 });
@@ -121,7 +133,6 @@ export class CheckoutComponent implements OnInit {
     ngOnInit():void {
         this.geoNameService.getCountries()
             .subscribe(data=> {
-                console.log("countrydata" + data)
             });
         this.customerInfoForm = this.fb.group({
             name: ['',Validators.required],
@@ -131,11 +142,10 @@ export class CheckoutComponent implements OnInit {
                 country: ['中国',Validators.required],
                 province: ['北京',Validators.required],
                 city: ['海淀',Validators.required],
-                streetName: ['',Validators.required],
-                buildingName: '',
-                streetNumber: '',
-                postcode: '',
-                roomNumber: ''
+                fullAddress: ['',Validators.required],
+                postcode: ['',Validators.required],
+                shippingRemark:''
+
             }),
 
         })

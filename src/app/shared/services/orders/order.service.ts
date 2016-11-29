@@ -38,10 +38,11 @@ export class OrderService extends BaseService {
         if(!product){
             return 'CNY';
         }
+        console.log(product)
         if(product.products){
             return product.products[0].product.unit.currency;
         }else {
-            return product.unit.currency;
+            return product.product.unit.currency;
         }
     }
     payNonOverseaProducts(customerInfo){

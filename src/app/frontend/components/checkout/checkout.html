@@ -14,6 +14,7 @@
                     <a routerLink="/products"  class="btn btn--ys btn--xl">现在去添加吧! <span class="icon icon--flippedX icon-reply"></span></a>
 
                 </div>
+                <div class="float-above" *ngIf="fetching"><span class="fa fa-spin fa-spinner"></span></div>
                 <div *ngIf="cartService.getCart().length>1"  class="panel-group" id="checkout">
                     <div class="panel panel-checkout" role="tablist">
                         <!-- panel heading -->
@@ -217,25 +218,16 @@
                                                 请填写邮编
                                             </small>
                                         </div>
-                                        <div class="form-group col-sm-4">
-                                            <label >乡镇/街道名称  <sup>*</sup></label>
-                                            <input type="text" class="form-control" formControlName="streetName">
-                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.streetName.valid || (customerInfoForm.controls.address.controls.streetName.pristine)">
-                                                请填写街道
+                                        <div class="form-group col-sm-8">
+                                            <label >详细地址  <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="fullAddress">
+                                            <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.fullAddress.valid || (customerInfoForm.controls.address.controls.fullAddress.pristine)">
+                                                请填详细地址
                                             </small>
                                         </div>
-                                        <div class="form-group col-sm-4">
-                                            <label >小区/建筑名称</label>
-                                            <input type="text" class="form-control" formControlName="buildingName">
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="form-group col-sm-4" >
-                                            <label >门牌号</label>
-                                            <input type="text" class="form-control" formControlName="streetNumber">
-                                        </div>
-                                        <div class="form-group col-sm-4">
-                                            <label >房间号</label>
-                                            <input type="text" class="form-control" formControlName="roomNumber">
+                                        <div class="form-group col-sm-12">
+                                            <label >订单备注</label>
+                                            <textarea  class="form-control" formControlName="fullAddress" rows="3"></textarea>
                                         </div>
                                     </div>
 
@@ -280,7 +272,7 @@
                                 </form>
                                 <div class="clearfix row text-right p-t-lg">
                                     <div class="col-sm-6 pull-left text-left" *ngIf="nonOverseaProducts.length>0">
-                                        <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid" class="btn btn--ys">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid && !payingNonOversea" class="btn btn--ys">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                     <div class="col-sm-6 pull-right text-right" *ngIf="overseaProducts.length>0">
                                         <button (click)="payOverseaProducts()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys ">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
@@ -310,37 +302,7 @@
                         </ul>
                     </div>
                     <!-- / -->
-                    <!--  -->
-                    <div class="block-underline-top">
-                        <a class="pull-right link-functional" href="#">Change</a>
-                        <h6 class="small">SHIPPING ADDRESS</h6>
-                        <ul class="categories-list">
-                            <li><a href="#">Lorem ipsum dolor sit amet </a></li>
-                            <li><a href="#">Conse ctetur adipisicing </a></li>
-                            <li><a href="#">Elit sed do eiusmod tempor</a></li>
-                            <li><a href="#">Incididunt ut labore </a></li>
-                            <li><a href="#">Et dolore magna aliqua</a></li>
-                        </ul>
-                    </div>
-                    <!-- / -->
-                    <!--  -->
-                    <div class="block-underline-top">
-                        <a class="pull-right link-functional" href="#">Change</a>
-                        <h6 class="small">SHIPPING METHOD</h6>
-                        <ul class="categories-list">
-                            <li><a href="#">Lorem ipsum dolor sit amet </a></li>
-                        </ul>
-                    </div>
-                    <!-- / -->
-                    <!--  -->
-                    <div class="block-underline-top">
-                        <a class="pull-right link-functional" href="#">Change</a>
-                        <h6 class="small">PAYMENT METHOD</h6>
-                        <ul class="categories-list">
-                            <li><a href="#">Lorem ipsum dolor sit amet </a></li>
-                        </ul>
-                    </div>
-                    <!-- / -->
+
                 </div>
 
 
