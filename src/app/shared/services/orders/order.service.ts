@@ -20,8 +20,16 @@ export class OrderService extends BaseService {
     * to pay the _cart
     * */
     payCart(cart:any,customerInfo,currency='CNY') {
-        console.log(customerInfo);
-        let orderCart = {products:[],customerInformation:customerInfo,currency:currency};
+        let orderCart = {
+            products:[],
+            customerInformation:customerInfo,
+            currency:currency,
+            shippingRemark:customerInfo.shippingRemark,
+            totalPrice:this.cartService.getPriceSum(cart)
+        };
+        if(currency=="CAD"){
+            orderCart['total_price_cad']=this.cartService.getPriceSum(cart);
+        }
         cart.forEach((item)=> {
 
             orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})

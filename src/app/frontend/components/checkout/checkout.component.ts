@@ -37,7 +37,7 @@ export class CheckoutComponent implements OnInit {
     overseaSubmitted:boolean;
     nonOverseaSubmitted:boolean;
     payingNonOversea:boolean;
-
+    payingOversea:boolean;
 
     constructor(private cartService:CartService, private authService:AuthenticationService,
                 private orderService:OrderService, public fb:FormBuilder,
@@ -57,8 +57,18 @@ export class CheckoutComponent implements OnInit {
         return this.cartService.nonOverSearProducts();
     }
     payOverseaProducts(){
+        this.fetching=true;
         this.overseaSubmitted=true;
+        this.payingOversea=true;
         this.orderService.payOverseaProducts(_.extend(this.customerInfoForm.getRawValue(),this.idCardForm.getRawValue()))
+            .subscribe(
+                data=>{
+                    this.fetching=false;
+                },
+                err=>{
+                    this.fetching=false;
+                }
+            )
     }
     payNonOverseaProducts(){
         this.nonOverseaSubmitted=true;

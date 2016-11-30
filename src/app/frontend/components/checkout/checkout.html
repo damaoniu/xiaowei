@@ -135,7 +135,10 @@
                         </div>
                         <!-- /panel body -->
                     </div>
-                    <div *ngIf="cartService.cart.length>0" class="panel panel-checkout" role="tablist">
+                    <div>
+
+                        <div *ngIf="cartService.cart.length>0" class="panel panel-checkout" role="tablist">
+
                         <!-- panel heading -->
                         <div class="panel-heading active" role="tab">
                             <h4 class="panel-title"> <a role="button" data-toggle="collapse" href="#collapseOne">发货地址信息</a> </h4>
@@ -275,12 +278,13 @@
                                         <button (click)="payNonOverseaProducts()"  [disabled]="!customerInfoForm.valid && !payingNonOversea" class="btn btn--ys">支付境内产品确<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                     <div class="col-sm-6 pull-right text-right" *ngIf="overseaProducts.length>0">
-                                        <button (click)="payOverseaProducts()"  [disabled]="!customerInfoForm.valid ||!idCardForm.valid" class="btn btn--ys ">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
+                                        <button (click)="payOverseaProducts()"  [disabled]="(!customerInfoForm.valid ||!idCardForm.valid) && !payingOversea" class="btn btn--ys ">支付海外产品<span class="icon icon--flippedX icon-reply"></span></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!-- /panel body -->
+                        </div>
                     </div>
                 </div>
                 <!-- /checkout-step -->
