@@ -2,16 +2,16 @@ import {Injectable} from '@angular/core';
 import {Http, Response} from '@angular/http';
 import {Config} from '../config'
 import {BaseService} from "../BaseService.service";
-import {Order} from './order'
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {CartService} from "../cartService/cart.service";
+import {AuthenticationService} from "../authentication.service";
 
 @Injectable()
 export class OrderService extends BaseService {
     baseUrl:string=Config.orderServiceUrl;
 
-    constructor(_http:Http,private cartService:CartService) {
+    constructor(_http:Http,private cartService:CartService,private authService:AuthenticationService) {
         super(_http);
     }
 
@@ -25,14 +25,23 @@ export class OrderService extends BaseService {
             customerInformation:customerInfo,
             currency:currency,
             shippingRemark:customerInfo.shippingRemark,
-            totalPrice:this.cartService.getPriceSum(cart)
+            totalPrice:this.cartService.getPriceSum(cart),
+            totalWeight:this.cartService.getWeightSum(cart),
+            creatorId:this.authService.currentUser.id
         };
         if(currency=="CAD"){
             orderCart['total_price_cad']=this.cartService.getPriceSum(cart);
         }
+        //send only the necessary information to the server
         cart.forEach((item)=> {
-
-            orderCart.products.push({id: item.id, quantity: item.quantity, type: item['type']})
+            console.log(item);
+            orderCart.products.push({
+                id: item.id,
+                quantity: item.quantity,
+                type: item['type'],
+                storageCondition:item.product.storageCondition,
+                thirdPartyId:item.product.thirdPartyId
+            })
         });
 
         return this._http.post(this.baseUrl + "/payCart",orderCart)

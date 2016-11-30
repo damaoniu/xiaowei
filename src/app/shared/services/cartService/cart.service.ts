@@ -145,18 +145,18 @@ export class CartService extends BaseService {
 
     getSubWeight(item:Item) {
         let weight = 0;
+         console.log(item)
         if (item.quantity && item.product) {
             if (item.product.products) {
                 item.product.products.forEach((component)=> {
                     weight += item.quantity*component.quantity * component.product.unit.weightInKg;
                 })
             } else {
-                weight += item.quantity * item.product.unit.weightInk;
+                weight += item.quantity * item.product.unit.weightInKg;
 
             }
         }
-
-        return 0;
+        return weight;
     }
 
     getSubTotal(item:Item) {
