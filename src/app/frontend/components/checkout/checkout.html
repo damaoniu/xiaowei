@@ -219,7 +219,11 @@
                                                 请填写邮编
                                             </small>
                                         </div>
-                                        <div class="form-group col-sm-8">
+                                        <div class="form-group col-sm-4">
+                                            <label >区  <sup>*</sup></label>
+                                            <input type="text" class="form-control" formControlName="district">
+                                        </div>
+                                        <div class="form-group col-sm-12">
                                             <label >详细地址  <sup>*</sup></label>
                                             <input type="text" class="form-control" formControlName="fullAddress">
                                             <small class="alert-danger p-a p-t-sm p-b-sm" minlength="18" [hidden]="customerInfoForm.controls.address.controls.fullAddress.valid || (customerInfoForm.controls.address.controls.fullAddress.pristine)">

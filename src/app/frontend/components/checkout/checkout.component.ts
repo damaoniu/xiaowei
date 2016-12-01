@@ -165,7 +165,8 @@ export class CheckoutComponent implements OnInit {
                 city: ['海淀', Validators.required],
                 fullAddress: ['', Validators.required],
                 postcode: ['', Validators.required],
-                shippingRemark: ''
+                shippingRemark: '',
+                district:''
 
             }),
 

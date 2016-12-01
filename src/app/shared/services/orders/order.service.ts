@@ -27,7 +27,8 @@ export class OrderService extends BaseService {
             shippingRemark: customerInfo.shippingRemark,
             totalPrice: this.cartService.getPriceSum(cart),
             totalWeight: this.cartService.getWeightSum(cart),
-            creatorId: this.authService.currentUser.id
+            creatorId: this.authService.currentUser.id,
+            creatorEmail:this.authService.currentUser.email
         };
         if (currency == "CAD") {
             orderCart['total_price_cad'] = this.cartService.getPriceSum(cart);
