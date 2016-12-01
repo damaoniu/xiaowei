@@ -9,61 +9,66 @@ import {AuthenticationService} from "../authentication.service";
 
 @Injectable()
 export class OrderService extends BaseService {
-    baseUrl:string=Config.orderServiceUrl;
+    baseUrl:string = Config.orderServiceUrl;
 
-    constructor(_http:Http,private cartService:CartService,private authService:AuthenticationService) {
+    constructor(_http:Http, private cartService:CartService, private authService:AuthenticationService) {
         super(_http);
     }
 
     /*
-    * @params _cart
-    * to pay the _cart
-    * */
-    payCart(cart:any,customerInfo,currency='CNY') {
+     * @params _cart
+     * to pay the _cart
+     * */
+    payCart(cart:any, customerInfo, currency = 'CNY') {
         let orderCart = {
-            products:[],
-            customerInformation:customerInfo,
-            currency:currency,
-            shippingRemark:customerInfo.shippingRemark,
-            totalPrice:this.cartService.getPriceSum(cart),
-            totalWeight:this.cartService.getWeightSum(cart),
-            creatorId:this.authService.currentUser.id
+            products: [],
+            customerInformation: customerInfo,
+            currency: currency,
+            shippingRemark: customerInfo.shippingRemark,
+            totalPrice: this.cartService.getPriceSum(cart),
+            totalWeight: this.cartService.getWeightSum(cart),
+            creatorId: this.authService.currentUser.id
         };
-        if(currency=="CAD"){
-            orderCart['total_price_cad']=this.cartService.getPriceSum(cart);
+        if (currency == "CAD") {
+            orderCart['total_price_cad'] = this.cartService.getPriceSum(cart);
         }
         //send only the necessary information to the server
         cart.forEach((item)=> {
-            console.log(item);
             orderCart.products.push({
                 id: item.id,
                 quantity: item.quantity,
                 type: item['type'],
-                storageCondition:item.product.storageCondition,
-                thirdPartyId:item.product.thirdPartyId
-            })
+                storageCondition: item.product.storageCondition,
+                thirdPartyId: item.product.thirdPartyId,
+                packagingFee:this.cartService.getItemPackageingFee(item.product.storageCondition),
+                xfzCost:this.cartService.getItemXfzCost(item)
+            });
         });
 
-        return this._http.post(this.baseUrl + "/payCart",orderCart)
+        return this._http.post(this.baseUrl + "/payCart", orderCart)
             .map(res=>res.json())
             .catch(this._handleErrors)
     }
-    payOverseaProducts(customerInfo){
 
-       return this.payCart(this.cartService.overSeaProducts(),customerInfo,this.getProductCurrency(this.cartService.overSeaProducts()[0]))
+    payOverseaProducts(customerInfo) {
+
+        return this.payCart(this.cartService.overSeaProducts(), customerInfo, this.getProductCurrency(this.cartService.overSeaProducts()[0]))
     }
-    getProductCurrency(product){
-        if(!product){
+
+    getProductCurrency(product) {
+        if (!product) {
             return 'CNY';
         }
-        if(product.products){
+        if (product.products) {
             return product.products[0].product.unit.currency;
-        }else {
+        } else {
             return product.product.unit.currency;
         }
     }
-    payNonOverseaProducts(customerInfo){
-       return this.payCart(this.cartService.nonOverSearProducts(),customerInfo,this.getProductCurrency(this.cartService.nonOverSearProducts()[0]))
+
+    payNonOverseaProducts(customerInfo) {
+
+        return this.payCart(this.cartService.nonOverSearProducts(), customerInfo, this.getProductCurrency(this.cartService.nonOverSearProducts()[0]))
     }
 
     /*

@@ -94,7 +94,27 @@ export class CartService extends BaseService {
         this._cart.forEach((item)=>count += item.quantity);
         return count;
     }
-
+    getItemPackageingFee(storageCondition:string){
+        switch (storageCondition){
+            case "FROZEN":
+                return 15;
+            case "REGULAR":
+                return 10;
+            default:
+                return 10
+        }
+    }
+    getItemXfzCost(item){
+        if(item.product.products){
+            let cost=0;
+            item.product.products.forEach((product)=>{
+                cost+=product.product.stock.cost.xfzCost*product.quantity;
+            })
+            return cost;
+        }else{
+            return item.product.stock.cost.xfzCost;
+        }
+    }
     addItem(item:Item, quantity:number) {
         quantity = quantity || 1;
         let currentItem = _.findWhere(this._cart, {id: item.id});
@@ -145,7 +165,6 @@ export class CartService extends BaseService {
 
     getSubWeight(item:Item) {
         let weight = 0;
-         console.log(item)
         if (item.quantity && item.product) {
             if (item.product.products) {
                 item.product.products.forEach((component)=> {
