@@ -166,15 +166,20 @@ export class CartService extends BaseService {
     getSubWeight(item:Item) {
         let weight = 0;
         if (item.quantity && item.product) {
-            if (item.product.products) {
-                item.product.products.forEach((component)=> {
-                    weight += item.quantity*component.quantity * component.product.unit.weightInKg;
+            weight = item.quantity*this.getProductWeight(item.product)
+        }
+        return weight;
+    }
+    getProductWeight(product){
+        let weight = 0;
+            if (product.products) {
+                product.products.forEach((component)=> {
+                    weight += component.quantity * component.product.unit.weightInKg;
                 })
             } else {
-                weight += item.quantity * item.product.unit.weightInKg;
+                weight += product.unit.weightInKg;
 
             }
-        }
         return weight;
     }
 
@@ -196,7 +201,9 @@ export class CartService extends BaseService {
             return 0
         }
     }
-
+    getProductType(product){
+        return product.products?"COMBO":"PRODUCT"
+    }
     getTotalPrice() {
         let totalPrice = this._cart.reduce((sum, cartItem)=> {
             return sum += this.getSubTotal(cartItem), sum;
