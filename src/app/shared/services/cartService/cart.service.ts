@@ -59,20 +59,7 @@ export class CartService extends BaseService {
         return overSeaProducts;
 
     }
-    getOverseaTotalPrice(){
-        return this.getPriceSum(this.overSeaProducts());
-    }
-    getNonOverseaTotalPrice(){
-        return this.getPriceSum(this.nonOverSearProducts());
-    }
-    getPriceSum(products) {
-        let price = 0;
-        let that = this;
-        products.forEach((product)=> {
-            price += that.getSubTotal(product);
-        })
-        return price;
-    }
+
 
     nonOverSearProducts() {
         let nonVerSeaProducts = [];
@@ -135,7 +122,6 @@ export class CartService extends BaseService {
     }
     updateItemQuantity(e, itemId){
         let currentItem = _.findWhere(this._cart, {id: itemId});
-        console.log(e);
         if(!isNaN(e.target.value)){
             currentItem.quantity= +e.target.value;
         }
@@ -185,7 +171,6 @@ export class CartService extends BaseService {
                 })
             } else {
                 weight += product.unit.weightInKg;
-
             }
         return weight;
     }
@@ -202,11 +187,26 @@ export class CartService extends BaseService {
             } else {
                 price = item.product.unit.levelThreePrice
             }
-            let subTotal = item.quantity * price;
+            console.log(price);
+            let subTotal = +(item.quantity * price).toFixed(2);
             return subTotal
         } else {
             return 0
         }
+    }
+    getOverseaTotalPrice(){
+        return this.getPriceSum(this.overSeaProducts());
+    }
+    getNonOverseaTotalPrice(){
+        return this.getPriceSum(this.nonOverSearProducts());
+    }
+    getPriceSum(products) {
+        let price = 0;
+        let that = this;
+        products.forEach((product)=> {
+            price += that.getSubTotal(product);
+        })
+        return price;
     }
     getProductType(product){
         return product.products?"COMBO":"PRODUCT"
