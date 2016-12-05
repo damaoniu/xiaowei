@@ -133,7 +133,14 @@ export class CartService extends BaseService {
         }
 
     }
-
+    updateItemQuantity(e, itemId){
+        let currentItem = _.findWhere(this._cart, {id: itemId});
+        console.log(e);
+        if(!isNaN(e.target.value)){
+            currentItem.quantity= +e.target.value;
+        }
+        localStorage.setItem(cart, JSON.stringify(this._cart));
+    }
 
     deleteItem(item:Item) {
         this._cart = this._cart.filter(cartItem=>cartItem.id !== item.id);

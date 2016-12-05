@@ -40,8 +40,9 @@ export class OrderService extends BaseService {
                 quantity: item.quantity,
                 type: this.cartService.getProductType(item.product),
                 storageCondition: item.product.storageCondition,
-                thirdPartyId: item.product.thirdPartyId,
-                weight:this.cartService.getSubWeight(item),
+                thirdPartyId: item.product.thirdPartyId?item.product.thirdPartyId:0,
+                weight:this.cartService.getProductWeight(item.product),
+                categoryName:item.product.categoryName,
                 packagingFee:this.cartService.getItemPackageingFee(item.product.storageCondition),
                 xfzCost:this.cartService.getItemXfzCost(item)
             });
