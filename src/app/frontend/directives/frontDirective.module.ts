@@ -8,16 +8,17 @@ import {DynamicHtmlOutlet} from "./dynamicHtmlOutlet.directive";
 import {ToggleDirective} from "./toggle.directive";
 import {NoAttachmentValidator} from "./noAttachment.directive";
 import {EqualValidator} from "./validateEqual.directive";
+import {EmailInSystem} from "./validations/emailInSystem";
 @NgModule({
     imports:[SharedModule],
     declarations:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective,
+        ToggleDirective,EmailInSystem,
         NoAttachmentValidator,EqualValidator
     ],
     exports:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective,
+        ToggleDirective,EmailInSystem,
         NoAttachmentValidator,EqualValidator
     ]
 })

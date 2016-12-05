@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input type="number" step="1" min="1" [(ngModel)]="product.quantity" class="form-control">
+                                        <input type="number" step="1" min="1" (change)="cartService.updateItemQuantity($event,product.id)"  [ngModel]="product.quantity" class="form-control">
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="order-review-table__product-price subtotal">
@@ -87,7 +87,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-1">
-                                        <input step="1" type="number" min="1" class="form-control" [(ngModel)]="product.quantity">
+                                        <input step="1" type="number" min="1" class="form-control" (change)="cartService.updateItemQuantity($event,product.id)"  [ngModel]="product.quantity">
                                     </div>
                                     <div class="col-sm-3">
                                         <div class="order-review-table__product-price subtotal">

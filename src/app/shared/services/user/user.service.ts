@@ -33,4 +33,14 @@ export class UserService extends BaseService {
             .map(res=>res.json())
             .catch(this._handleErrors);
     }
+
+    /*
+    * @method getUserByEmail
+    * @param email
+    * */
+    getUserByEmail(email:String){
+        return this._http.get("/user/"+email)
+            .map(res=>res.json())
+            .catch(this._handleErrors);
+    }
 }
