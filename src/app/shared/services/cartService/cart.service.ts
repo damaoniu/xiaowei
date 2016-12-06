@@ -187,7 +187,6 @@ export class CartService extends BaseService {
             } else {
                 price = item.product.unit.levelThreePrice
             }
-            console.log(price);
             let subTotal = +(item.quantity * price).toFixed(2);
             return subTotal
         } else {

@@ -39,7 +39,7 @@ export class UserService extends BaseService {
     * @param email
     * */
     getUserByEmail(email:String){
-        return this._http.get("/user/"+email)
+        return this._http.get(this.baseUrl+"/byEmail/"+email)
             .map(res=>res.json())
             .catch(this._handleErrors);
     }

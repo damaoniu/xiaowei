@@ -1,41 +1,39 @@
 import {Directive, forwardRef} from "@angular/core";
-import {NG_VALIDATORS, FormControl} from "@angular/forms";
-import {Http} from "@angular/http";
+import {AbstractControl, NG_ASYNC_VALIDATORS} from "@angular/forms";
 import {UserService} from "../../../shared/services/user/user.service";
+import {validate} from 'email-validator'
 
 function validateEmailFactory(userService:UserService) {
-    return (c: FormControl) => {
-        return new Promise( resolve => {
-            userService.getUserByEmail(c.value)
-                .subscribe(email => {
-                    if (email == null) {
-                        // need to return something if not ok
+    return (c:AbstractControl) => {
+        return new Promise(resolve => {
+            if (validate(c.value)) {
+                userService.getUserByEmail(c.value)
+                    .subscribe(email => {
+                        //if the email exists then it is not ok
                         resolve(null);
-                    } else {
-                        // need to return null if ok
-
-                        resolve({userExists: true});
-                    }
-                });
+                    }, (err)=> {
+                        resolve({userExists: "no"});
+                    });
+            }
         });
 
     };
 }
 @Directive({
-    selector:"[emailInSystem]",
+    selector: "[emailInSystem]",
     providers: [
-        { provide: NG_VALIDATORS, useExisting: forwardRef(()=>EmailInSystem), multi: true }
+        {provide: NG_ASYNC_VALIDATORS, useExisting: forwardRef(()=>EmailInSystem), multi: true}
     ]
 })
-export class EmailInSystem{
+export class EmailInSystem {
 
-    validator: Function;
+    validator:Function;
 
-    constructor(userService:UserService ) {
+    constructor(userService:UserService) {
         this.validator = validateEmailFactory(userService);
     }
 
-    validate(c: FormControl) {
+    validate(c:AbstractControl) {
         return this.validator(c);
     }
 }

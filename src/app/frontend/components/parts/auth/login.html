@@ -121,8 +121,11 @@
                         <span class="input-group-addon"><i class="fa fa-user-md"></i></span>
                         <input type="text" ngModel emailInSystem #invitee="ngModel" name="invitee" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" class="form-control" placeholder="邀请人邮箱:">
                     </div>
-                    <small class="alert-danger p-a p-t-sm" [hidden]="invitee.valid || (invitee.pristine && !caf.submitted)">
+                    <small class="alert-danger p-a p-t-sm" [hidden]="!invitee.errors?.pattern || (invitee.pristine && !caf.submitted)">
                         请填入正确的邮箱地址
+                    </small>
+                    <small class="alert-danger p-a p-t-sm" [hidden]="!invitee.errors?.userExists || (invitee.pristine && !caf.submitted)">
+                        此邮箱不存在系统中
                     </small>
                 </div>
                 <div class="checkbox-group">
