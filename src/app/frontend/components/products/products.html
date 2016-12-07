@@ -58,7 +58,7 @@
                         <div class="panel-body text-warning text-center">暂时没有这类产品,抱歉亲,我们正在努力添加&nbsp;<i class="fa fa-smile-o"></i></div>
                     </div>
                 </div>
-                <div class="product-listing row" style="min-height: 400px;">
+                <div class="product-listing row" [ngClass]="rowView?'row-view':''" style="min-height: 400px;">
                     <div class="float-above" *ngIf="fetching"><span class="fa fa-spin fa-spinner"></span></div>
                     <div *ngFor="let product of products" class="col-xs-6 col-sm-4 col-md-6 col-lg-4 col-xl-one-fifth p-a" [ngStyle]="{'opacity':(fetching?0.5:1)}">
                         <!-- product -->
@@ -86,9 +86,10 @@
                                     <a  productModal [product]="product"  class="quick-view"><b><span class="icon icon-visibility"></span>预览</b> </a>
                                     <!-- /quick-view -->
                                     <!-- countdown_box -->
-                                    <div class="countdown_box">
+                                    <div  class="countdown_box text-center" *ngIf="product.sale">
+                                        离促销结束还有
                                         <div class="countdown_inner">
-                                            <div id="countdown1"></div>
+                                            <div countdown [finalDate]="product.sale.endDate" ></div>
                                         </div>
                                     </div>
                                     <!-- /countdown_box -->
@@ -118,8 +119,9 @@
                                 <div class="product__inside__price price-box">{{product.unit?product.unit.levelThreePrice:product.levelThreePrice}}<span *ngIf="product.sale" class="price-box__old">$28.00</span></div>
 
                                 <div class="product__inside__hover">
-
-                                    <addToCart [item]="product"></addToCart>
+                                    <div class="product__inside__info">
+                                    <addToCart [item]="product" class="m-t"></addToCart>
+                                    </div>
                                     <!-- /product info -->
                                     <!-- product rating -->
                                     <!--<div class="rating row-mode-hide"> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star"></span> <span class="icon-star empty-star"></span> </div>-->
@@ -138,8 +140,8 @@
                     <div class="pull-left">
                         <div class="filters-row__mode">
                             <a href="#" class="btn btn--ys slide-column-open visible-xs visible-sm hidden-xl hidden-lg hidden-md">Filter</a>
-                            <a class="filters-row__view active link-grid-view btn-img btn-img-view_module"><span></span></a>
-                            <a class="filters-row__view link-row-view btn-img btn-img-view_list"><span></span></a>
+                            <a class="filters-row__view  link-grid-view btn-img btn-img-view_module" [ngClass]="!rowView?'active':''" (click)="rowView=false" ><span></span></a>
+                            <a class="filters-row__view link-row-view btn-img btn-img-view_list" [ngClass]="rowView?'active':''" (click)="rowView=true"><span></span></a>
                         </div>
                     </div>
                     <div class="pull-right">

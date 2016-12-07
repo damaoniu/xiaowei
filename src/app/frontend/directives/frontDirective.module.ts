@@ -9,17 +9,18 @@ import {ToggleDirective} from "./toggle.directive";
 import {NoAttachmentValidator} from "./noAttachment.directive";
 import {EqualValidator} from "./validateEqual.directive";
 import {EmailInSystem} from "./validations/emailInSystem";
+import {CountDown} from "./countdown.directive";
 @NgModule({
     imports:[SharedModule],
     declarations:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective,EmailInSystem,
-        NoAttachmentValidator,EqualValidator
+        ToggleDirective,CountDown,
+        EmailInSystem, NoAttachmentValidator,EqualValidator
     ],
     exports:[
         RevolutionSlider,SlickDirective,MagnificPopUp,ProductModalDirective,DynamicHtmlOutlet,
-        ToggleDirective,EmailInSystem,
-        NoAttachmentValidator,EqualValidator
+        ToggleDirective,CountDown,
+        EmailInSystem, NoAttachmentValidator,EqualValidator
     ]
 })
 export class FrontDirectivesModule{
