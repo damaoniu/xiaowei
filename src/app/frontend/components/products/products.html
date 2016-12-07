@@ -86,9 +86,9 @@
                                     <a  productModal [product]="product"  class="quick-view"><b><span class="icon icon-visibility"></span>预览</b> </a>
                                     <!-- /quick-view -->
                                     <!-- countdown_box -->
-                                    <div  class="countdown_box text-center" *ngIf="product.sale">
-                                        离促销结束还有
+                                    <div  class="countdown_box " *ngIf="product.sale">
                                         <div class="countdown_inner">
+                                            <span class="text-center">离促销结束还有</span>
                                             <div countdown [finalDate]="product.sale.endDate" ></div>
                                         </div>
                                     </div>
@@ -116,7 +116,8 @@
                                 <div class="product__inside__description row-mode-visible"> {{product.description}} </div>
                                 <!-- /product description -->
                                 <!-- product price -->
-                                <div class="product__inside__price price-box">{{product.unit?product.unit.levelThreePrice:product.levelThreePrice}}<span *ngIf="product.sale" class="price-box__old">$28.00</span></div>
+                                <div class="product__inside__price price-box" ><span *ngIf="product.sale" >促销价:{{product.priceSale}}</span><span [ngClass]="{'price-box__old':product.priceSale}">热销价:{{product.price}}</span></div>
+                                <div class="product__inside__price price-box" *ngIf="product.priceV"><span *ngIf="product.sale" >小V促销价:{{product.priceSaleV}}</span><span [ngClass]="{'price-box__old':product.priceSaleV}">小V热销价:{{product.priceV}}</span></div>
 
                                 <div class="product__inside__hover">
                                     <div class="product__inside__info">

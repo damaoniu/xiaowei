@@ -1,16 +1,17 @@
 import {Injectable} from "@angular/core";
-import {Http, Headers, Response} from "@angular/http";
+import {Http} from "@angular/http";
 import {Product} from "./product";
 import {Config} from "../config";
-import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/do";
 import "rxjs/add/operator/map";
 import {BaseService} from "../BaseService.service";
+import {AuthenticationService} from "../authentication.service";
 declare var _:any;
 @Injectable()
 export class ProductService extends BaseService {
     baseUrl:string = Config.productServiceUrl;
-    constructor(http:Http) {
+
+    constructor(http:Http, private authService:AuthenticationService) {
         super(http);
     }
 
@@ -42,6 +43,7 @@ export class ProductService extends BaseService {
             .map(data=>data.product)
             .catch(this._handleErrors);
     }
+
     getCombo(id:string) {
         return this._http.get(this.baseUrl + '/combo/' + id)
             .map(res=>res.json())
@@ -53,38 +55,36 @@ export class ProductService extends BaseService {
         return this._http.get(this.baseUrl + "/productsByCategory/" + categoryId)
             .map(res=>res.json())
             .map(res=>res['products'])
-            .map(res=>{
-                let newProducts = [];
-                res.forEach(product=>{
-                    newProducts.push(_.omit(product,"availabilities"))
-                })
-                return newProducts;
-            })
+            .map(products=>this.transformProducts(products))
             .catch(this._handleErrors);
     }
+
     getComboByCategory(categoryId:string) {
         return this._http.get(this.baseUrl + "/combosByCategory/" + categoryId)
             .map(res=>res.json())
             .map(res=>res['combos'])
-            .map(res=>{
-                let newProducts = [];
-                res.forEach(product=>{
-                    newProducts.push(_.omit(product,"availabilities"))
-                })
-                return newProducts;
-            })
+            .map(products=>this.transformProducts(products))
             .catch(this._handleErrors);
     }
-    getPrice(product){
-        if(product){
-            if(product['unit']){
-                if(product['sale']){
-                    return product['unit']['levelThreePrice']*(100-product['sale']['rate'])/100;
-                }else{
-                    return product['unit']['levelThreePrice']
-                }
-            }else{
-                return 0;
+    transformProducts(products){
+        let newProducts = [];
+        products.map(product=> {
+            this.setPrice(product);
+            console.log(product);
+            newProducts.push(_.omit(product, "availabilities"))
+        });
+        return newProducts;
+    }
+
+    setPrice(product) {
+        product['price'] = product.unit ? product.unit.levelThreePrice : product.levelThreePrice;
+        if(this.authService.currentUser.role=="ROLE_SALES_VIP"){
+            product['priceV'] = product.unit ? product.unit.levelOnePrice : product.levelOnePrice;
+        }
+        if (product.sale) {
+            product.priceSale = +(product.price * (100 -product.sale.rate) / 100).toFixed(2)
+            if(this.authService.currentUser.role=="ROLE_SALES_VIP") {
+                product.priceSaleV = +(product.priceV * (100 - product.sale.rate) / 100).toFixed(2)
             }
         }
     }

@@ -4,6 +4,7 @@ import {EventEmitter} from "@angular/forms/src/facade/async";
 import {Discount} from "./discount";
 import {BaseService} from "../BaseService.service";
 import {Http} from "@angular/http";
+import {AuthenticationService} from "../authentication.service";
 //this is the better way to use no typescript libraries
 declare var _:any;
 declare var localStorage:any;
@@ -15,7 +16,7 @@ export class CartService extends BaseService {
     public itemDeleted$:EventEmitter<Item>;
     public discount:Discount;
 
-    constructor(http:Http, public _ngzone:NgZone) {
+    constructor(http:Http, private authService:AuthenticationService) {
         super(http);
         this.itemAdded$ = new EventEmitter<any>();
         this.itemDeleted$ = new EventEmitter<any>();
@@ -182,10 +183,18 @@ export class CartService extends BaseService {
          * */
         if (item.quantity && item.product) {
             let price = 0;
-            if (item.product.products) {
-                price = item.product.levelThreePrice;
-            } else {
-                price = item.product.unit.levelThreePrice
+            switch (this.authService.currentUser.role){
+                case "ROLE_SALES_REGULAR":
+                    price=item.product.price;
+                    if(item.product.sale){
+                        price=item.product.priceSale;
+                    }
+                   break;
+                default:
+                    price=item.product.priceV;
+                    if(item.product.sale){
+                        price=item.product.priceSaleV;
+                    }
             }
             let subTotal = +(item.quantity * price).toFixed(2);
             return subTotal

@@ -16,9 +16,7 @@ export class ProductComponent implements OnInit {
     constructor(private route:ActivatedRoute, private productService:ProductService) {
         this.relatedProducts = new Subject<[any]>();
     }
-    get price(){
-        return this.productService.getPrice(this.product)
-    }
+
     ngOnInit() {
         let that =this;
         // Init All Carousel

@@ -11,7 +11,7 @@
         <button (click)="addToCart()" [ngClass]="showQty?'btn--xxl':'btn--xl'" class="btn btn--ys"><span class="icon icon-shopping_basket">
         </span >添加到购物车</button>
     </div>
-    <div class="clearfix m-l-lg text-danger _800" *ngIf="inCart">
+    <div class="clearfix m-l-lg text-danger _800 text-center" *ngIf="inCart">
         <i class="fa fa-heart"></i>&nbsp;产品已经在购物车里
     </div>
 </div>
