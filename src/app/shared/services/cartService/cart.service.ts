@@ -196,6 +196,7 @@ export class CartService extends BaseService {
                         price=item.product.priceSaleV;
                     }
             }
+            console.log(price);
             let subTotal = +(item.quantity * price).toFixed(2);
             return subTotal
         } else {
